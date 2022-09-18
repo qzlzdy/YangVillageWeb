@@ -2,7 +2,6 @@
 #define PORTFOLIO_H
 
 #include <Wt/WApplication.h>
-#include <Wt/WNavigationBar.h>
 #include <Wt/WEnvironment.h>
 
 namespace yang{
