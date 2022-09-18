@@ -13,10 +13,12 @@ using namespace Wt;
 using namespace yang;
 
 Portfolio::Portfolio(const WEnvironment &env): WApplication(env){
+    /*
     if(env.urlScheme() != "https"){
         redirect("https://" + env.hostName() + url());
         return;
     }
+    */
     setTitle("Yang Village");
     setTheme(make_shared<WBootstrap5Theme>());
     auto borderLayout = make_unique<WBorderLayout>();
