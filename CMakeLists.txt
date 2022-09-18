@@ -17,6 +17,7 @@ include_directories(include)
 
 add_executable(yangvillage.wt
     src/main.cpp
+    src/HomePage.cpp
     src/Portfolio.cpp
 )
 

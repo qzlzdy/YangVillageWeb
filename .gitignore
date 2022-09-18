@@ -5,6 +5,7 @@
 *.key
 *.key.org
 resources
+images/
 ### XilinxISE template
 # intermediate build files
 *.bgn

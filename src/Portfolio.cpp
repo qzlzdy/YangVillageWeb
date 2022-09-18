@@ -7,6 +7,7 @@
 #include <Wt/WNavigationBar.h>
 #include <Wt/WStackedWidget.h>
 #include <Wt/WText.h>
+#include "HomePage.h"
 
 using namespace std;
 using namespace Wt;
@@ -19,24 +20,22 @@ Portfolio::Portfolio(const WEnvironment &env): WApplication(env){
         return;
     }
     */
-    setTitle("Yang Village");
+    setTitle("羊村");
     setTheme(make_shared<WBootstrap5Theme>());
-    auto borderLayout = make_unique<WBorderLayout>();
+    WBorderLayout *borderLayout = root()->setLayout(
+        make_unique<WBorderLayout>());
 
-    auto navigationBar = make_unique<WNavigationBar>();
-    navigationBar->setTitle("Yang Village", "https://localhost");
+    WNavigationBar *navigationBar = borderLayout->addWidget(
+        make_unique<WNavigationBar>(), LayoutPosition::North);
+    navigationBar->setTitle("羊村", "http://47.74.46.203");
     navigationBar->setResponsive(true);
     navigationBar->setStyleClass("navbar-light bg-light");
 
-    auto contentsStack = make_unique<WStackedWidget>();
+    WStackedWidget *contentsStack = borderLayout->addWidget(
+        make_unique<WStackedWidget>(), LayoutPosition::Center);
     contentsStack->setStyleClass("contents");
 
-    auto menu = make_unique<WMenu>(contentsStack.get());
-    borderLayout->addWidget(move(contentsStack), LayoutPosition::Center);
+    WMenu *menu = navigationBar->addMenu(make_unique<WMenu>(contentsStack));
     menu->setStyleClass("me-auto");
-    menu->addItem("Home", make_unique<WText>("Hello World"));
-    navigationBar->addMenu(move(menu));
-
-    borderLayout->addWidget(move(navigationBar), LayoutPosition::North);
-    root()->setLayout(move(borderLayout));
+    menu->addItem("主页", make_unique<HomePage>());
 }
