@@ -18,6 +18,9 @@ include_directories(include)
 add_executable(yangvillage.wt
     src/main.cpp
     src/Portfolio.cpp
+    src/Header.cpp
+    src/Profile.cpp
+    src/SocialLinks.cpp
 )
 
 target_link_libraries(yangvillage.wt wt wthttp)
