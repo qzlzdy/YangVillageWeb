@@ -1,10 +1,10 @@
 #ifndef NAVIGATIONBAR_H
 #define NAVIGATIONBAR_H
 
+#include <Wt/WAnchor.h>
 #include <Wt/WContainerWidget.h>
 #include <Wt/WNavigationBar.h>
 #include <Wt/WString.h>
-#include <Wt/WWebWidget.h>
 
 namespace yang{
 
@@ -13,9 +13,11 @@ public:
     NavigationBar();
 private:
     static const Wt::WString defaultStyleClass;
-    void setActiveStyle(Wt::WWebWidget *widget);
-    void setDeactiveStyle(Wt::WWebWidget *widget);
-    void setDefaultStyle(Wt::WWebWidget *widget, bool isDeactive = true);
+    void setActiveStyle(Wt::WAnchor *widget);
+    void setDeactiveStyle(Wt::WAnchor *widget);
+    void setDefaultStyle(Wt::WAnchor *widget, bool isDeactive = true);
+    void menuClicked(Wt::WAnchor *source);
+    Wt::WAnchor *currentActive;
 };
 
 }

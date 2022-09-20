@@ -1,5 +1,6 @@
 #include "NavigationBar.h"
 
+#include <functional>
 #include <Wt/WAnchor.h>
 #include <Wt/WColor.h>
 #include <Wt/WContainerWidget.h>
@@ -20,28 +21,35 @@ NavigationBar::NavigationBar(){
     WAnchor *home = layout->addWidget(make_unique<WAnchor>(WLink(),
         "<i class=\"bi bi-house-door\"/>主页"));
     setDefaultStyle(home, false);
+    home->clicked().connect(bind(&NavigationBar::menuClicked, this, home));
 
     WAnchor *about = layout->addWidget(make_unique<WAnchor>(WLink(),
         "<i class=\"bi bi-person\"/>简介"));
     setDefaultStyle(about);
+    about->clicked().connect(bind(&NavigationBar::menuClicked, this, about));
 
     WAnchor *resume = layout->addWidget(make_unique<WAnchor>(WLink(),
         "<i class=\"bi bi-file-earmark\"/>教育 &amp; 工作经历"));
     setDefaultStyle(resume);
+    resume->clicked().connect(bind(&NavigationBar::menuClicked, this, resume));
 
     WAnchor *portfolio = layout->addWidget(make_unique<WAnchor>(WLink(),
         "<i class=\"bi bi-hdd-stack\"/>项目经历"));
     setDefaultStyle(portfolio);
+    portfolio->clicked().connect(bind(&NavigationBar::menuClicked, this, portfolio));
 
     WAnchor *contact = layout->addWidget(make_unique<WAnchor>(WLink(),
         "<i class=\"bi bi-envelope\"/>联系方式"));
     setDefaultStyle(contact);
+    contact->clicked().connect(bind(&NavigationBar::menuClicked, this, contact));
+
+    currentActive = home;
 }
 
 const WString NavigationBar::defaultStyleClass =
     "d-flex text-center text-decoration-none";
 
-void NavigationBar::setActiveStyle(WWebWidget *widget){
+void NavigationBar::setActiveStyle(WAnchor *widget){
     WFont font;
     font.setSize(24);
     widget->decorationStyle().setFont(font);
@@ -49,7 +57,7 @@ void NavigationBar::setActiveStyle(WWebWidget *widget){
     widget->setStyleClass("pe-2 " + defaultStyleClass);
 }
 
-void NavigationBar::setDeactiveStyle(WWebWidget *widget){
+void NavigationBar::setDeactiveStyle(WAnchor *widget){
     WFont font;
     font.setSize(20);
     widget->decorationStyle().setFont(font);
@@ -57,7 +65,7 @@ void NavigationBar::setDeactiveStyle(WWebWidget *widget){
     widget->setStyleClass("p-3 " + defaultStyleClass);
 }
 
-void NavigationBar::setDefaultStyle(WWebWidget *widget, bool isDeactive){
+void NavigationBar::setDefaultStyle(WAnchor *widget, bool isDeactive){
     widget->setMargin(0, Side::Top | Side::Left | Side::Right);
     widget->setPositionScheme(PositionScheme::Relative);
     widget->setMargin(8, Side::Bottom);
@@ -67,4 +75,10 @@ void NavigationBar::setDefaultStyle(WWebWidget *widget, bool isDeactive){
     else{
         setActiveStyle(widget);
     }
+}
+
+void NavigationBar::menuClicked(WAnchor *source){
+    setDeactiveStyle(currentActive);
+    setActiveStyle(source);
+    currentActive = source;
 }
