@@ -2,6 +2,7 @@
 
 #include <Wt/WColor.h>
 #include <Wt/WCssDecorationStyle.h>
+#include "NavigationBar.h"
 #include "Profile.h"
 #include "SocialLinks.h"
 
@@ -17,4 +18,5 @@ Header::Header(){
     setStyleClass("py-0 px-3 d-flex flex-column");
     addWidget(make_unique<Profile>());
     addWidget(make_unique<SocialLinks>());
+    addWidget(make_unique<NavigationBar>());
 }

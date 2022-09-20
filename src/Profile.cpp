@@ -29,13 +29,11 @@ Profile::Profile(){
 
     WLink link(LinkType::InternalPath, "/");
     link.setTarget(LinkTarget::Self);
-    WAnchor *name = layout->addWidget(
-        make_unique<WAnchor>(link, "骑着轮子的羊"));
-    name->setMargin(0, Side::Top | Side::Bottom | Side::Left | Side::Right);
+    WAnchor *name = layout->addWidget(make_unique<WAnchor>(link, "骑着轮子的羊"));
+    name->setMargin(0, Side(0xf));
     WFont font(FontFamily::SansSerif);
     font.setSize(24);
     font.setWeight(FontWeight::Value, 600);
     name->decorationStyle().setFont(font);
-    name->setStyleClass("p-0 text-center fst-italic text-light");
-    name->decorationStyle().setTextDecoration(TextDecoration(0));
+    name->setStyleClass("p-0 text-center text-light text-decoration-none");
 }

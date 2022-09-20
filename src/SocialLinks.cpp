@@ -43,10 +43,10 @@ void SocialLinks::setIconStyle(WWebWidget *icon){
     font.setSize(24);
     icon->decorationStyle().setFont(font);
     icon->decorationStyle().setBackgroundColor(WColor(0x21, 0x24, 0x31));
+    icon->decorationStyle().setForegroundColor(WColor(0xff, 0xff, 0xff));
     icon->setMargin(4, Side::Right);
     icon->resize(36, 36);
-    icon->setStyleClass(
-        "text-light p-0 text-center rounded-circle d-inline-block");
+    icon->setStyleClass("p-0 text-center rounded-circle d-inline-block");
 }
 
 void SocialLinks::showDialog(const WString &title, const WLink &code){
