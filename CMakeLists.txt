@@ -17,12 +17,14 @@ include_directories(include)
 
 add_executable(yangvillage.wt
     src/main.cpp
+    src/About.cpp
     src/Footer.cpp
     src/Header.cpp
     src/Home.cpp
     src/NavigationBar.cpp
     src/Portfolio.cpp
     src/Profile.cpp
+    src/Section.cpp
     src/SocialLinks.cpp
 )
 
