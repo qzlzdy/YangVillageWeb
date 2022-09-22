@@ -6,6 +6,8 @@
 
 namespace yang{
 
+extern const Wt::WString INDENT;
+
 class Section: public Wt::WContainerWidget{
 public:
     Section();

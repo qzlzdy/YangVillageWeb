@@ -10,6 +10,8 @@ using namespace std;
 using namespace Wt;
 using namespace yang;
 
+const WString yang::INDENT = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+
 Section::Section(){
     decorationStyle().setBackgroundColor(WColor(0xf5, 0xf8, 0xfd));
     setPositionScheme(PositionScheme::Relative);

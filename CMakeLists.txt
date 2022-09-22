@@ -25,6 +25,7 @@ add_executable(yangvillage.wt
     src/Portfolio.cpp
     src/Profile.cpp
     src/Section.cpp
+    src/Skills.cpp
     src/SocialLinks.cpp
 )
 

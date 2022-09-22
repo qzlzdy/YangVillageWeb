@@ -8,6 +8,7 @@
 #include "Footer.h"
 #include "Header.h"
 #include "Home.h"
+#include "Skills.h"
 
 using namespace std;
 using namespace Wt;
@@ -35,6 +36,7 @@ Portfolio::Portfolio(const WEnvironment &env): WApplication(env){
     WVBoxLayout *main = contents->setLayout(make_unique<WVBoxLayout>());
     main->addWidget(make_unique<Home>());
     main->addWidget(make_unique<About>());
+    main->addWidget(make_unique<Skills>());
 
     root()->addWidget(make_unique<Header>());
     root()->addWidget(make_unique<Footer>());

@@ -6,15 +6,12 @@
 #include <Wt/WFont.h>
 #include <Wt/WGridLayout.h>
 #include <Wt/WImage.h>
-#include <Wt/WText.h>
 
 using namespace std;
 using namespace Wt;
 using namespace yang;
 
 namespace {
-
-const WString INDENT = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 
 const WString ABOUT_DESC =
 "没有什么是泰勒公式洛必达法则华里士公式伽玛函数拉格朗日乘数法牛顿莱布尼茨公式格"
@@ -63,8 +60,7 @@ About::About(){
     WGridLayout *grid = details->setLayout(make_unique<WGridLayout>());
     auto addGridCell = [=](int row, int column){
         WContainerWidget *cell = grid->addWidget(
-            make_unique<WContainerWidget>(), row, column,
-            AlignmentFlag::Left | AlignmentFlag::Middle);
+            make_unique<WContainerWidget>(), row, column);
         cell->setMargin(20, Side::Bottom);
         cell->setStyleClass("d-flex align-items-center");
         return cell;
@@ -73,7 +69,7 @@ About::About(){
     WContainerWidget *birthday = addGridCell(0, 0);
     addChevron(birthday);
     addLabel(birthday, "生日：");
-    addPlain(birthday, "1999-4-12");
+    addPlain(birthday, "4月12日");
 
     WContainerWidget *age = addGridCell(0, 1);
     addChevron(age);
@@ -82,7 +78,7 @@ About::About(){
 
     WContainerWidget *website = addGridCell(1, 0);
     addChevron(website);
-    addLabel(website, "个人网页：");
+    addLabel(website, "主页：");
     addPlain(website, "http://47.74.46.203");
 
     WContainerWidget *degree = addGridCell(1, 1);
@@ -92,8 +88,8 @@ About::About(){
 
     WContainerWidget *phone = addGridCell(2, 0);
     addChevron(phone);
-    addLabel(phone, "电话：");
-    addPlain(phone, "19817478853");
+    addLabel(phone, "QQ：");
+    addPlain(phone, "419286376");
 
     WContainerWidget *email = addGridCell(2, 1);
     addChevron(email);
@@ -110,12 +106,12 @@ About::About(){
     addLabel(job, "职业：");
     addPlain(job, "大魔法师");
 
-    p = content->addWidget(make_unique<WText>(INDENT + WString("月薪400读研人")));
+    p = content->addWidget(make_unique<WText>(INDENT + WString("月薪400读研狗")));
     p->setMargin(0, Side::Bottom);
     p->setStyleClass("fs-4");
 }
 
-void About::addChevron(WContainerWidget *container){
+WText *About::addChevron(WContainerWidget *container){
     WText *chevron = container->addWidget(make_unique<WText>(
         "<i class=\"bi bi-chevron-right\"/>"));
     WFont font;
@@ -124,19 +120,22 @@ void About::addChevron(WContainerWidget *container){
     chevron->setMargin(5, Side::Right);
     chevron->decorationStyle().setForegroundColor(WColor(0x14, 0x9d, 0xdd));
     chevron->setLineHeight(0);
+    return chevron;
 }
 
-void About::addLabel(WContainerWidget *container, const WString &text){
+WText *About::addLabel(WContainerWidget *container, const WString &text){
     WText *label = container->addWidget(make_unique<WText>(text));
     label->setMargin(10, Side::Right);
     WFont font;
     font.setSize(24);
     label->decorationStyle().setFont(font);
+    return label;
 }
 
-void About::addPlain(WContainerWidget *container, const WString &text){
+WText *About::addPlain(WContainerWidget *container, const WString &text){
     WText *plain = container->addWidget(make_unique<WText>(text));
     WFont font;
     font.setSize(24);
     plain->decorationStyle().setFont(font);
+    return plain;
 }

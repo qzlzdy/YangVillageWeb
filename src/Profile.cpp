@@ -21,7 +21,7 @@ Profile::Profile(){
     WImage *avatar = layout->addWidget(
         make_unique<WImage>("images/avatar.png", "头像"));
     avatar->setMargin(15, Side::Top | Side::Bottom);
-    avatar->setMargin(WLength(), Side::Left | Side::Right);
+    avatar->setMargin(WLength::Auto, Side::Left | Side::Right);
     avatar->setWidth(120);
     avatar->decorationStyle().setBorder(
         WBorder(BorderStyle::Solid, 8, WColor(0x2c, 0x2f, 0x3f)));
