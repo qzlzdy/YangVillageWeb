@@ -10,8 +10,6 @@ using namespace std;
 using namespace Wt;
 using namespace yang;
 
-const WString yang::INDENT = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-
 Section::Section(){
     decorationStyle().setBackgroundColor(WColor(0xf5, 0xf8, 0xfd));
     setPositionScheme(PositionScheme::Relative);
@@ -19,7 +17,7 @@ Section::Section(){
     setStyleClass("py-5 px-0");
 }
 
-void Section::addSectionTitle(const WString &title, const WString &desc){
+void Section::addSectionTitle(const WString &title){
     WText *h2 = addWidget(make_unique<WText>(title));
     WFont font;
     font.setSize(32);
@@ -39,7 +37,7 @@ void Section::addSectionTitle(const WString &title, const WString &desc){
     line->setMargin(0, Side::Bottom | Side::Left);
 
     addWidget(make_unique<WBreak>());
-    WText *p = addWidget(make_unique<WText>(desc));
+    WText *p = addWidget(make_unique<WText>("&nbsp;"));
     p->setMargin(0, Side::Bottom);
     p->setStyleClass("pb-4 fs-4");
 }

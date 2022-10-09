@@ -1,6 +1,5 @@
 #include "Skills.h"
 
-#include <boost/format.hpp>
 #include <Wt/WColor.h>
 #include <Wt/WCssDecorationStyle.h>
 #include <Wt/WFont.h>
@@ -10,18 +9,8 @@ using namespace std;
 using namespace Wt;
 using namespace yang;
 
-namespace {
-
-const WString SKILLS_DESC =
-"精通C++面向对象程序设计；熟练使用CMake跨平台构建工具；熟练使用基于"
-"C++的Qt、Wt等框架；熟悉Linux开发环境；使用Git等版本管理工具；能使用"
-"Markdown、LaTeX、Doxygen等工具书写文档；能无障碍阅读英语、日语技术文"
-"档；熟练驾驶C1型机动车。";
-
-}
-
 Skills::Skills(){
-    addSectionTitle("专业技能", INDENT + SKILLS_DESC);
+    addSectionTitle("专业技能");
     WContainerWidget *content = addWidget(make_unique<WContainerWidget>());
     WGridLayout *grid = content->setLayout(make_unique<WGridLayout>());
     grid->setHorizontalSpacing(20);
@@ -58,27 +47,32 @@ Skills::Skills(){
     addIndicator(git, "70%");
     addProgressBar(git, 70);
 
-    WContainerWidget *doxygen = addGridCell(2, 1);
+    WContainerWidget *sql = addGridCell(2, 1);
+    addLabel(sql, "SQL");
+    addIndicator(sql, "70%");
+    addProgressBar(sql, 70);
+
+    WContainerWidget *doxygen = addGridCell(3, 0);
     addLabel(doxygen, "Doxygen");
     addIndicator(doxygen, "50%");
     addProgressBar(doxygen, 50);
 
-    WContainerWidget *latex = addGridCell(3, 0);
+    WContainerWidget *latex = addGridCell(3, 1);
     addLabel(latex, "LaTeX");
     addIndicator(latex, "55%");
     addProgressBar(latex, 55);
 
-    WContainerWidget *driving = addGridCell(3, 1);
+    WContainerWidget *driving = addGridCell(4, 0);
     addLabel(driving, "机动车驾驶");
     addIndicator(driving, "75%");
     addProgressBar(driving, 75);
 
-    WContainerWidget *japanese = addGridCell(4, 0);
+    WContainerWidget *japanese = addGridCell(4, 1);
     addLabel(japanese, "日本語");
     addIndicator(japanese, "80%");
     addProgressBar(japanese, 80);
 
-    WContainerWidget *english = addGridCell(4, 1);
+    WContainerWidget *english = addGridCell(5, 0);
     addLabel(english, "English");
     addIndicator(english, "60%");
     addProgressBar(english, 60);

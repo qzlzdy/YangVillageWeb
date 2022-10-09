@@ -30,7 +30,7 @@ Profile::Profile(){
     WLink link(LinkType::InternalPath, "/");
     link.setTarget(LinkTarget::Self);
     WAnchor *name = layout->addWidget(make_unique<WAnchor>(link, "骑着轮子的羊"));
-    name->setMargin(0, Side(0xf));
+    name->setMargin(0, AllSides);
     WFont font(FontFamily::SansSerif);
     font.setSize(24);
     font.setWeight(FontWeight::Value, 600);

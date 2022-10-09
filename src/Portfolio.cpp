@@ -8,6 +8,7 @@
 #include "Footer.h"
 #include "Header.h"
 #include "Home.h"
+#include "Resume.h"
 #include "Skills.h"
 
 using namespace std;
@@ -37,6 +38,7 @@ Portfolio::Portfolio(const WEnvironment &env): WApplication(env){
     main->addWidget(make_unique<Home>());
     main->addWidget(make_unique<About>());
     main->addWidget(make_unique<Skills>());
+    main->addWidget(make_unique<Resume>());
 
     root()->addWidget(make_unique<Header>());
     root()->addWidget(make_unique<Footer>());

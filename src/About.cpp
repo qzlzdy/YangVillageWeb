@@ -11,22 +11,8 @@ using namespace std;
 using namespace Wt;
 using namespace yang;
 
-namespace {
-
-const WString ABOUT_DESC =
-"没有什么是泰勒公式洛必达法则华里士公式伽玛函数拉格朗日乘数法牛顿莱布尼茨公式格"
-"林公式斯托克斯公式高斯公式不能解决的。如若有，那超纲了。";
-
-const WString QUAL_DESC =
-"能根据软件开发项目管理和软件工程的要求，按照系统总体设计规格说明书进行软件设计"
-"，编写程序设计规格说明书等相应的文档；组织和指导程序员编写、调试程序，并对软件"
-"进行优化和集成测试，开发出符合系统总体设计要求的高质量软件；具有工程师的实际工"
-"作能力和业务水平。";
-
-}
-
 About::About(){
-    addSectionTitle("简介", INDENT + ABOUT_DESC);
+    addSectionTitle("简介");
     WContainerWidget *container = addWidget(make_unique<WContainerWidget>());
     container->setStyleClass("row");
 
@@ -46,7 +32,7 @@ About::About(){
     h3->decorationStyle().setForegroundColor(WColor(0x17, 0x3b, 0x6c));
 
     content->addWidget(make_unique<WBreak>());
-    WText *p = content->addWidget(make_unique<WText>(INDENT + QUAL_DESC));
+    WText *p = content->addWidget(make_unique<WText>("&nbsp;"));
     font = WFont();
     font.setStyle(FontStyle::Italic);
     p->decorationStyle().setFont(font);
@@ -106,7 +92,7 @@ About::About(){
     addLabel(job, "职业：");
     addPlain(job, "大魔法师");
 
-    p = content->addWidget(make_unique<WText>(INDENT + WString("月薪400读研狗")));
+    p = content->addWidget(make_unique<WText>("&nbsp;"));
     p->setMargin(0, Side::Bottom);
     p->setStyleClass("fs-4");
 }

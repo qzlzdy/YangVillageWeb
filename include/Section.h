@@ -6,13 +6,11 @@
 
 namespace yang{
 
-extern const Wt::WString INDENT;
-
 class Section: public Wt::WContainerWidget{
 public:
     Section();
 protected:
-    void addSectionTitle(const Wt::WString &title, const Wt::WString &desc);
+    void addSectionTitle(const Wt::WString &title);
 };
 
 }
