@@ -1,6 +1,7 @@
 #ifndef RESUME_H
 #define RESUME_H
 
+#include <Wt/WText.h>
 #include <Wt/WVBoxLayout.h>
 #include "Section.h"
 

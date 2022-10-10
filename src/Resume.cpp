@@ -6,7 +6,6 @@
 #include <Wt/WCssDecorationStyle.h>
 #include <Wt/WFont.h>
 #include <Wt/WHBoxLayout.h>
-#include <Wt/WText.h>
 
 using namespace std;
 using namespace Wt;
@@ -14,8 +13,8 @@ using namespace yang;
 
 Resume::Resume(){
     addSectionTitle("教育 &amp; 工作经历");
-    WContainerWidget *content = addWidget(make_unique<WContainerWidget>());
-    WHBoxLayout *row = content->setLayout(make_unique<WHBoxLayout>());
+    WHBoxLayout *row = addWidget(make_unique<WContainerWidget>())
+                       ->setLayout(make_unique<WHBoxLayout>());
     WContainerWidget *left = row->addWidget(make_unique<WContainerWidget>());
     WVBoxLayout *leftCol = left->setLayout(make_unique<WVBoxLayout>());
     WContainerWidget *right = row->addWidget(make_unique<WContainerWidget>());
@@ -62,6 +61,9 @@ Resume::Resume(){
     addH5(expr, "2021.2 - 2021.6");
     p = expr->addWidget(make_unique<WText>("C++后端开发实习"));
     p->decorationStyle().setFont(font);
+
+    row->setStretchFactor(left, 6);
+    row->setStretchFactor(right, 6);
 }
 
 WText *Resume::addTitle(WVBoxLayout *layout, const WString &text){

@@ -11,9 +11,8 @@ using namespace Wt;
 using namespace yang;
 
 Home::Home(){
-    // FIXME replace background.png
     decorationStyle().setBackgroundImage(
-        "/images/wallpaper.jpg", Orientation(0), Side::CenterX | Side::Top);
+        "/images/background.png", Orientation(0), Side::CenterX | Side::Top);
     setPositionScheme(PositionScheme::Relative);
     setMinimumSize(300, 1080);
     setMargin(0, AllSides);

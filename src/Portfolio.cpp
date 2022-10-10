@@ -5,6 +5,7 @@
 #include <Wt/WLink.h>
 #include <Wt/WVBoxLayout.h>
 #include "About.h"
+#include "Contact.h"
 #include "Footer.h"
 #include "Header.h"
 #include "Home.h"
@@ -39,6 +40,7 @@ Portfolio::Portfolio(const WEnvironment &env): WApplication(env){
     main->addWidget(make_unique<About>());
     main->addWidget(make_unique<Skills>());
     main->addWidget(make_unique<Resume>());
+    main->addWidget(make_unique<Contact>());
 
     root()->addWidget(make_unique<Header>());
     root()->addWidget(make_unique<Footer>());

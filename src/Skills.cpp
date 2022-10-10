@@ -76,6 +76,9 @@ Skills::Skills(){
     addLabel(english, "English");
     addIndicator(english, "60%");
     addProgressBar(english, 60);
+
+    grid->setColumnStretch(0, 6);
+    grid->setColumnStretch(1, 6);
 }
 
 WText *Skills::addLabel(WContainerWidget *container, const WString &text){
