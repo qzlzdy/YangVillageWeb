@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<messages>
+    <message id='contactForm-template'>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="${id:name}">昵称</label>
+                ${name}
+            </div>
+            <div class="col-md-6">
+                <label for="${id:email}">邮箱</label>
+                ${email}
+            </div>
+        </div>
+        <div>
+            <label for="${id:subject}">主题</label>
+            ${subject}
+        </div>
+        <div>
+            <label for="${id:message}">正文</label>
+            ${message}
+        </div>
+        <div class="text-center">
+            ${submit}
+        </div>
+        <div class="my-3">
+            ${submit-info}
+        </div>
+    </message>
+</messages>

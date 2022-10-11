@@ -6,6 +6,7 @@
 #include <Wt/WFont.h>
 #include <Wt/WHBoxLayout.h>
 #include <Wt/WVBoxLayout.h>
+#include "ContactFormView.h"
 
 using namespace std;
 using namespace Wt;
@@ -20,7 +21,6 @@ Contact::Contact(){
     WVBoxLayout *leftCol = left->setLayout(make_unique<WVBoxLayout>());
     WContainerWidget *right = row->addWidget(make_unique<WContainerWidget>());
     WVBoxLayout *rightCol = right->setLayout(make_unique<WVBoxLayout>());
-    static_cast<void>(rightCol);
 
     left->decorationStyle().setBackgroundColor(WColor(0xff, 0xff, 0xff));
     left->setStyleClass("p-5 w-100 shadow");
@@ -46,7 +46,6 @@ Contact::Contact(){
     WLeafletMap *map = leftCol->addWidget(make_unique<WLeafletMap>());
     map->resize(430, 290);
     Json::Object options;
-    options["maxZoom"] = 19;
     options["attribution"] =
         "&copy; <a href=\"https://www.openstreetmap.org/copyright\">"
             "OpenStreetMap"
@@ -56,9 +55,15 @@ Contact::Contact(){
     map->addMarker(make_unique<WLeafletMap::LeafletMarker>(Home));
     map->setZoomLevel(16);
 
+    ContactFormView *form = rightCol->addWidget(make_unique<ContactFormView>());
+    form->decorationStyle().setBackgroundColor(WColor(0xff, 0xff, 0xff));
+    form->setStyleClass("w-100 p-4 shadow");
+
     row->setStretchFactor(left, 5);
     row->setStretchFactor(right, 7);
 }
+
+WLeafletMap::Coordinate Contact::Home(30.318400, 120.337750);
 
 WText *Contact::addIcon(WContainerWidget *container, const WString &text){
     WText *icon = container->addWidget(make_unique<WText>(text));
@@ -97,5 +102,3 @@ WText *Contact::addPara(WContainerWidget *container, const WString &text){
     p->setStyleClass("pt-0 pe-0 pb-2 ps-5");
     return p;
 }
-
-WLeafletMap::Coordinate Contact::Home(30.318400, 120.337750);

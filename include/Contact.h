@@ -11,10 +11,10 @@ class Contact: public Section{
 public:
     Contact();
 private:
+    static Wt::WLeafletMap::Coordinate Home;
     Wt::WText *addIcon(Wt::WContainerWidget *container, const Wt::WString &text);
     Wt::WText *addH4(Wt::WContainerWidget *container, const Wt::WString &text);
     Wt::WText *addPara(Wt::WContainerWidget *container, const Wt::WString &text);
-    static Wt::WLeafletMap::Coordinate Home;
 };
 
 }

@@ -19,6 +19,8 @@ add_executable(yangvillage.wt
     src/main.cpp
     src/About.cpp
     src/Contact.cpp
+    src/ContactFormModel.cpp
+    src/ContactFormView.cpp
     src/Footer.cpp
     src/Header.cpp
     src/Home.cpp
