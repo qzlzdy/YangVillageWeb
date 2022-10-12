@@ -28,6 +28,7 @@ Portfolio::Portfolio(const WEnvironment &env): WApplication(env){
     //     redirect("https://" + env.hostName() + url());
     //     return;
     // }
+    messageResourceBundle().use("template");
     setTheme(make_shared<WBootstrap5Theme>());
     useStyleSheet(BootstrapIcon);
     setTitle("羊村");

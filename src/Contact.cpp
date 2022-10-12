@@ -23,7 +23,7 @@ Contact::Contact(){
     WVBoxLayout *rightCol = right->setLayout(make_unique<WVBoxLayout>());
 
     left->decorationStyle().setBackgroundColor(WColor(0xff, 0xff, 0xff));
-    left->setStyleClass("p-5 w-100 shadow");
+    left->setStyleClass("d-flex align-items-stretch p-5 shadow");
 
     WContainerWidget *address = leftCol->addWidget(make_unique<WContainerWidget>());
     addIcon(address, "<i class=\"bi bi-geo-alt\"/>");
@@ -54,6 +54,9 @@ Contact::Contact(){
     map->panTo(Home);
     map->addMarker(make_unique<WLeafletMap::LeafletMarker>(Home));
     map->setZoomLevel(16);
+
+    right->setMargin(5, Side::Top);
+    right->setStyleClass("d-flex align-items-stretch");
 
     ContactFormView *form = rightCol->addWidget(make_unique<ContactFormView>());
     form->decorationStyle().setBackgroundColor(WColor(0xff, 0xff, 0xff));
