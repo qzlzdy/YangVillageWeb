@@ -69,6 +69,7 @@ void NavigationBar::setDefaultStyle(WAnchor *widget, bool isDeactive){
     widget->setMargin(0, Side::Top | Side::Left | Side::Right);
     widget->setPositionScheme(PositionScheme::Relative);
     widget->setMargin(8, Side::Bottom);
+    widget->decorationStyle().setCursor(Cursor::PointingHand);
     if(isDeactive){
         setDeactiveStyle(widget);
     }

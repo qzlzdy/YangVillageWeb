@@ -29,4 +29,12 @@
             </div>
         </div>
     </message>
+    <message id="projectDetails-template">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">${title}</h5>
+                <p>${from-date}&nbsp;&nbsp;to&nbsp;&nbsp;${to-date}</p>
+            </div>
+        </div>
+    </message>
 </messages>

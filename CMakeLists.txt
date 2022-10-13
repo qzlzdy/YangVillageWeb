@@ -27,6 +27,8 @@ add_executable(yangvillage.wt
     src/NavigationBar.cpp
     src/Portfolio.cpp
     src/Profile.cpp
+    src/ProjectDetails.cpp
+    src/Projects.cpp
     src/Resume.cpp
     src/Section.cpp
     src/Skills.cpp
