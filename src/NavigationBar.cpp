@@ -33,10 +33,10 @@ NavigationBar::NavigationBar(){
     setDefaultStyle(resume);
     resume->clicked().connect(bind(&NavigationBar::menuClicked, this, resume));
 
-    WAnchor *portfolio = layout->addWidget(make_unique<WAnchor>(WLink(),
+    WAnchor *projects = layout->addWidget(make_unique<WAnchor>(WLink(),
         "<i class=\"bi bi-hdd-stack\"/>项目经历"));
-    setDefaultStyle(portfolio);
-    portfolio->clicked().connect(bind(&NavigationBar::menuClicked, this, portfolio));
+    setDefaultStyle(projects);
+    projects->clicked().connect(bind(&NavigationBar::menuClicked, this, projects));
 
     WAnchor *contact = layout->addWidget(make_unique<WAnchor>(WLink(),
         "<i class=\"bi bi-envelope\"/>联系方式"));

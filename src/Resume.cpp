@@ -61,6 +61,7 @@ Resume::Resume(){
     addH5(expr, "2021.2 - 2021.6");
     p = expr->addWidget(make_unique<WText>("C++后端开发实习"));
     p->decorationStyle().setFont(font);
+    rightCol->addStretch(1);
 
     row->setStretchFactor(left, 6);
     row->setStretchFactor(right, 6);
@@ -96,7 +97,6 @@ void Resume::setH4Style(WText *h4){
     h4->decorationStyle().setFont(font);
     h4->decorationStyle().setForegroundColor(WColor(0x05, 0x0d, 0x18));
     h4->setMargin(10, Side::Bottom);
-    h4->setStyleClass("");
 }
 
 WText *Resume::addH4(WContainerWidget *container, const WString &text){
