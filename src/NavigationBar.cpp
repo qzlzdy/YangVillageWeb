@@ -79,6 +79,9 @@ void NavigationBar::setDefaultStyle(WAnchor *widget, bool isDeactive){
 }
 
 void NavigationBar::menuClicked(WAnchor *source){
+    if(currentActive == source){
+        return;
+    }
     setDeactiveStyle(currentActive);
     setActiveStyle(source);
     currentActive = source;
