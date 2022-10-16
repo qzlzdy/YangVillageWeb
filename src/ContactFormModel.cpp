@@ -1,7 +1,13 @@
 #include "ContactFormModel.h"
 
+#include <Wt/Dbo/Dbo.h>
+#include <Wt/Dbo/Exception.h>
+#include <Wt/Dbo/Session.h>
+#include <Wt/Dbo/Transaction.h>
+#include <Wt/Dbo/backend/Sqlite3.h>
 #include <Wt/WLengthValidator.h>
 #include <Wt/WRegExpValidator.h>
+#include <Messages.h>
 
 using namespace std;
 using namespace Wt;
@@ -21,6 +27,27 @@ ContactFormModel::ContactFormModel(){
     setValidator(EmailField, createEmailValidator());
     setValidator(SubjectField, createSubjectValidator());
     setValidator(MessageField, createMessageValidator());
+}
+
+void ContactFormModel::sendMail(){
+    unique_ptr<Dbo::backend::Sqlite3> db =
+        make_unique<Dbo::backend::Sqlite3>("yangvillage.db");
+    Dbo::Session session;
+    session.setConnection(move(db));
+    session.mapClass<Messages>("messages");
+    try{
+        session.createTables();
+    }
+    catch(Dbo::Exception &e){
+        static_cast<void>(e);
+    }
+    Dbo::Transaction trans(session);
+    unique_ptr<Messages> messages = make_unique<Messages>();
+    messages->name = valueText(NameField).toUTF8();
+    messages->email = valueText(EmailField).toUTF8();
+    messages->subject = valueText(SubjectField).toUTF8();
+    messages->message = valueText(MessageField).toUTF8();
+    session.add(move(messages));
 }
 
 shared_ptr<WValidator> ContactFormModel::createNameValidator(){

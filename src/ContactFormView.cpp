@@ -39,6 +39,7 @@ ContactFormView::ContactFormView(){
 void ContactFormView::process(){
     updateModel(model.get());
     if(model->validate()){
+        model->sendMail();
         bindString("submit-info",
             "<p class=\"alert alert-success\">"
                 "提交成功！"
@@ -50,7 +51,7 @@ void ContactFormView::process(){
     else{
         bindString("submit-info",
             "<p class=\"alert alert-danger\">"
-                "信息格式错误或正文过短！"
+                "信息格式错误或正文字数超出限定！"
             "</p>");
         updateView(model.get());
     }

@@ -35,4 +35,4 @@ add_executable(yangvillage.wt
     src/SocialLinks.cpp
 )
 
-target_link_libraries(yangvillage.wt wt wthttp)
+target_link_libraries(yangvillage.wt wt wthttp wtdbo wtdbosqlite3)

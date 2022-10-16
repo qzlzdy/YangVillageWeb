@@ -13,6 +13,7 @@ public:
     static const Field SubjectField;
     static const Field MessageField;
     ContactFormModel();
+    void sendMail();
 private:
     std::shared_ptr<Wt::WValidator> createNameValidator();
     std::shared_ptr<Wt::WValidator> createEmailValidator();
