@@ -11,7 +11,7 @@ using namespace std;
 using namespace Wt;
 using namespace yang;
 
-Resume::Resume(){
+Resume::Resume(): Section("resume"){
     addSectionTitle("教育 &amp; 工作经历");
     WHBoxLayout *row = addWidget(make_unique<WContainerWidget>())
                        ->setLayout(make_unique<WHBoxLayout>());

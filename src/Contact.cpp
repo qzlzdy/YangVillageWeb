@@ -12,7 +12,7 @@ using namespace std;
 using namespace Wt;
 using namespace yang;
 
-Contact::Contact(){
+Contact::Contact(): Section("contact"){
     setStyleClass("pb-5");
     addSectionTitle("联系方式");
     WHBoxLayout *row = addWidget(make_unique<WContainerWidget>())

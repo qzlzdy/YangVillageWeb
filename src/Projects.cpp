@@ -135,7 +135,7 @@ const vector<const ProjectInfo *> Projects::projects = {
     &MISC
 };
 
-Projects::Projects(){
+Projects::Projects(): Section("projects"){
     addSectionTitle("项目经历");
     WContainerWidget *bar = addWidget(make_unique<WContainerWidget>());
     bar->setMargin(0, Side::Top);

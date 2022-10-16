@@ -11,6 +11,7 @@ using namespace Wt;
 using namespace yang;
 
 Home::Home(){
+    setId("home");
     decorationStyle().setBackgroundImage(
         "/images/background.png", Orientation(0), Side::CenterX | Side::Top);
     setPositionScheme(PositionScheme::Relative);

@@ -17,6 +17,14 @@ Section::Section(){
     setStyleClass("py-5 px-0");
 }
 
+Section::Section(const string &id){
+    setId(id);
+    decorationStyle().setBackgroundColor(WColor(0xf5, 0xf8, 0xfd));
+    setPositionScheme(PositionScheme::Relative);
+    setMargin(306, Side::Left);
+    setStyleClass("py-5 px-0");
+}
+
 void Section::addSectionTitle(const WString &title){
     WText *h2 = addWidget(make_unique<WText>(title));
     WFont font;

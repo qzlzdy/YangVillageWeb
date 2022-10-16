@@ -11,7 +11,7 @@ using namespace std;
 using namespace Wt;
 using namespace yang;
 
-About::About(){
+About::About(): Section("about"){
     addSectionTitle("简介");
     WContainerWidget *container = addWidget(make_unique<WContainerWidget>());
     container->setStyleClass("row");
