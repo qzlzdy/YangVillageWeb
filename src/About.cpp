@@ -65,7 +65,7 @@ About::About(){
     WContainerWidget *website = addGridCell(1, 0);
     addChevron(website);
     addLabel(website, "主页：");
-    addPlain(website, "http://47.74.46.203");
+    addPlain(website, "http://47.74.46.203/portfolio");
 
     WContainerWidget *degree = addGridCell(1, 1);
     addChevron(degree);

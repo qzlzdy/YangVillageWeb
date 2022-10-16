@@ -121,9 +121,18 @@ const ProjectInfo MISC = {
 }
 
 const vector<const ProjectInfo *> Projects::projects = {
-    &ANIVATAR, &YANG_VILLAGE, &EHDU_BADAPPLE, &NEKO_CHAN,
-    &DOLPHINDB_PLUGIN, &EHDU_CHESS, &INROOM_NAVI_APP, &KNOWLEDGE_GRAPH,
-    &CRAWL_BACKEND, &INSTGRAM_CRAWL, &STM32_GAME, &MISC
+    &ANIVATAR,
+    &YANG_VILLAGE,
+    &EHDU_BADAPPLE,
+    &NEKO_CHAN,
+    &DOLPHINDB_PLUGIN,
+    &EHDU_CHESS,
+    &INROOM_NAVI_APP,
+    &KNOWLEDGE_GRAPH,
+    &CRAWL_BACKEND,
+    &INSTGRAM_CRAWL,
+    &STM32_GAME,
+    &MISC
 };
 
 Projects::Projects(){
@@ -156,10 +165,10 @@ Projects::Projects(){
     WText *python = addFilter(filters, "Python");
     python->clicked().connect(bind(&Projects::filterClicked, this, python));
 
-    currentActive = all;
-
+    currentActive = nullptr;
     projectList = addWidget(make_unique<WContainerWidget>())
         ->setLayout(make_unique<WVBoxLayout>());
+    filterClicked(all);
 }
 
 WText *Projects::addFilter(WHBoxLayout *container, const WString &text){
@@ -191,16 +200,20 @@ void Projects::filterClicked(WText *source){
     if(currentActive == source){
         return;
     }
-    setDeactiveStyle(currentActive);
+    if(currentActive != nullptr){
+        setDeactiveStyle(currentActive);
+    }
     setActiveStyle(source);
     currentActive = source;
-    // TODO clear
+    while(projectList->count() > 0){
+        projectList->removeItem(projectList->itemAt(0));
+    }
     if(currentActive->text() == "All"){
         for_each(projects.begin(), projects.end(), [=](const ProjectInfo *info){
             projectList->addWidget(make_unique<ProjectDetails>(*info));
         });
     }
-    else if(currentActive->text() == "ANDROID"){
+    else if(currentActive->text() == "Android"){
         for_each(projects.begin(), projects.end(), [=](const ProjectInfo *info){
             if(info->type == PROJ_ANDROID){
                 projectList->addWidget(make_unique<ProjectDetails>(*info));

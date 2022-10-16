@@ -18,28 +18,38 @@ NavigationBar::NavigationBar(){
     WContainerWidget *root = addWidget(make_unique<WContainerWidget>());
     WVBoxLayout *layout = root->setLayout(make_unique<WVBoxLayout>());
 
-    WAnchor *home = layout->addWidget(make_unique<WAnchor>(WLink(),
-        "<i class=\"bi bi-house-door\"/>主页"));
+    WAnchor *home = layout->addWidget(make_unique<WAnchor>(
+        WLink(LinkType::InternalPath, "/home"),
+        "<i class=\"bi bi-house-door\"/>主页")
+    );
     setDefaultStyle(home, false);
     home->clicked().connect(bind(&NavigationBar::menuClicked, this, home));
 
-    WAnchor *about = layout->addWidget(make_unique<WAnchor>(WLink(),
-        "<i class=\"bi bi-person\"/>简介"));
+    WAnchor *about = layout->addWidget(make_unique<WAnchor>(
+        WLink(LinkType::InternalPath, "/about"),
+        "<i class=\"bi bi-person\"/>简介")
+    );
     setDefaultStyle(about);
     about->clicked().connect(bind(&NavigationBar::menuClicked, this, about));
 
-    WAnchor *resume = layout->addWidget(make_unique<WAnchor>(WLink(),
-        "<i class=\"bi bi-file-earmark\"/>教育 &amp; 工作经历"));
+    WAnchor *resume = layout->addWidget(make_unique<WAnchor>(
+        WLink(LinkType::InternalPath, "/resume"),
+        "<i class=\"bi bi-file-earmark\"/>教育 &amp; 工作经历")
+    );
     setDefaultStyle(resume);
     resume->clicked().connect(bind(&NavigationBar::menuClicked, this, resume));
 
-    WAnchor *projects = layout->addWidget(make_unique<WAnchor>(WLink(),
-        "<i class=\"bi bi-hdd-stack\"/>项目经历"));
+    WAnchor *projects = layout->addWidget(make_unique<WAnchor>(
+        WLink(LinkType::InternalPath, "/projects"),
+        "<i class=\"bi bi-hdd-stack\"/>项目经历")
+    );
     setDefaultStyle(projects);
     projects->clicked().connect(bind(&NavigationBar::menuClicked, this, projects));
 
-    WAnchor *contact = layout->addWidget(make_unique<WAnchor>(WLink(),
-        "<i class=\"bi bi-envelope\"/>联系方式"));
+    WAnchor *contact = layout->addWidget(make_unique<WAnchor>(
+        WLink(LinkType::InternalPath, "/contact"),
+        "<i class=\"bi bi-envelope\"/>联系方式")
+    );
     setDefaultStyle(contact);
     contact->clicked().connect(bind(&NavigationBar::menuClicked, this, contact));
 
