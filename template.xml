@@ -5,26 +5,22 @@
             <legend>${title}</legend>
             <div class="row pb-2 mb-3">
                 <div class="col-md-6">
-                    <label for="${id:name}" class="pb-2">昵称</label>
-                    ${name}
+                    <label for="${id:name}" class="pb-2">昵称</label>${name}
                 </div>
                 <div class="col-md-6">
-                    <label for="${id:email}" class="pb-2">邮箱</label>
-                    ${email}
+                    <label for="${id:email}" class="pb-2">邮箱</label>${email}
                 </div>
             </div>
             <div class="pb-2 mb-3">
-                <label for="${id:subject}" class="pb-2">主题</label>
-                ${subject}
+                <label for="${id:subject}" class="pb-2">主题</label>${subject}
             </div>
             <div class="pb-2 mb-3">
-                <label for="${id:message}" class="pb-2">正文</label>
-                ${message}
+                <label for="${id:message}" class="pb-2">正文</label>${message}
             </div>
             <div class="my-3">
                 ${submit-info}
             </div>
-            <div class="text-center">
+            <div class="py-3 px-4 text-center">
                 ${submit}
             </div>
         </div>

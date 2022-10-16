@@ -19,7 +19,6 @@ ContactFormView::ContactFormView(){
     addInput(ContactFormModel::NameField);
     addInput(ContactFormModel::EmailField);
     addInput(ContactFormModel::SubjectField);
-
     unique_ptr<WTextEdit> tinymce = make_unique<WTextEdit>();
     tinymce->setMinimumSize(WLength(), 300);
     WFont font;
@@ -28,10 +27,9 @@ ContactFormView::ContactFormView(){
     tinymce->setStyleClass("shadow-none py-3 px-4");
     setFormWidget(ContactFormModel::MessageField, move(tinymce));
 
-    WPushButton *submit = bindWidget("submit", make_unique<WPushButton>("发送"));
+    WPushButton *submit = bindWidget("submit", make_unique<WPushButton>("提交"));
     submit->decorationStyle().setBackgroundColor(WColor(0x14, 0x9d, 0xdd));
     submit->decorationStyle().setForegroundColor(WColor(0xff, 0xff, 0xff));
-    submit->setStyleClass("py-3, px-4");
     submit->clicked().connect(this, &ContactFormView::process);
     bindEmpty("submit-info");
 
@@ -41,13 +39,19 @@ ContactFormView::ContactFormView(){
 void ContactFormView::process(){
     updateModel(model.get());
     if(model->validate()){
-        bindString("submit-info", "Send successful!", TextFormat::Plain);
+        bindString("submit-info",
+            "<p class=\"alert alert-success\">"
+                "提交成功！"
+            "</p>");
         updateView(model.get());
-        WLineEdit *viewField = resolve<WLineEdit *>(ContactFormModel::MessageField);
+        WTextEdit *viewField = resolve<WTextEdit *>(ContactFormModel::MessageField);
         viewField->setFocus(true);
     }
     else{
-        bindEmpty("submit-info");
+        bindString("submit-info",
+            "<p class=\"alert alert-danger\">"
+                "信息格式错误或正文过短！"
+            "</p>");
         updateView(model.get());
     }
 }
