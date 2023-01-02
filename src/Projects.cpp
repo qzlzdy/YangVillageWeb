@@ -209,40 +209,40 @@ void Projects::filterClicked(WText *source){
         projectList->removeItem(projectList->itemAt(0));
     }
     if(currentActive->text() == "All"){
-        for_each(projects.begin(), projects.end(), [=](const ProjectInfo *info){
+        for_each(projects.begin(), projects.end(), [&](const ProjectInfo *info){
             projectList->addWidget(make_unique<ProjectDetails>(*info));
         });
     }
     else if(currentActive->text() == "Android"){
-        for_each(projects.begin(), projects.end(), [=](const ProjectInfo *info){
+        for_each(projects.begin(), projects.end(), [&](const ProjectInfo *info){
             if(info->type == PROJ_ANDROID){
                 projectList->addWidget(make_unique<ProjectDetails>(*info));
             }
         });
     }
     else if(currentActive->text() == "C/C++"){
-        for_each(projects.begin(), projects.end(), [=](const ProjectInfo *info){
+        for_each(projects.begin(), projects.end(), [&](const ProjectInfo *info){
             if(info->type == PROJ_CPP){
                 projectList->addWidget(make_unique<ProjectDetails>(*info));
             }
         });
     }
     else if(currentActive->text() == "Embedded"){
-        for_each(projects.begin(), projects.end(), [=](const ProjectInfo *info){
+        for_each(projects.begin(), projects.end(), [&](const ProjectInfo *info){
             if(info->type == PROJ_EMBEDDED){
                 projectList->addWidget(make_unique<ProjectDetails>(*info));
             }
         });
     }
     else if(currentActive->text() == "Java"){
-        for_each(projects.begin(), projects.end(), [=](const ProjectInfo *info){
+        for_each(projects.begin(), projects.end(), [&](const ProjectInfo *info){
             if(info->type == PROJ_JAVA){
                 projectList->addWidget(make_unique<ProjectDetails>(*info));
             }
         });
     }
     else if(currentActive->text() == "Python"){
-        for_each(projects.begin(), projects.end(), [=](const ProjectInfo *info){
+        for_each(projects.begin(), projects.end(), [&](const ProjectInfo *info){
             if(info->type == PROJ_PYTHON){
                 projectList->addWidget(make_unique<ProjectDetails>(*info));
             }

@@ -57,7 +57,7 @@ void SocialLinks::showDialog(const WString &title, const WLink &code){
     WPushButton *button = contents->addWidget(make_unique<WPushButton>("关闭"));
     button->setDefault(true);
     button->clicked().connect(dialog, &WDialog::accept);
-    dialog->finished().connect([=](){
+    dialog->finished().connect([&](){
         removeChild(dialog);
     });
     dialog->show();
