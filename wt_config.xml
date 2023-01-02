@@ -449,13 +449,14 @@
             <proxy>fe80::/10</proxy>
             -->
             <!-- local -->
+            <proxy>192.168.0.0/16</proxy>
             <!--
             <proxy>10.0.0.0/8</proxy>
             <proxy>172.16.0.0/12</proxy>
-            <proxy>192.168.0.0/16</proxy>
             <proxy>fc00::/7</proxy>
             -->
-	    <proxy>47.74.46.203/32</proxy>
+            <!-- public ip -->
+	          <proxy>47.74.46.203/32</proxy>
           </trusted-proxies>
         </trusted-proxy-config>
 

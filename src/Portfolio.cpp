@@ -25,10 +25,10 @@ const WLink BootstrapIcon = "https://cdn.jsdelivr.net/npm/"
 }
 
 Portfolio::Portfolio(const WEnvironment &env): WApplication(env){
-    // if(env.urlScheme() != "https"){
-    //     redirect("https://" + env.hostName() + url());
-    //     return;
-    // }
+    if(env.urlScheme() != "https"){
+        redirect("https://" + env.hostName() + url());
+        return;
+    }
     messageResourceBundle().use("template");
     setTheme(make_shared<WBootstrap5Theme>());
     useStyleSheet(BootstrapIcon);
