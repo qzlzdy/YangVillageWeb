@@ -31,6 +31,7 @@ ProjectDetails::ProjectDetails(const ProjectInfo &info){
     bindString("to-date", info.to.toString("yyyy-M"));
     if(!info.repo.isNull()){
         setCondition("has-src", true);
+        const_cast<ProjectInfo *>(&info)->repo.setTarget(LinkTarget::NewWindow);
         bindWidget("proj-src", make_unique<WAnchor>(info.repo, info.repoName));
     }
 }

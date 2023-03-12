@@ -1,5 +1,6 @@
 #include "Portfolio.h"
 
+#include <string>
 #include <Wt/WBootstrap5Theme.h>
 #include <Wt/WContainerWidget.h>
 #include <Wt/WLink.h>
@@ -20,13 +21,15 @@ using namespace yang;
 namespace {
 
 const WLink BootstrapIcon = "https://cdn.jsdelivr.net/npm/"
-    "bootstrap-icons@1.9.1/font/bootstrap-icons.css";
+    "bootstrap-icons@1.10.0/font/bootstrap-icons.css";
 
 }
 
 Portfolio::Portfolio(const WEnvironment &env): WApplication(env){
     if(env.urlScheme() != "https"){
-        redirect("https://" + env.hostName() + url());
+        string fullUrl = url();
+        string cleanUrl = fullUrl.substr(0, fullUrl.find_first_of('?'));
+        redirect("https://" + env.hostName() + cleanUrl);
         return;
     }
     messageResourceBundle().use("template");
