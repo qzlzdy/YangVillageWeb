@@ -2,6 +2,7 @@
 #include "Portfolio/Portfolio.h"
 
 #include <csignal>
+#include <cstdlib>
 #include <Wt/WServer.h>
 
 using namespace std;
@@ -31,11 +32,11 @@ int main(int argc, char **argv){
     }
     catch(WServer::Exception &e){
         cerr << e.what() << endl;
-        return 1;
+        return EXIT_FAILURE;
     }
     catch(exception &e){
         cerr << "exception: " << e.what() << endl;
-        return 1;
+        return EXIT_FAILURE;
     }
-    return 0;
+    return EXIT_SUCCESS;
 }

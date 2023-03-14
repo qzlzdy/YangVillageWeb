@@ -1,32 +1,32 @@
 # 1. YangVillageWeb
 
-Source code of Yang Village website.
+羊村网站源代码。
 
 - [1. YangVillageWeb](#1-yangvillageweb)
-  - [1.1. Prerequisites](#11-prerequisites)
-    - [1.1.1. Install packages](#111-install-packages)
-    - [1.1.2. Copy resources](#112-copy-resources)
-    - [1.1.3. Install TinyMCE](#113-install-tinymce)
-    - [1.1.4. Prepare certificate](#114-prepare-certificate)
-  - [1.2. Build](#12-build)
-  - [1.3. Start server](#13-start-server)
+- [2. Prerequisites](#2-prerequisites)
+  - [2.1. Install packages](#21-install-packages)
+  - [2.2. Copy resources](#22-copy-resources)
+  - [2.3. Install TinyMCE](#23-install-tinymce)
+  - [2.4. Prepare certificate](#24-prepare-certificate)
+- [3. Build](#3-build)
+- [4. Start server](#4-start-server)
 
-## 1.1. Prerequisites
+# 2. Prerequisites
 
-### 1.1.1. Install packages
+## 2.1. Install packages
 
 ```bash
 pacman -S cmake wt
 ```
 
-### 1.1.2. Copy resources
+## 2.2. Copy resources
 
 ```bash
 mkdir resources
 cp -r /usr/share/Wt/resources/* resources/
 ```
 
-### 1.1.3. Install TinyMCE
+## 2.3. Install TinyMCE
 
 ```bash
 aria2c https://download.tiny.cloud/tinymce/community/tinymce_4.9.11.zip
@@ -35,7 +35,7 @@ mkdir resources/tinymce
 cp -r tinymce/js/tinymce/* resources/tinymce/
 ```
 
-### 1.1.4. Prepare certificate
+## 2.4. Prepare certificate
 
 ```bash
 openssl dhparam -check -text -out dh2048.pem 2048
@@ -47,7 +47,7 @@ openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 cat server.crt server.key server.crt > server.pem
 ```
 
-## 1.2. Build
+# 3. Build
 
 ```bash
 mkdir build
@@ -56,7 +56,7 @@ cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
 make -j4
 ```
 
-## 1.3. Start server
+# 4. Start server
 
 ```bash
 yangvillage.wt \
