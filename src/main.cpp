@@ -1,4 +1,5 @@
-#include "Portfolio.h"
+#include "Homepage/Homepage.h"
+#include "Portfolio/Portfolio.h"
 
 #include <csignal>
 #include <Wt/WServer.h>
@@ -11,9 +12,14 @@ int main(int argc, char **argv){
     try{
         WServer server(argv[0]);
         server.setServerConfiguration(argc, argv, WTHTTP_CONFIGURATION);
-        server.addEntryPoint(Wt::EntryPointType::Application, [](const WEnvironment &env){
-            return make_unique<Portfolio>(env);
-        }, "/portfolio", "favicon.ico");
+        server.addEntryPoint(Wt::EntryPointType::Application,
+            [](const WEnvironment &env){
+                return make_unique<Homepage>(env);
+            }, "", "favicon.ico");
+        server.addEntryPoint(Wt::EntryPointType::Application,
+            [](const WEnvironment &env){
+                return make_unique<Portfolio>(env);
+            }, "/portfolio", "favicon.ico");
         if(server.start()){
             int sig = WServer::waitForShutdown();
             cerr << "Shutdown (signal = " << sig << ")" << endl;

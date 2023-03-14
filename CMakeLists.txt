@@ -11,26 +11,10 @@ add_compile_options(-Wall -Wpedantic)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_COMPILE_WARNING_AS_ERROR ON)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+
 include_directories(include)
 
-add_executable(yangvillage.wt
-    src/main.cpp
-    src/About.cpp
-    src/Contact.cpp
-    src/ContactFormModel.cpp
-    src/ContactFormView.cpp
-    src/Footer.cpp
-    src/Header.cpp
-    src/Home.cpp
-    src/NavigationBar.cpp
-    src/Portfolio.cpp
-    src/Profile.cpp
-    src/ProjectDetails.cpp
-    src/Projects.cpp
-    src/Resume.cpp
-    src/Section.cpp
-    src/Skills.cpp
-    src/SocialLinks.cpp
-)
-
-target_link_libraries(yangvillage.wt wt wthttp wtdbo wtdbosqlite3)
+add_subdirectory(src)

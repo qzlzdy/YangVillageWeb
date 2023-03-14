@@ -1,0 +1,18 @@
+add_library(Portfolio
+    About.cpp
+    Contact.cpp
+    ContactFormModel.cpp
+    ContactFormView.cpp
+    Footer.cpp
+    Header.cpp
+    Home.cpp
+    NavigationBar.cpp
+    Portfolio.cpp
+    Profile.cpp
+    ProjectDetails.cpp
+    Projects.cpp
+    Resume.cpp
+    Section.cpp
+    Skills.cpp
+    SocialLinks.cpp
+)
