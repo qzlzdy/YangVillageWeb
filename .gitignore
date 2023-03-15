@@ -5,7 +5,6 @@
 *.key
 *.key.org
 resources
-images/
 start.sh
 ### XilinxISE template
 # intermediate build files
