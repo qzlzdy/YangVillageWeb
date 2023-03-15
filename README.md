@@ -7,7 +7,6 @@
   - [2.1. Install packages](#21-install-packages)
   - [2.2. Copy resources](#22-copy-resources)
   - [2.3. Install TinyMCE](#23-install-tinymce)
-  - [2.4. Prepare certificate](#24-prepare-certificate)
 - [3. Build](#3-build)
 - [4. Start server](#4-start-server)
 
@@ -33,18 +32,6 @@ aria2c https://download.tiny.cloud/tinymce/community/tinymce_4.9.11.zip
 unzip tinymce_4.9.11.zip
 mkdir resources/tinymce
 cp -r tinymce/js/tinymce/* resources/tinymce/
-```
-
-## 2.4. Prepare certificate
-
-```bash
-openssl dhparam -check -text -out dh2048.pem 2048
-openssl genrsa -des3 -out server.key 2048
-openssl req -new -key server.key -out server.csr
-cp server.key server.key.org
-openssl rsa -in server.key.org -out server.key
-openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
-cat server.crt server.key server.crt > server.pem
 ```
 
 # 3. Build

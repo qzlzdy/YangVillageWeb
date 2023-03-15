@@ -65,7 +65,7 @@ About::About(): Section("about"){
     WContainerWidget *website = addGridCell(1, 0);
     addChevron(website);
     addLabel(website, "主页：");
-    addPlain(website, "http://47.74.46.203/portfolio");
+    addPlain(website, "https://yangvillage.top/portfolio");
 
     WContainerWidget *degree = addGridCell(1, 1);
     addChevron(degree);

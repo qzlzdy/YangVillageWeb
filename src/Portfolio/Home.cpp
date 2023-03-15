@@ -30,7 +30,7 @@ Home::Home(){
     h1->setLineHeight(56);
     h1->decorationStyle().setForegroundColor(WColor(0xff, 0xff, 0xff));
 
-    WText *p = addWidget(make_unique<WText>("足控、妹控、萝莉控、抖M"));
+    WText *p = addWidget(make_unique<WText>("足フェチ、臭いフェチ、サイズフェチ、マゾ"));
     p->decorationStyle().setForegroundColor(WColor(0xff, 0xff, 0xff));
     p->setMargin(50, Side::Bottom);
     font.setSize(26);
