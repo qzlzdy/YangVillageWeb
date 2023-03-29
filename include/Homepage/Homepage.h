@@ -1,5 +1,5 @@
 #ifndef HOMEPAGE_HOMEPAGE_H
-#define HOMEPAGE_HOMEPAGE_h
+#define HOMEPAGE_HOMEPAGE_H
 
 #include <Wt/WApplication.h>
 #include <Wt/WEnvironment.h>
