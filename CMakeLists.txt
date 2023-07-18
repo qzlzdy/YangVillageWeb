@@ -3,11 +3,10 @@ cmake_minimum_required(VERSION 3.26)
 project(YangVillageWeb)
 
 set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_COMPILER_LAUNCHER ccache)
 
-add_compile_options(-Wall -Wpedantic)
+add_compile_options(-Wall -Wpedantic -Wextra)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_COMPILE_WARNING_AS_ERROR ON)
 
@@ -18,4 +17,3 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 include_directories(include)
 
 add_subdirectory(src)
-

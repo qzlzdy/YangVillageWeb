@@ -18,7 +18,8 @@ const ProjectInfo INSTGRAM_CRAWL = {
     PROJ_PYTHON,
     WDate(2018, 9, 1),
     WDate(2019, 1, 1),
-    WLink()
+    WLink(),
+    WString()
 };
 
 const ProjectInfo CRAWL_BACKEND = {
@@ -26,7 +27,8 @@ const ProjectInfo CRAWL_BACKEND = {
     PROJ_JAVA,
     WDate(2019, 3, 1),
     WDate(2019, 7, 1),
-    WLink()
+    WLink(),
+    WString()
 };
 
 const ProjectInfo KNOWLEDGE_GRAPH = {
@@ -34,7 +36,8 @@ const ProjectInfo KNOWLEDGE_GRAPH = {
     PROJ_PYTHON,
     WDate(2019, 9, 1),
     WDate(2020, 1 ,1),
-    WLink()
+    WLink(),
+    WString()
 };
 
 const ProjectInfo STM32_GAME = {
@@ -42,7 +45,8 @@ const ProjectInfo STM32_GAME = {
     PROJ_EMBEDDED,
     WDate(2019, 9, 1),
     WDate(2020, 1, 1),
-    WLink()
+    WLink(),
+    WString()
 };
 
 const ProjectInfo INROOM_NAVI_APP = {
