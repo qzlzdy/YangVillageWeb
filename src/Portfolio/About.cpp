@@ -1,5 +1,6 @@
 #include "Portfolio/About.h"
 
+#include <Wt/WAnchor.h>
 #include <Wt/WBreak.h>
 #include <Wt/WColor.h>
 #include <Wt/WCssDecorationStyle.h>
@@ -65,7 +66,12 @@ About::About(): Section("about"){
     WContainerWidget *website = addGridCell(1, 0);
     addChevron(website);
     addLabel(website, "主页：");
-    addPlain(website, "https://yangvillage.top/portfolio");
+    WLink webAddr("https://yangvillage.top/portfolio");
+    WAnchor *webLink = website->addWidget(
+        make_unique<WAnchor>(webAddr, "羊村个人主页"));
+    font = WFont();
+    font.setSize(24);
+    webLink->decorationStyle().setFont(font);
 
     WContainerWidget *degree = addGridCell(1, 1);
     addChevron(degree);
