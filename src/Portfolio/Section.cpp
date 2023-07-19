@@ -18,7 +18,7 @@ Section::Section(){
 }
 
 Section::Section(const string &id){
-    setId(id);
+    setObjectName(id);
     decorationStyle().setBackgroundColor(WColor(0xf5, 0xf8, 0xfd));
     setPositionScheme(PositionScheme::Relative);
     setMargin(306, Side::Left);

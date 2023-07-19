@@ -1,6 +1,7 @@
 #include "Portfolio/Portfolio.h"
 
 #include <string>
+#include <Wt/WAnchor.h>
 #include <Wt/WBootstrap5Theme.h>
 #include <Wt/WContainerWidget.h>
 #include <Wt/WLink.h>
@@ -41,13 +42,24 @@ Portfolio::Portfolio(const WEnvironment &env): WApplication(env){
         root()->addWidget(make_unique<WContainerWidget>());
     contents->setStyleClass("p-0");
     WVBoxLayout *main = contents->setLayout(make_unique<WVBoxLayout>());
-    main->addWidget(make_unique<Home>());
-    main->addWidget(make_unique<About>());
+    Home *home = main->addWidget(make_unique<Home>());
+    About *about = main->addWidget(make_unique<About>());
     main->addWidget(make_unique<Skills>());
-    main->addWidget(make_unique<Resume>());
-    main->addWidget(make_unique<Projects>());
-    main->addWidget(make_unique<Contact>());
+    Resume *resume = main->addWidget(make_unique<Resume>());
+    Projects *projects = main->addWidget(make_unique<Projects>());
+    Contact *contact = main->addWidget(make_unique<Contact>());
 
-    root()->addWidget(make_unique<Header>());
+    Header *header = root()->addWidget(make_unique<Header>());
     root()->addWidget(make_unique<Footer>());
+
+    static_cast<WAnchor *>
+    (header->find("home-link"))->setLink("#" + home->id());
+    static_cast<WAnchor *>
+    (header->find("about-link"))->setLink("#" + about->id());
+    static_cast<WAnchor *>
+    (header->find("resume-link"))->setLink("#" + resume->id());
+    static_cast<WAnchor *>
+    (header->find("projects-link"))->setLink("#" + projects->id());
+    static_cast<WAnchor *>
+    (header->find("contact-link"))->setLink("#" + contact->id());
 }

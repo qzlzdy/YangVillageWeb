@@ -19,37 +19,42 @@ NavigationBar::NavigationBar(){
     WVBoxLayout *layout = root->setLayout(make_unique<WVBoxLayout>());
 
     WAnchor *home = layout->addWidget(make_unique<WAnchor>(
-        WLink("#home"),
+        WLink(),
         "<i class=\"bi bi-house-door\"/>主页")
     );
+    home->setObjectName("home-link");
     setDefaultStyle(home, false);
     home->clicked().connect(bind(&NavigationBar::menuClicked, this, home));
 
     WAnchor *about = layout->addWidget(make_unique<WAnchor>(
-        WLink("#about"),
+        WLink(),
         "<i class=\"bi bi-person\"/>简介")
     );
+    about->setObjectName("about-link");
     setDefaultStyle(about);
     about->clicked().connect(bind(&NavigationBar::menuClicked, this, about));
 
     WAnchor *resume = layout->addWidget(make_unique<WAnchor>(
-        WLink("#resume"),
+        WLink(),
         "<i class=\"bi bi-file-earmark\"/>教育 &amp; 工作经历")
     );
+    resume->setObjectName("resume-link");
     setDefaultStyle(resume);
     resume->clicked().connect(bind(&NavigationBar::menuClicked, this, resume));
 
     WAnchor *projects = layout->addWidget(make_unique<WAnchor>(
-        WLink("#projects"),
+        WLink(),
         "<i class=\"bi bi-hdd-stack\"/>项目经历")
     );
+    projects->setObjectName("projects-link");
     setDefaultStyle(projects);
     projects->clicked().connect(bind(&NavigationBar::menuClicked, this, projects));
 
     WAnchor *contact = layout->addWidget(make_unique<WAnchor>(
-        WLink("#contact"),
+        WLink(),
         "<i class=\"bi bi-envelope\"/>联系方式")
     );
+    contact->setObjectName("contact-link");
     setDefaultStyle(contact);
     contact->clicked().connect(bind(&NavigationBar::menuClicked, this, contact));
 
