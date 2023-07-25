@@ -7,7 +7,7 @@
 #include <Wt/Dbo/backend/Sqlite3.h>
 #include <Wt/WLengthValidator.h>
 #include <Wt/WRegExpValidator.h>
-#include <Portfolio/Messages.h>
+#include "Portfolio/ContactMessage.h"
 
 using namespace std;
 using namespace Wt;
@@ -33,16 +33,11 @@ void ContactFormModel::sendMail(){
     unique_ptr<Dbo::backend::Sqlite3> db =
         make_unique<Dbo::backend::Sqlite3>("yangvillage.db");
     Dbo::Session session;
-    session.setConnection(move(db));
-    session.mapClass<Messages>("messages");
-    try{
-        session.createTables();
-    }
-    catch(Dbo::Exception &e){
-        static_cast<void>(e);
-    }
+    session.setConnection(std::move(db));
+    session.mapClass<ContactMessage>("messages");
+
     Dbo::Transaction trans(session);
-    unique_ptr<Messages> messages = make_unique<Messages>();
+    unique_ptr<ContactMessage> messages = make_unique<ContactMessage>();
     messages->name = valueText(NameField).toUTF8();
     messages->email = valueText(EmailField).toUTF8();
     messages->subject = valueText(SubjectField).toUTF8();

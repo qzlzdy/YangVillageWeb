@@ -1,142 +1,20 @@
 #include "Portfolio/Projects.h"
 
-#include <algorithm>
 #include <functional>
+#include <memory>
+#include <Wt/Dbo/Dbo.h>
+#include <Wt/Dbo/Session.h>
+#include <Wt/Dbo/Transaction.h>
+#include <Wt/Dbo/backend/Sqlite3.h>
 #include <Wt/WColor.h>
 #include <Wt/WCssDecorationStyle.h>
 #include <Wt/WFont.h>
 #include <Wt/WVBoxLayout.h>
+#include "Portfolio/ProjectInfo.h"
 
 using namespace std;
 using namespace Wt;
 using namespace yang;
-
-namespace {
-
-const ProjectInfo INSTGRAM_CRAWL = {
-    "基于Scrapy + MongoDB的Instgram爬虫",
-    PROJ_PYTHON,
-    WDate(2018, 9, 1),
-    WDate(2019, 1, 1),
-    WLink(),
-    WString()
-};
-
-const ProjectInfo CRAWL_BACKEND = {
-    "基于Spring boot + MySQL的爬虫后台",
-    PROJ_JAVA,
-    WDate(2019, 3, 1),
-    WDate(2019, 7, 1),
-    WLink(),
-    WString()
-};
-
-const ProjectInfo KNOWLEDGE_GRAPH = {
-    "基于Protege + D2RQ + Apache Jena Fuseki的知识图谱应用",
-    PROJ_PYTHON,
-    WDate(2019, 9, 1),
-    WDate(2020, 1 ,1),
-    WLink(),
-    WString()
-};
-
-const ProjectInfo STM32_GAME = {
-    "基于STM32F207VCT6的触摸屏双人棋类游戏",
-    PROJ_EMBEDDED,
-    WDate(2019, 9, 1),
-    WDate(2020, 1, 1),
-    WLink(),
-    WString()
-};
-
-const ProjectInfo INROOM_NAVI_APP = {
-    "基于Android + 百度地图SDK + 知识图谱的可语音交互室内导航APP",
-    PROJ_ANDROID,
-    WDate(2020, 3, 1),
-    WDate(2020, 6, 1),
-    "https://github.com/longjie1107/AndroidShopQuery.git",
-    "AndroidShopQuery"
-};
-
-const ProjectInfo ANIVATAR = {
-    "基于生成对抗网络的动漫头像生成软件开发",
-    PROJ_PYTHON,
-    WDate(2020, 12, 1),
-    WDate(2021, 4, 1),
-    "https://github.com/qzlzdy/Anivatar.git",
-    "Anivatar"
-};
-
-const ProjectInfo EHDU_CHESS = {
-    "基于STM32F207的触摸屏国际象棋游戏",
-    PROJ_EMBEDDED,
-    WDate(2022, 3, 1),
-    WDate(2022, 6, 1),
-    "https://github.com/qzlzdy/EhduChess.git",
-    "EhduChess"
-};
-
-const ProjectInfo EHDU_BADAPPLE = {
-    "Bad Apple杭电版",
-    PROJ_EMBEDDED,
-    WDate(2022, 3, 1),
-    WDate(2022, 6, 1),
-    "https://github.com/qzlzdy/EhduBadApple.git",
-    "EhduBadApple"
-};
-
-const ProjectInfo NEKO_CHAN = {
-    "猫猫ちゃん色图机器人",
-    PROJ_PYTHON,
-    WDate(2018, 12, 18),
-    WDate::currentServerDate(),
-    "https://github.com/qzlzdy/Neko-Chan2.git",
-    "Neko-Chan2"
-};
-
-const ProjectInfo YANG_VILLAGE = {
-    "羊村网站",
-    PROJ_CPP,
-    WDate(2022, 9, 17),
-    WDate::currentServerDate(),
-    "https://github.com/qzlzdy/YangVillageWeb.git",
-    "YangVillageWeb"
-};
-
-const ProjectInfo DOLPHINDB_PLUGIN = {
-    "Dolphin DB插件",
-    PROJ_CPP,
-    WDate(2021, 2, 8),
-    WDate(2021, 6, 25),
-    "https://github.com/dolphindb/DolphinDBPlugin.git",
-    "DolphinDBPlugin"
-};
-
-const ProjectInfo MISC = {
-    "其他各种代码片段",
-    PROJ_CPP,
-    WDate(2017, 9, 18),
-    WDate::currentServerDate(),
-    "https://github.com/qzlzdy/Daily-Code.git",
-    "Daily-Code"
-};
-
-}
-
-const vector<const ProjectInfo *> Projects::projects = {
-    &ANIVATAR,
-    &YANG_VILLAGE,
-    &EHDU_BADAPPLE,
-    &NEKO_CHAN,
-    &DOLPHINDB_PLUGIN,
-    &EHDU_CHESS,
-    &INROOM_NAVI_APP,
-    &KNOWLEDGE_GRAPH,
-    &CRAWL_BACKEND,
-    &INSTGRAM_CRAWL,
-    &STM32_GAME,
-    &MISC
-};
 
 Projects::Projects(): Section("projects"){
     addSectionTitle("项目经历");
@@ -195,7 +73,7 @@ void Projects::setDefaultStyle(WText *filter){
     filter->decorationStyle().setFont(font);
     filter->decorationStyle().setCursor(Cursor::PointingHand);
     filter->setMargin(5, Side::Bottom);
-    filter->setStyleClass("d-inline-block py-2 px-3 text-uppercase");
+    filter->setStyleClass("d-inline-block py-2 px-3 uppercase");
     setDeactiveStyle(filter);
 }
 
@@ -211,44 +89,42 @@ void Projects::filterClicked(WText *source){
     while(projectList->count() > 0){
         projectList->removeItem(projectList->itemAt(0));
     }
-    if(currentActive->text() == "All"){
-        for_each(projects.begin(), projects.end(), [&](const ProjectInfo *info){
-            projectList->addWidget(make_unique<ProjectDetails>(*info));
-        });
+    ProjectType activeType = ProjectType::ALL;
+    if(currentActive->text() == "C/C++"){
+        activeType = ProjectType::CPP;
     }
-    else if(currentActive->text() == "Android"){
-        for_each(projects.begin(), projects.end(), [&](const ProjectInfo *info){
-            if(info->type == PROJ_ANDROID){
-                projectList->addWidget(make_unique<ProjectDetails>(*info));
-            }
-        });
+    else if(currentActive->text() == "EMBEDDED"){
+        activeType = ProjectType::EMBEDDED;
     }
-    else if(currentActive->text() == "C/C++"){
-        for_each(projects.begin(), projects.end(), [&](const ProjectInfo *info){
-            if(info->type == PROJ_CPP){
-                projectList->addWidget(make_unique<ProjectDetails>(*info));
-            }
-        });
+    else if(currentActive->text() == "JAVA"){
+        activeType = ProjectType::JAVA;
     }
-    else if(currentActive->text() == "Embedded"){
-        for_each(projects.begin(), projects.end(), [&](const ProjectInfo *info){
-            if(info->type == PROJ_EMBEDDED){
-                projectList->addWidget(make_unique<ProjectDetails>(*info));
-            }
-        });
+    else if(currentActive->text() == "ANDROID"){
+        activeType = ProjectType::ANDROID;
     }
-    else if(currentActive->text() == "Java"){
-        for_each(projects.begin(), projects.end(), [&](const ProjectInfo *info){
-            if(info->type == PROJ_JAVA){
-                projectList->addWidget(make_unique<ProjectDetails>(*info));
-            }
-        });
+    else if(currentActive->text() == "PYTHON"){
+        activeType = ProjectType::PYTHON;
     }
-    else if(currentActive->text() == "Python"){
-        for_each(projects.begin(), projects.end(), [&](const ProjectInfo *info){
-            if(info->type == PROJ_PYTHON){
-                projectList->addWidget(make_unique<ProjectDetails>(*info));
-            }
-        });
+
+    unique_ptr<Dbo::backend::Sqlite3> db =
+        make_unique<Dbo::backend::Sqlite3>("yangvillage.db");
+    Dbo::Session session;
+    session.setConnection(std::move(db));
+    session.mapClass<ProjectInfo>("projects");
+    Dbo::Transaction trans(session);
+    using Projs = Dbo::collection<Dbo::ptr<ProjectInfo>>;
+
+    Projs projs;
+    if(activeType == ProjectType::ALL){
+        projs = session.find<ProjectInfo>().orderBy("begin DESC");
+    }
+    else{
+        projs = session.find<ProjectInfo>()
+            .where("type = ?")
+            .orderBy("begin DESC")
+            .bind(activeType);
+    }
+    for(auto proj: projs){
+        projectList->addWidget(proj->toWidget());
     }
 }

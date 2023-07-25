@@ -9,7 +9,7 @@ add_library(Portfolio
     NavigationBar.cpp
     Portfolio.cpp
     Profile.cpp
-    ProjectDetails.cpp
+    ProjectInfo.cpp
     Projects.cpp
     Resume.cpp
     Section.cpp
