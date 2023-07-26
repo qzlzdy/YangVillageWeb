@@ -9,13 +9,15 @@
   - [2.3. Install TinyMCE](#23-install-tinymce)
 - [3. Build](#3-build)
 - [4. Start server](#4-start-server)
+  - [Initialization](#initialization)
+  - [Run](#run)
 
 # 2. Prerequisites
 
 ## 2.1. Install packages
 
 ```bash
-pacman -S cmake wt
+pacman -S cmake ccache sqlite wt
 ```
 
 ## 2.2. Copy resources
@@ -44,6 +46,18 @@ make -j4
 ```
 
 # 4. Start server
+
+## Initialization
+
+```bash
+# Create database
+sqlite yangvillage.db -init initdb.sql
+
+# Create Diffie-Hellman parameters file
+openssl dhparam -check -text -out dh2048.pem 2048
+```
+
+## Run
 
 ```bash
 yangvillage.wt \
