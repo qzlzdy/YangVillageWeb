@@ -36,7 +36,7 @@ Portfolio::Portfolio(const WEnvironment &env): WApplication(env){
     messageResourceBundle().use("template");
     setTheme(make_shared<WBootstrap5Theme>());
     useStyleSheet(BootstrapIcon);
-    setTitle("羊村");
+    setTitle("羊村-村长室");
 
     WContainerWidget *contents =
         root()->addWidget(make_unique<WContainerWidget>());

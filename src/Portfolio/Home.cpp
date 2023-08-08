@@ -17,8 +17,8 @@ Home::Home(){
     setPositionScheme(PositionScheme::Relative);
     setMinimumSize(300, 1080);
     setMargin(0, AllSides);
-    setStyleClass("w-100 h-100 "
-        "d-flex flex-column justify-content-center align-items-center");
+    setStyleClass("w-100 h-100 d-flex flex-column justify-content-center "
+                  "align-items-center");
 
     WText *h1 = addWidget(make_unique<WText>("骑着轮子的羊"));
     h1->setMargin(10, Side::Bottom);

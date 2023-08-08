@@ -24,26 +24,26 @@ Projects::Projects(): Section("projects"){
     bar->setMargin(WLength(), Side::Left | Side::Right);
     bar->decorationStyle().setBackgroundColor(WColor(0xff, 0xff, 0xff));
     bar->setStyleClass("row col-lg-12 d-flex justify-content-center py-0 px-3 "
-        "text-center rounded-pill");
+                       "text-center rounded-pill");
     WHBoxLayout *filters = bar->setLayout(make_unique<WHBoxLayout>());
 
-    WText *all = addFilter(filters, "All");
+    WText *all = addFilter(filters, "ALL");
     setActiveStyle(all);
     all->clicked().connect(bind(&Projects::filterClicked, this, all));
 
-    WText *android = addFilter(filters, "Android");
+    WText *android = addFilter(filters, "ANDROID");
     android->clicked().connect(bind(&Projects::filterClicked, this, android));
 
     WText *cpp = addFilter(filters, "C/C++");
     cpp->clicked().connect(bind(&Projects::filterClicked, this, cpp));
 
-    WText *embedded = addFilter(filters, "Embedded");
+    WText *embedded = addFilter(filters, "EMBEDDED");
     embedded->clicked().connect(bind(&Projects::filterClicked, this, embedded));
 
-    WText *java = addFilter(filters, "Java");
+    WText *java = addFilter(filters, "JAVA");
     java->clicked().connect(bind(&Projects::filterClicked, this, java));
 
-    WText *python = addFilter(filters, "Python");
+    WText *python = addFilter(filters, "PYTHON");
     python->clicked().connect(bind(&Projects::filterClicked, this, python));
 
     currentActive = nullptr;
@@ -73,7 +73,7 @@ void Projects::setDefaultStyle(WText *filter){
     filter->decorationStyle().setFont(font);
     filter->decorationStyle().setCursor(Cursor::PointingHand);
     filter->setMargin(5, Side::Bottom);
-    filter->setStyleClass("d-inline-block py-2 px-3 uppercase");
+    filter->setStyleClass("d-inline-block py-2 px-3");
     setDeactiveStyle(filter);
 }
 

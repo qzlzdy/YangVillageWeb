@@ -77,9 +77,8 @@ WText *Contact::addIcon(WContainerWidget *container, const WString &text){
     icon->setWidth(44);
     icon->setHeight(44);
     icon->decorationStyle().setBackgroundColor(WColor(0xdf, 0xf3, 0xfc));
-    icon->setStyleClass(
-        "justify-content-center align-items-center "
-        "d-flex rounded-circle float-start");
+    icon->setStyleClass("justify-content-center align-items-center "
+                        "d-flex rounded-circle float-start");
     return icon;
 }
 

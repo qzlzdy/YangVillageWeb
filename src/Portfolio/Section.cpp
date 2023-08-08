@@ -11,18 +11,12 @@ using namespace Wt;
 using namespace yang;
 
 Section::Section(){
-    decorationStyle().setBackgroundColor(WColor(0xf5, 0xf8, 0xfd));
-    setPositionScheme(PositionScheme::Relative);
-    setMargin(306, Side::Left);
-    setStyleClass("py-5 px-0");
+    initSection();
 }
 
 Section::Section(const string &id){
     setObjectName(id);
-    decorationStyle().setBackgroundColor(WColor(0xf5, 0xf8, 0xfd));
-    setPositionScheme(PositionScheme::Relative);
-    setMargin(306, Side::Left);
-    setStyleClass("py-5 px-0");
+    initSection();
 }
 
 void Section::addSectionTitle(const WString &title){
@@ -48,4 +42,11 @@ void Section::addSectionTitle(const WString &title){
     WText *p = addWidget(make_unique<WText>("&nbsp;"));
     p->setMargin(0, Side::Bottom);
     p->setStyleClass("pb-4 fs-4");
+}
+
+void Section::initSection(){
+    decorationStyle().setBackgroundColor(WColor(0xf5, 0xf8, 0xfd));
+    setPositionScheme(PositionScheme::Relative);
+    setMargin(306, Side::Left);
+    setStyleClass("py-5 px-0");
 }

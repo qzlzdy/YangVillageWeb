@@ -13,6 +13,8 @@ public:
     Section(const std::string &id);
 protected:
     void addSectionTitle(const Wt::WString &title);
+private:
+    void initSection();
 };
 
 } // namespace yang
