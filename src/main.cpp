@@ -1,3 +1,4 @@
+#include "Bookmark/Bookmark.h"
 #include "Homepage/Homepage.h"
 #include "Portfolio/Portfolio.h"
 
@@ -17,6 +18,10 @@ int main(int argc, char **argv){
             [](const WEnvironment &env){
                 return make_unique<Homepage>(env);
             }, "", "favicon.ico");
+        server.addEntryPoint(Wt::EntryPointType::Application,
+            [](const WEnvironment &env){
+                return make_unique<Bookmark>(env);
+            }, "/bookmark", "favicon.ico");
         server.addEntryPoint(Wt::EntryPointType::Application,
             [](const WEnvironment &env){
                 return make_unique<Portfolio>(env);
