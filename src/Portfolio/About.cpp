@@ -4,6 +4,7 @@
 #include <Wt/WBreak.h>
 #include <Wt/WColor.h>
 #include <Wt/WCssDecorationStyle.h>
+#include <Wt/WDate.h>
 #include <Wt/WFont.h>
 #include <Wt/WGridLayout.h>
 #include <Wt/WImage.h>
@@ -61,17 +62,19 @@ About::About(): Section("about"){
     WContainerWidget *age = addGridCell(0, 1);
     addChevron(age);
     addLabel(age, "年龄：");
-    addPlain(age, "23");
+    WDate today = WDate::currentServerDate();
+    addPlain(age, to_string(today.year() - 1999));
 
     WContainerWidget *website = addGridCell(1, 0);
     addChevron(website);
     addLabel(website, "主页：");
     WLink webAddr("https://yangvillage.top/portfolio");
     WAnchor *webLink = website->addWidget(
-        make_unique<WAnchor>(webAddr, "羊村个人主页"));
+        make_unique<WAnchor>(webAddr, "yangvillage.top"));
     font = WFont();
     font.setSize(24);
     webLink->decorationStyle().setFont(font);
+    webLink->setStyleClass("text-decoration-none");
 
     WContainerWidget *degree = addGridCell(1, 1);
     addChevron(degree);

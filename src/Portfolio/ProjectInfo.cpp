@@ -39,8 +39,9 @@ unique_ptr<WTemplate> ProjectInfo::toWidget() const{
         widget->setCondition("has-src", true);
         WLink repoLink(repoAddr);
         repoLink.setTarget(LinkTarget::NewWindow);
-        widget->bindWidget("proj-src",
+        WAnchor *url = widget->bindWidget("proj-src",
             make_unique<WAnchor>(repoLink, repoName));
+        url->setStyleClass("text-decoration-none");
     }
     if(!desc.empty()){
         widget->setCondition("has-desc", true);

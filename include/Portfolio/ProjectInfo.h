@@ -23,9 +23,7 @@ enum class ProjectType{
 
 Wt::WString toIcon(const ProjectType &type);
 
-class ProjectInfo{
-public:
-    ProjectInfo() = default;
+struct ProjectInfo{
     template<class Action>
     void persist(Action &a);
     std::unique_ptr<Wt::WTemplate> toWidget() const;

@@ -8,9 +8,7 @@ namespace Dbo = Wt::Dbo;
 
 namespace yang{
 
-class ContactMessage{
-public:
-    ContactMessage() = default;
+struct ContactMessage{
     template<class Action>
     void persist(Action &a);
     std::string name;

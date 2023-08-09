@@ -20,25 +20,15 @@ Resume::Resume(): Section("resume"){
     WContainerWidget *right = row->addWidget(make_unique<WContainerWidget>());
     WVBoxLayout *rightCol = right->setLayout(make_unique<WVBoxLayout>());
 
-    addTitle(leftCol, "总览");
-    WContainerWidget *summary = addItem(leftCol);
-    addH4(summary, "骑着轮子的羊");
-    summary->addWidget(make_unique<WBreak>());
-    WText *p = summary->addWidget(make_unique<WText>("&nbsp;"));
     WFont font;
     font.setWeight(FontWeight::Bold);
-    p->decorationStyle().setFont(font);
-    WVBoxLayout *summaryUl = addUl(summary);
-    addLi(summaryUl, "浙江省嘉兴市平湖市");
-    addLi(summaryUl, "314200");
-    addLi(summaryUl, "qzlzdy@qq.com");
 
     addTitle(leftCol, "教育");
     WVBoxLayout *master =
         addItem(leftCol)->setLayout(make_unique<WVBoxLayout>());
     addH4(master, "工学硕士");
     addH5(master, "2021 - 2024");
-    p = master->addWidget(make_unique<WText>(
+    WText *p = master->addWidget(make_unique<WText>(
         "杭州电子科技大学" "&nbsp;&nbsp;&nbsp;&nbsp;"
         "计算机学院" "&nbsp;&nbsp;&nbsp;&nbsp;"
         "计算机科学与技术"));
