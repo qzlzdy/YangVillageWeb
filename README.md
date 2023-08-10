@@ -5,29 +5,37 @@
 - [1. YangVillageWeb](#1-yangvillageweb)
 - [2. Prerequisites](#2-prerequisites)
   - [2.1. Install packages](#21-install-packages)
-  - [2.2. Copy resources](#22-copy-resources)
-  - [2.3. Install TinyMCE](#23-install-tinymce)
+  - [2.2. Clone Repository](#22-clone-repository)
+  - [2.3. Copy resources](#23-copy-resources)
+  - [2.4. Install TinyMCE](#24-install-tinymce)
 - [3. Build](#3-build)
 - [4. Start server](#4-start-server)
-  - [Initialization](#initialization)
-  - [Run](#run)
+  - [4.1. Initialization](#41-initialization)
+  - [4.2. Run](#42-run)
 
 # 2. Prerequisites
 
 ## 2.1. Install packages
 
 ```bash
-pacman -S cmake ccache sqlite wt
+pacman -S cmake ccache sqlite wt git
 ```
 
-## 2.2. Copy resources
+## 2.2. Clone Repository
+
+```bash
+git clone https://github.com/qzlzdy/YangVillageWeb.git
+cd YangVillageWeb
+```
+
+## 2.3. Copy resources
 
 ```bash
 mkdir resources
 cp -r /usr/share/Wt/resources/* resources/
 ```
 
-## 2.3. Install TinyMCE
+## 2.4. Install TinyMCE
 
 ```bash
 aria2c https://download.tiny.cloud/tinymce/community/tinymce_4.9.11.zip
@@ -47,7 +55,7 @@ make -j4
 
 # 4. Start server
 
-## Initialization
+## 4.1. Initialization
 
 ```bash
 # Create database
@@ -57,7 +65,7 @@ sqlite yangvillage.db -init initdb.sql
 openssl dhparam -check -text -out dh2048.pem 2048
 ```
 
-## Run
+## 4.2. Run
 
 ```bash
 yangvillage.wt \

@@ -14,42 +14,42 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('ref',
     'C++参考手册',
-    '一种被广泛使用的计算机程序设计语言',
+    '被广泛使用的计算机程序设计语言',
     'https://en.cppreference.com/w/'
 );
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('ref',
     'Python官方文档',
-    '一种广泛使用的解释型、高级和通用的编程语言',
+    '广泛使用的解释型、高级和通用的编程语言',
     'https://docs.python.org/3/'
 );
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('ref',
     'Qt框架官方文档',
-    '一个跨平台的C++应用程序开发框架',
+    '跨平台的C++应用程序开发框架',
     'https://doc.qt.io/qt-6/classes.html'
 );
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('ref',
     'CMake官方文档',
-    '一个开源的跨平台自动化建构系统',
+    '开源的跨平台自动化建构系统',
     'https://cmake.org/cmake/help/latest/'
 );
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('ref',
     'PyTorch官方文档',
-    '一个开源的Python机器学习库',
+    '开源的Python机器学习库',
     'https://pytorch.org/docs/stable/index.html'
 );
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('ref',
     'Doxygen官方手册',
-    '一个适用于多种语言的文档生成器',
+    '适用于多种语言的文档生成器',
     'https://doxygen.nl/manual/index.html'
 );
 INSERT INTO bookmarks
@@ -84,7 +84,7 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('ref',
     'Bootstrap框架官方文档',
-    '一组用于网站和网络应用程序开发的开源前端框架',
+    '用于网站和网络应用程序开发的开源前端框架',
     'https://getbootstrap.com/docs/5.2/getting-started/introduction/'
 );
 INSERT INTO bookmarks
@@ -98,21 +98,21 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('ref',
     'Graphviz官方文档',
-    '一个由AT&T实验室启动的开源工具包',
+    '由AT&T实验室启动的开源工具包',
     'https://graphviz.org/doc/info/lang.html'
 );
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('ref',
     'Chisel3官方参考手册',
-    '一个现代硬件设计语言',
+    '现代硬件设计语言',
     'https://www.chisel-lang.org/api/latest/'
 );
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('ref',
     'Verilator官方文档',
-    '一个将Verilog转换为C++或SystemC中精确到周期的行为模型的开源软件工具',
+    '将Verilog转换为C++或SystemC中精确到周期的行为模型的开源软件工具',
     'https://veripool.org/guide/latest/'
 );
 INSERT INTO bookmarks
@@ -126,7 +126,7 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('ref',
     'Funkwhale官方文档',
-    '一个自托管、现代、免费和开源的音乐服务器',
+    '自托管、现代、免费和开源的音乐服务器',
     'https://docs.funkwhale.audio/administrator/index.html'
 );
   -- wikis
@@ -134,7 +134,7 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('wiki',
     'Arch Linux',
-    '一个独立开发的x86-64架构通用GNU/Linux发行版',
+    '独立开发的x86-64架构通用GNU/Linux发行版',
     'https://archlinux.org/'
 );
 INSERT INTO bookmarks
@@ -191,7 +191,7 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('anime',
     'Nyaa',
-    '一个专注于东亚媒体（包括动画、漫画、音乐等）的BitTorrent社区',
+    '专注于东亚媒体（包括动画、漫画、音乐等）的BitTorrent社区',
     'https://nyaa.si/'
 );
 INSERT INTO bookmarks
@@ -208,6 +208,41 @@ VALUES('anime',
     '从这里找到天使动漫主站',
     'http://www.tsdm.vip/'
 );
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('anime',
+    '番组计划',
+    '一个专注于动漫、音乐、游戏领域，帮助你分享、发现与结识同好的ACG网络',
+    'https://bangumi.tv/'
+);
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('anime',
+    '蜜柑计划',
+    '蜜柑计划：新一代的动漫下载站',
+    'https://mikanani.me/'
+);
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('anime',
+    'DLsite',
+    '日本最大的二次元综合下载商店之一',
+    'https://www.dlsite.com/index.html?locale=ja_JP'
+);
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('anime',
+    'GGBases',
+    '提供最全面的GalGame、同人遊戲BT下載，以及功能完善的標簽檢索功能。',
+    'https://www.ggbases.com/'
+);
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('anime',
+    '熱辣漫畫',
+    '熱辣漫畫Hotmangas，為全球華人提供高質量中文全本漫畫，同人志。',
+    'https://www.manga2022.com/'
+);
   -- game
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
@@ -220,7 +255,7 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('game',
     'PRTS.wiki',
-    '一个非盈利性质的明日方舟资料Wiki网站',
+    '非盈利性质的明日方舟资料Wiki网站',
     'https://prts.wiki/w/%E9%A6%96%E9%A1%B5'
 );
 INSERT INTO bookmarks
@@ -284,7 +319,7 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('tool',
     'draw.io',
-    '一款免费的在线图表软件，用于制作流程图、流程图、组织结构图、UML、ER 和网络图',
+    '免费的在线图表软件，用于制作流程图、流程图、组织结构图、UML、ER和网络图',
     'https://app.diagrams.net/'
 );
 INSERT INTO bookmarks
@@ -299,14 +334,14 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('comm',
     'Github',
-    '全球最大同♂️性交流网站（不是）',
+    '全球最大同♂️性交友网站（不是）',
     'https://github.com/'
 );
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('comm',
     '臭鼬娘俱乐部',
-    '好想闻美少女的屁啊',
+    '好想闻美少女放的屁啊',
     'https://www.skunkgirl.cc/'
 );
 INSERT INTO bookmarks
@@ -349,7 +384,7 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('artc',
     'PrintableSearch',
-    '一个搜索引擎，用于从最好的3D模型网站查找顶级3D打印模型、可打印文件和stls',
+    '搜索引擎，用于从最好的3D模型网站查找顶级3D打印模型、可打印文件',
     'https://www.printablesearch.com/'
 );
 INSERT INTO bookmarks
@@ -372,6 +407,70 @@ VALUES('artc',
     'DIY Raspberry Pi NAS',
     'DIY NAS',
     'https://www.instructables.com/DIY-Raspberry-Orange-Pi-NAS-That-Really-Looks-Like/'
+);
+  -- Ypologist
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('ypo',
+    'RISC-V Specifications',
+    'RISC-V架构官方文档下载',
+    'https://riscv.org/technical/specifications/'
+);
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('ypo',
+    'Linux source code',
+    'Linux内核源码',
+    'https://elixir.bootlin.com/linux/latest/source'
+);
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('ypo',
+    'LLVM source code',
+    'LLVM源码',
+    'https://elixir.bootlin.com/llvm/latest/source'
+);
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('ypo',
+    'Linux From Scratch',
+    'LFS在线文档',
+    'https://www.linuxfromscratch.org/lfs/read.html'
+);
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('ypo',
+    'The LLVM Compiler Infrastructure',
+    'LLVM编译器官网',
+    'https://llvm.org/'
+);
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('ypo',
+    'Xiangshan 官方文档',
+    'Xiangshan架构官方文档',
+    'https://xiangshan-doc.readthedocs.io/zh_CN/latest/arch/'
+);
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('ypo',
+    'OpenFPGA官方文档',
+    '可定制FPGA架构快速原型开发开放源代码框架。',
+    'https://openfpga.readthedocs.io/en/master/'
+);
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('ypo',
+    'Verilog-to-Routing官方文档',
+    '为FPGA架构和CAD研发提供的开源框架',
+    'https://docs.verilogtorouting.org/en/latest/'
+);
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('ypo',
+    'GPT fdisk Tutorial',
+    'gdisk官网',
+    'https://www.rodsbooks.com/gdisk/'
 );
 COMMIT;
 

@@ -32,9 +32,10 @@ Bookmark::Bookmark(const WEnvironment &env): WApplication(env){
 
     main->addWidget(make_unique<Cluster>("编程文档", "ref"));
     main->addWidget(make_unique<Cluster>("百科全书", "wiki"));
-    main->addWidget(make_unique<Cluster>("追番", "anime"));
+    main->addWidget(make_unique<Cluster>("追番追漫", "anime"));
     main->addWidget(make_unique<Cluster>("游戏", "game"));
     main->addWidget(make_unique<Cluster>("小工具", "tool"));
     main->addWidget(make_unique<Cluster>("社区", "comm"));
     main->addWidget(make_unique<Cluster>("解析、例子、文章", "artc"));
+    main->addWidget(make_unique<Cluster>("Ypologist专区", "ypo"));
 }
