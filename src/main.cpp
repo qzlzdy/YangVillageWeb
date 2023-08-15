@@ -17,15 +17,15 @@ int main(int argc, char **argv){
         server.addEntryPoint(Wt::EntryPointType::Application,
             [](const WEnvironment &env){
                 return make_unique<Homepage>(env);
-            }, "", "favicon.ico");
+            }, "/");
         server.addEntryPoint(Wt::EntryPointType::Application,
             [](const WEnvironment &env){
                 return make_unique<Bookmark>(env);
-            }, "/bookmark", "favicon.ico");
+            }, "/bookmark");
         server.addEntryPoint(Wt::EntryPointType::Application,
             [](const WEnvironment &env){
                 return make_unique<Portfolio>(env);
-            }, "/portfolio", "favicon.ico");
+            }, "/portfolio");
         if(server.start()){
             int sig = WServer::waitForShutdown();
             cerr << "Shutdown (signal = " << sig << ")" << endl;

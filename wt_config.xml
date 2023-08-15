@@ -207,7 +207,7 @@
            (e.g. for apache + fastcgi module), or on stderr (e.g. for
            the built-in httpd).
          -->
-        <log-file></log-file>
+        <log-file>/var/log/wt.log</log-file>
 
         <!-- Logger configuration
 
@@ -325,7 +325,7 @@
            you set it to 0.5 for example, that means that 50% of all sessions
            may be plain HTML sessions.
           -->
-        <plain-ajax-sessions-ratio-limit>1</plain-ajax-sessions-ratio-limit>
+        <plain-ajax-sessions-ratio-limit>0.1</plain-ajax-sessions-ratio-limit>
 
         <!-- DoS prevention: adds a puzzle to validate Ajax sessions
 
@@ -336,7 +336,7 @@
            request which eliminates agents that do not build a proper
            DOM tree.
           -->
-        <ajax-puzzle>false</ajax-puzzle>
+        <ajax-puzzle>true</ajax-puzzle>
 
         <!-- Do strict serialization of events.
 
@@ -388,7 +388,7 @@
              use WGLWidget, this option can be set to false. It will improve
              the initial loading time of the web application.
         -->
-        <webgl-detection>true</webgl-detection>
+        <webgl-detection>false</webgl-detection>
 
         <!-- Redirect message shown for browsers without JavaScript support
 
@@ -456,7 +456,7 @@
             <proxy>fc00::/7</proxy>
             -->
             <!-- public ip -->
-	          <proxy>47.74.46.203/32</proxy>
+            <proxy>47.74.46.203/32</proxy>
           </trusted-proxies>
         </trusted-proxy-config>
 
