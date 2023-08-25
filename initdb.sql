@@ -254,6 +254,13 @@ VALUES('game',
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('game',
+    '干员培养表',
+    '明日方舟干员培养表',
+    'https://ark-nights.com/'
+);
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('game',
     'PRTS.wiki',
     '非盈利性质的明日方舟资料Wiki网站',
     'https://prts.wiki/w/%E9%A6%96%E9%A1%B5'
