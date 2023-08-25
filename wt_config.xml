@@ -619,7 +619,11 @@
           <link> tags that are global for the entire application.
         -->
         <head-matter user-agent=".*MSIE.*">
-          <meta name="robots" content="noindex" />
+          <meta name="charset" content="utf-8"/>
+          <meta name="author" content="骑着轮子的羊"/>
+          <meta name="description" content="羊村官方网站"/>
+          <meta name="keywords" content="yangvillage,software,anime,portfolio"/>
+          <meta name="robots" content="index,follow" />
         </head-matter>
 
         <!-- Configure allowed origins for CORS (only for WidgetSet entry points)

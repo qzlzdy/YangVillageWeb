@@ -69,7 +69,7 @@ openssl dhparam -check -text -out dh2048.pem 2048
 
 ```bash
 yangvillage.wt \
-    --docroot ".;/favicon.ico,/resources,/images" \
+    --docroot ".;/favicon.ico,/robots.txt,/sitemap.xml,/resources,/images" \
     -c wt_config.xml \
     --http-listen 0.0.0.0 \
     --http-listen [::0] \
