@@ -415,6 +415,13 @@ VALUES('artc',
     'DIY NAS',
     'https://www.instructables.com/DIY-Raspberry-Orange-Pi-NAS-That-Really-Looks-Like/'
 );
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('artc',
+    '17 Golden Rules of Financial Safety',
+    '个人财务管理',
+    'https://thetaoofwealth.wordpress.com/2013/02/17/harry-brownes-17-golden-rules-of-financial-safety/'
+);
   -- Ypologist
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
