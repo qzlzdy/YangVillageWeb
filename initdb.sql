@@ -422,6 +422,13 @@ VALUES('artc',
     '个人财务管理',
     'https://thetaoofwealth.wordpress.com/2013/02/17/harry-brownes-17-golden-rules-of-financial-safety/'
 );
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('artc',
+    'grabcad',
+    'CAD 模型收集',
+    'https://grabcad.com/library'
+);
   -- Ypologist
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
