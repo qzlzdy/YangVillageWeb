@@ -16,7 +16,6 @@ public:
     void sendMail();
 private:
     std::shared_ptr<Wt::WValidator> createNameValidator();
-    std::shared_ptr<Wt::WValidator> createEmailValidator();
     std::shared_ptr<Wt::WValidator> createSubjectValidator();
     std::shared_ptr<Wt::WValidator> createMessageValidator();
 };

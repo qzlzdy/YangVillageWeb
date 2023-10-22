@@ -2,6 +2,7 @@
 
 #include <Wt/WColor.h>
 #include <Wt/WCssDecorationStyle.h>
+#include <Wt/WEmailEdit.h>
 #include <Wt/WFont.h>
 #include <Wt/WPushButton.h>
 #include <Wt/WTextEdit.h>
@@ -16,9 +17,10 @@ ContactFormView::ContactFormView(){
     addFunction("id", &WTemplate::Functions::id);
 
     bindString("title", "联系我");
-    addInput(ContactFormModel::NameField);
-    addInput(ContactFormModel::EmailField);
-    addInput(ContactFormModel::SubjectField);
+    addInput<Wt::WLineEdit>(ContactFormModel::NameField);
+    addInput<Wt::WEmailEdit>(ContactFormModel::EmailField)
+        ->emailValidator()->setMandatory(true);
+    addInput<Wt::WLineEdit>(ContactFormModel::SubjectField);
     unique_ptr<WTextEdit> tinymce = make_unique<WTextEdit>();
     tinymce->setMinimumSize(WLength(), 300);
     WFont font;
@@ -55,11 +57,4 @@ void ContactFormView::process(){
             "</p>");
         updateView(model.get());
     }
-}
-
-WLineEdit *ContactFormView::addInput(WFormModel::Field field){
-    unique_ptr<WLineEdit> input = make_unique<WLineEdit>();
-    input->setHeight(44);
-    setFormWidget(field, move(input));
-    return resolve<WLineEdit *>(field);
 }

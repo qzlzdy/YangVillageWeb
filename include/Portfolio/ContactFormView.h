@@ -12,9 +12,18 @@ public:
     ContactFormView();
 private:
     void process();
-    Wt::WLineEdit *addInput(Wt::WFormModel::Field field);
+    template<typename T>
+    T *addInput(Wt::WFormModel::Field field);
     std::shared_ptr<ContactFormModel> model;
 };
+
+template<typename T>
+T *ContactFormView::addInput(Wt::WFormModel::Field field){
+    std::unique_ptr<T> input = std::make_unique<T>();
+    input->setHeight(44);
+    setFormWidget(field, std::move(input));
+    return resolve<T *>(field);
+}
 
 } // namespace yang
 

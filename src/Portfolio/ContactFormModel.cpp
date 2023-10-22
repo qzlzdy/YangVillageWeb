@@ -24,7 +24,6 @@ ContactFormModel::ContactFormModel(){
     addField(SubjectField);
     addField(MessageField);
     setValidator(NameField, createNameValidator());
-    setValidator(EmailField, createEmailValidator());
     setValidator(SubjectField, createSubjectValidator());
     setValidator(MessageField, createMessageValidator());
 }
@@ -42,7 +41,7 @@ void ContactFormModel::sendMail(){
     messages->email = valueText(EmailField).toUTF8();
     messages->subject = valueText(SubjectField).toUTF8();
     messages->message = valueText(MessageField).toUTF8();
-    session.add(move(messages));
+    session.add(std::move(messages));
 }
 
 shared_ptr<WValidator> ContactFormModel::createNameValidator(){
@@ -50,12 +49,6 @@ shared_ptr<WValidator> ContactFormModel::createNameValidator(){
     v->setMandatory(true);
     v->setMinimumLength(2);
     v->setMaximumLength(16);
-    return v;
-}
-
-shared_ptr<WValidator> ContactFormModel::createEmailValidator(){
-    shared_ptr<WEmailValidator> v = make_shared<WEmailValidator>();
-    v->setMandatory(true);
     return v;
 }
 
