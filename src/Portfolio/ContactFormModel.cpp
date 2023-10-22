@@ -6,7 +6,7 @@
 #include <Wt/Dbo/Transaction.h>
 #include <Wt/Dbo/backend/Sqlite3.h>
 #include <Wt/WLengthValidator.h>
-#include <Wt/WRegExpValidator.h>
+#include <Wt/WEmailValidator.h>
 #include "Portfolio/ContactMessage.h"
 
 using namespace std;
@@ -54,9 +54,8 @@ shared_ptr<WValidator> ContactFormModel::createNameValidator(){
 }
 
 shared_ptr<WValidator> ContactFormModel::createEmailValidator(){
-    shared_ptr<WRegExpValidator> v = make_shared<WRegExpValidator>();
+    shared_ptr<WEmailValidator> v = make_shared<WEmailValidator>();
     v->setMandatory(true);
-    v->setRegExp("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}");
     return v;
 }
 
