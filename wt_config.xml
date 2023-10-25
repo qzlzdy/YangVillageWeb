@@ -456,7 +456,7 @@
             <proxy>fc00::/7</proxy>
             -->
             <!-- public ip -->
-            <proxy>47.74.46.203/32</proxy>
+            <proxy>47.74.46.203</proxy>
           </trusted-proxies>
         </trusted-proxy-config>
 
@@ -509,7 +509,7 @@
            Each <user-agent> is a regular expression.
           -->
         <user-agents type="ajax" mode="black-list">
-          <!-- <user-agent>.*Crappy browser.*</user-agent> -->
+          <user-agent>.*Crappy browser.*</user-agent>
         </user-agents>
 
         <!-- Bot user agent list
@@ -618,11 +618,10 @@
           verbatim. This could be useful for setting <meta> tags or
           <link> tags that are global for the entire application.
         -->
-        <head-matter user-agent=".*MSIE.*">
+        <head-matter>
           <meta name="charset" content="utf-8"/>
           <meta name="author" content="骑着轮子的羊"/>
-          <meta name="description" content="羊村官方网站"/>
-          <meta name="keywords" content="yangvillage,software,anime,portfolio"/>
+          <meta name="description" content="这里是羊村，这里可以有任何东西——这取决于村长的决定。传说村子里有白丝兽耳红瞳美少女，但从没有人见过。"/>
           <meta name="robots" content="index,follow"/>
         </head-matter>
 
