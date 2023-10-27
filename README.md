@@ -9,16 +9,17 @@
   - [2.3. Copy resources](#23-copy-resources)
   - [2.4. Install TinyMCE](#24-install-tinymce)
 - [3. Build](#3-build)
-- [4. Start server](#4-start-server)
-  - [4.1. Initialization](#41-initialization)
-  - [4.2. Run](#42-run)
+- [4. Deploy](#4-deploy)
+  - [4.1. Create databse](#41-create-databse)
+  - [4.2. Config NGINX](#42-config-nginx)
+  - [4.3. Run](#43-run)
 
 # 2. Prerequisites
 
 ## 2.1. Install packages
 
 ```bash
-pacman -S cmake ccache sqlite wt git
+sudo pacman -S ccache cmake fcgi git nginx sqlite spawn-fcgi wt
 ```
 
 ## 2.2. Clone Repository
@@ -53,30 +54,32 @@ cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
 make -j4
 ```
 
-# 4. Start server
+# 4. Deploy
 
-## 4.1. Initialization
+## 4.1. Create databse
 
 ```bash
-# Create database
 sqlite yangvillage.db -init initdb.sql
-
-# Create Diffie-Hellman parameters file
-openssl dhparam -check -text -out dh2048.pem 2048
 ```
 
-## 4.2. Run
+## 4.2. Config NGINX
 
 ```bash
-yangvillage.wt \
-    --docroot ".;/favicon.ico,/robots.txt,/sitemap.xml,/resources,/images" \
-    -c wt_config.xml \
-    --http-listen 0.0.0.0 \
-    --http-listen [::0] \
-    --https-listen 0.0.0.0 \
-    --https-listen [::0] \
-    --ssl-certificate=<server.pem> \
-    --ssl-private-key=<server.key> \
-    --ssl-tmp-dh=<dh2048.pem> \
-    --ssl-cipherlist='ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA'
+cp wt_fcgi.conf     /etc/nginx/wt_fcgi.conf
+cp wt_ssl.conf      /etc/nginx/wt_ssl.conf
+cp wt_static.conf   /etc/nginx/wt_static.conf
+cp yangvillage.conf /etc/nginx/sites-available.conf
+ln -s /etc/nginx/sites-available/yangvillage.conf /etc/nginx/sites-enabled/yangvillage.conf
+```
+
+> add `include /etc/nginx/sites-enabled/*;` in http block in nginx.conf
+
+## 4.3. Run
+
+```bash
+WT_APP_ROOT=/path/to/repo spawn-fcgi -n build/bin/homepage.wt -a 0.0.0.0 -p 9001
+WT_APP_ROOT=/path/to/repo spawn-fcgi -n build/bin/bookmark.wt -a 0.0.0.0 -p 9002
+WT_APP_ROOT=/path/to/repo spawn-fcgi -n build/bin/broadcast.wt -a 0.0.0.0 -p 9003
+WT_APP_ROOT=/path/to/repo spawn-fcgi -n build/bin/portfolio.wt -a 0.0.0.0 -p 9004
+nginx -s reload
 ```

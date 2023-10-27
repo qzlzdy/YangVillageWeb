@@ -1,6 +1,3 @@
-#include <memory>
-#include <Wt/WApplication.h>
-#include <Wt/WEnvironment.h>
 #include "Portfolio/Portfolio.h"
 
 using namespace std;

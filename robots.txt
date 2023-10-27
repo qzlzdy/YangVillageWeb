@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /bookmark
 
 Sitemap: https://yangvillage.top/sitemap.xml

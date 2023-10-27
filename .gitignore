@@ -1,11 +1,5 @@
 ### Project Specific stuff
-*.pem
-*.crt
-*.csr
-*.key
-*.key.org
 resources
-start.sh
 ### XilinxISE template
 # intermediate build files
 *.bgn

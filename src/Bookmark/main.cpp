@@ -1,6 +1,3 @@
-#include <memory>
-#include <Wt/WApplication.h>
-#include <Wt/WEnvironment.h>
 #include "Bookmark/Bookmark.h"
 
 using namespace std;

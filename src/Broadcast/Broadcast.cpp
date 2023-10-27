@@ -1,6 +1,5 @@
-#include "Homepage/Homepage.h"
+#include "Broadcast/Broadcast.h"
 
-#include <string>
 #include <Wt/WAnchor.h>
 #include <Wt/WBootstrap5Theme.h>
 #include <Wt/WContainerWidget.h>
@@ -12,9 +11,9 @@ using namespace std;
 using namespace Wt;
 using namespace yang;
 
-Homepage::Homepage(const WEnvironment &env): WApplication(env){
+Broadcast::Broadcast(const WEnvironment &env): WApplication(env){
     setTheme(make_shared<WBootstrap5Theme>());
-    setTitle("羊村");
+    setTitle("羊村-广播站");
 
     root()->decorationStyle().setBackgroundColor(WColor(0xf5, 0xf8, 0xfd));
     WContainerWidget *contents =
@@ -22,13 +21,11 @@ Homepage::Homepage(const WEnvironment &env): WApplication(env){
     contents->setStyleClass("mx-5");
     WVBoxLayout *main = contents->setLayout(make_unique<WVBoxLayout>());
 
-    WText *title = main->addWidget(make_unique<WText>("羊村"));
+    WText *title = main->addWidget(make_unique<WText>("羊村广播站"));
     title->setStyleClass("mt-5 fs-1 text-center");
 
+    main->addWidget(make_unique<WText>(
+        "广播站暂不对外开放 如过您是本村村民 请点击下方连接"));
     main->addWidget(make_unique<WAnchor>(
-        WLink("https://bookmark.yangvillage.top"), "羊村客运中心"));
-    main->addWidget(make_unique<WAnchor>(
-        WLink("https://music.yangvillage.top"), "羊村广播站"));
-    main->addWidget(make_unique<WAnchor>(
-        WLink("https://author.yangvillage.top"), "羊村村长室(个人主页)"));
+        WLink("https://192.168.1.200:5443"), "直达专车"));
 }
