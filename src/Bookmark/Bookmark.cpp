@@ -12,12 +12,6 @@ using namespace Wt;
 using namespace yang;
 
 Bookmark::Bookmark(const WEnvironment &env): WApplication(env){
-    if(env.urlScheme() != "https"){
-        string fullUrl = url();
-        string cleanUrl = fullUrl.substr(0, fullUrl.find_first_of('?'));
-        redirect("https://" + env.hostName() + cleanUrl);
-        return;
-    }
     setTheme(make_shared<WBootstrap5Theme>());
     setTitle("羊村-客运中心");
 

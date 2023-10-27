@@ -1,4 +1,5 @@
-add_library(Portfolio
+add_executable(portfolio.wt
+    main.cpp
     About.cpp
     Contact.cpp
     ContactFormModel.cpp
@@ -15,4 +16,8 @@ add_library(Portfolio
     Section.cpp
     Skills.cpp
     SocialLinks.cpp
+)
+
+target_link_libraries(portfolio.wt
+    fcgi wt wtfcgi wtdbo wtdbosqlite3
 )
