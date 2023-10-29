@@ -20,8 +20,8 @@ Cluster::Cluster(const WString &title, const string &catalog){
     unique_ptr<WContainerWidget> root = make_unique<WContainerWidget>();
     root->setStyleClass("p-2 bg-white row row-cols-1 row-cols-md-4 g-2");
 
-    unique_ptr<Dbo::backend::Sqlite3> db =
-        make_unique<Dbo::backend::Sqlite3>("yangvillage.db");
+    unique_ptr<Dbo::backend::Sqlite3> db = make_unique<Dbo::backend::Sqlite3>(
+        "/var/lib/yangvillage/yangvillage.db");
     Dbo::Session session;
     session.setConnection(std::move(db));
     session.mapClass<BookmarkInfo>("bookmarks");

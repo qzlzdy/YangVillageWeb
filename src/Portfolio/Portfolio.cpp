@@ -24,10 +24,10 @@ namespace {
 const WLink BootstrapIcon = "https://cdn.jsdelivr.net/npm/"
     "bootstrap-icons@1.10.0/font/bootstrap-icons.css";
 
-}
+} // namespace
 
 Portfolio::Portfolio(const WEnvironment &env): WApplication(env){
-    messageResourceBundle().use("template");
+    messageResourceBundle().use("/usr/share/yangvillage/template");
     setTheme(make_shared<WBootstrap5Theme>());
     useStyleSheet(BootstrapIcon);
     setTitle("羊村-村长室");

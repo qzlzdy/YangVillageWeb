@@ -10,7 +10,7 @@
             <server-push-timeout>50</server-push-timeout>
         </session-management>
         <connector-fcgi>
-            <run-directory>/var/run/wt</run-directory>
+            <run-directory>/run/yangvillage</run-directory>
         </connector-fcgi>
         <debug>false</debug>
         <log-file>/var/log/wt.log</log-file>
@@ -76,25 +76,19 @@
             <property name="tinyMCEBaseURL">resources/tinymce</property>
         </properties>
     </application-settings>
-    <application-settings location="build/bin/homepage.wt">
-      <log-file>/var/log/wt/homepage.log</log-file>
-      <head-matter>
-        <link rel="canonical" href="yangvillage.top"/>
-      </head-matter>
-    </application-settings>
-    <application-settings location="build/bin/bookmark.wt">
+    <application-settings location="/var/lib/yangvillage/bin/bookmark.wt">
       <log-file>/var/log/wt/bookmark.log</log-file>
       <head-matter>
         <link rel="canonical" href="bookmark.yangvillage.top"/>
       </head-matter>
     </application-settings>
-    <application-settings location="build/bin/broadcast.wt">
+    <application-settings location="/var/lib/yangvillage/bin/broadcast.wt">
       <log-file>/var/log/wt/broadcast.log</log-file>
       <head-matter>
         <link rel="canonical" href="music.yangvillage.top"/>
       </head-matter>
     </application-settings>
-    <application-settings location="build/bin/portfolio.wt">
+    <application-settings location="/var/lib/yangvillage/bin/portfolio.wt">
       <log-file>/var/log/wt/portfolio.log</log-file>
       <head-matter>
         <link rel="canonical" href="author.yangvillage.top"/>

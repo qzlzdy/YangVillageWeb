@@ -1,5 +1,4 @@
 ### Project Specific stuff
-resources
 ### XilinxISE template
 # intermediate build files
 *.bgn

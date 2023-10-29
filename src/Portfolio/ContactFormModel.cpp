@@ -29,8 +29,8 @@ ContactFormModel::ContactFormModel(){
 }
 
 void ContactFormModel::sendMail(){
-    unique_ptr<Dbo::backend::Sqlite3> db =
-        make_unique<Dbo::backend::Sqlite3>("yangvillage.db");
+    unique_ptr<Dbo::backend::Sqlite3> db = make_unique<Dbo::backend::Sqlite3>(
+        "/var/lib/yangvillage/yangvillage.db");
     Dbo::Session session;
     session.setConnection(std::move(db));
     session.mapClass<ContactMessage>("messages");

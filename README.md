@@ -5,11 +5,10 @@
 - [1. YangVillageWeb](#1-yangvillageweb)
 - [2. Prerequisites](#2-prerequisites)
   - [2.1. Install packages](#21-install-packages)
-  - [2.2. Clone Repository](#22-clone-repository)
-  - [2.3. Copy resources](#23-copy-resources)
-  - [2.4. Install TinyMCE](#24-install-tinymce)
 - [3. Build](#3-build)
 - [4. Deploy](#4-deploy)
+  - [Create Directories](#create-directories)
+  - [2.3. Copy Files](#23-copy-files)
   - [4.1. Create databse](#41-create-databse)
   - [4.2. Config NGINX](#42-config-nginx)
   - [4.3. Run](#43-run)
@@ -22,32 +21,12 @@
 sudo pacman -S ccache cmake fcgi git nginx sqlite spawn-fcgi wt
 ```
 
-## 2.2. Clone Repository
+# 3. Build
 
 ```bash
 git clone https://github.com/qzlzdy/YangVillageWeb.git
 cd YangVillageWeb
-```
 
-## 2.3. Copy resources
-
-```bash
-mkdir resources
-cp -r /usr/share/Wt/resources/* resources/
-```
-
-## 2.4. Install TinyMCE
-
-```bash
-aria2c https://download.tiny.cloud/tinymce/community/tinymce_4.9.11.zip
-unzip tinymce_4.9.11.zip
-mkdir resources/tinymce
-cp -r tinymce/js/tinymce/* resources/tinymce/
-```
-
-# 3. Build
-
-```bash
 mkdir build
 cd build
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
@@ -56,19 +35,50 @@ make -j4
 
 # 4. Deploy
 
+## Create Directories
+
+```bash
+mkdir -p /usr/share/yangvillage/{bin,static/resouces{,/tinymce}}
+mkdir -p /etc/yangvillage
+mkdir -p /var/lib/yangvillage
+ln -s /usr/share/yangvillage/bin /var/lib/yangvillage/bin
+ln -s /usr/share/yangvillage/static /var/lib/yangvillage/static
+ln -s /etc/yangvillage/wt_config.xml /var/lib/yangvillage/wt_config.xml
+```
+
+## 2.3. Copy Files
+
+```bash
+# copy resources
+cp -r /usr/share/Wt/resources/* /usr/share/yangvillage/static/resources/
+
+# install TinyMCE
+aria2c https://download.tiny.cloud/tinymce/community/tinymce_4.9.11.zip
+unzip tinymce_4.9.11.zip
+cp -r tinymce/js/tinymce/* /usr/share/yangvillage/static/resources/tinymce/
+
+# copy static files
+cp -r static/* /usr/share/yangvillage/static/
+cp template.xml /usr/share/yangvillage/
+
+# copy binary
+cp build/bin/*.wt /usr/share/yangvillage/bin/
+
+# copy wt_config.xml
+cp wt_config.xml /etc/yangvillage/
+```
+
 ## 4.1. Create databse
 
 ```bash
-sqlite yangvillage.db -init initdb.sql
+sqlite /var/lib/yangvillage/yangvillage.db -init initdb.sql
 ```
 
 ## 4.2. Config NGINX
 
 ```bash
-cp wt_fcgi.conf     /etc/nginx/wt_fcgi.conf
-cp wt_ssl.conf      /etc/nginx/wt_ssl.conf
-cp wt_static.conf   /etc/nginx/wt_static.conf
-cp yangvillage.conf /etc/nginx/sites-available.conf
+cp nginx-config/wt_*.conf     /etc/nginx/
+cp nginx-config/yangvillage.conf /etc/nginx/sites-available/
 ln -s /etc/nginx/sites-available/yangvillage.conf /etc/nginx/sites-enabled/yangvillage.conf
 ```
 
@@ -77,9 +87,9 @@ ln -s /etc/nginx/sites-available/yangvillage.conf /etc/nginx/sites-enabled/yangv
 ## 4.3. Run
 
 ```bash
-WT_APP_ROOT=/path/to/repo spawn-fcgi -n build/bin/homepage.wt -a 0.0.0.0 -p 9001
-WT_APP_ROOT=/path/to/repo spawn-fcgi -n build/bin/bookmark.wt -a 0.0.0.0 -p 9002
-WT_APP_ROOT=/path/to/repo spawn-fcgi -n build/bin/broadcast.wt -a 0.0.0.0 -p 9003
-WT_APP_ROOT=/path/to/repo spawn-fcgi -n build/bin/portfolio.wt -a 0.0.0.0 -p 9004
+export WT_APP_ROOT=/var/lib/yangvillage
+spawn-fcgi -n /var/lib/yangvillage/bin/bookmark.wt -a 0.0.0.0 -p 9002
+spawn-fcgi -n /var/lib/yangvillage/bin/broadcast.wt -a 0.0.0.0 -p 9003
+spawn-fcgi -n /var/lib/yangvillage/bin/portfolio.wt -a 0.0.0.0 -p 9004
 nginx -s reload
 ```
