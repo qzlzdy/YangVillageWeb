@@ -129,6 +129,13 @@ VALUES('ref',
     '自托管、现代、免费和开源的音乐服务器',
     'https://docs.funkwhale.audio/administrator/index.html'
 );
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('ref',
+    'Grav官方文档',
+    '一个快速、简单、灵活的基于文件的网络平台',
+    'https://learn.getgrav.org/17/content'
+);
   -- wikis
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
@@ -178,7 +185,7 @@ INSERT INTO bookmarks
 VALUES('anime',
     'AGE动漫',
     'Age动漫专业的在线动漫网站，动漫免费在线观看，高品质画质，实时更新，追番利器!',
-    'https://www.agemys.org/'
+    'https://www.agedm.org/'
 );
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")

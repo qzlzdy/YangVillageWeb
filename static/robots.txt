@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yangvillage.top/sitemap.xml
+Sitemap: https://author.yangvillage.top/sitemap.xml
