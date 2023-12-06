@@ -14,14 +14,14 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('ref',
     'C++参考手册',
-    '被广泛使用的计算机程序设计语言',
+    '为程序员提供 C 和 C++ 语言及标准库的完整在线参考资料',
     'https://en.cppreference.com/w/'
 );
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('ref',
     'Python官方文档',
-    '广泛使用的解释型、高级和通用的编程语言',
+    '一种清晰而强大的面向对象编程语言',
     'https://docs.python.org/3/'
 );
 INSERT INTO bookmarks
@@ -342,6 +342,13 @@ VALUES('tool',
     'ReceiveSMS',
     '免费在线接收短信。无需注册。用于短信验证的临时电话号码',
     'https://www.receivesms.io/'
+);
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('tool',
+    'explain shell',
+    '命令解释搜索引擎',
+    'https://explainshell.com'
 );
   -- communities
 INSERT INTO bookmarks
