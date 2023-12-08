@@ -21,11 +21,17 @@ Broadcast::Broadcast(const WEnvironment &env): WApplication(env){
     contents->setStyleClass("mx-5");
     WVBoxLayout *main = contents->setLayout(make_unique<WVBoxLayout>());
 
-    WText *title = main->addWidget(make_unique<WText>("羊村广播站"));
-    title->setStyleClass("mt-5 fs-1 text-center");
+    main->addWidget(make_unique<WText>("羊村广播站"))
+        ->setStyleClass("mt-5 fs-1 text-center");
 
-    main->addWidget(make_unique<WText>(
-        "广播站暂不对外开放 如过您是本村村民 请点击下方连接"));
+    main->addWidget(make_unique<WText>("广播站暂不对外开放"))
+        ->setStyleClass("alert alert-danger");
+
+    main->addWidget(make_unique<WText>("如过您是本村村民 请点击下方链接"))
+        ->setStyleClass("alert alert-info");
+
     main->addWidget(make_unique<WAnchor>(
-        WLink("https://192.168.1.200:5443"), "直达专车"));
+            WLink("https://192.168.1.200:5443"), "直达专车"))
+        ->setStyleClass("rounded-2 bg-primary text-white fs-6 text-center "
+                        "text-decoration-none");
 }
