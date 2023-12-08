@@ -9,7 +9,9 @@ menu: 主页
 
 ## 这是哪里
 
-这里是由[骑着轮子的羊](https://author.yangvillage.top)村长建立的个人网站。网站可能提供任何内容——这取决于村长的决定。一般而言，这些内容都与计算机、二次元有关。
+这里是由[骑着轮子的羊][1]村长建立的个人网站。网站可能提供任何内容——这取决于村长的决定。一般而言，这些内容都与计算机、二次元有关。
+
+[1]: https://author.yangvillage.top
 
 ## 部门网站
 
@@ -17,32 +19,24 @@ menu: 主页
 
 ### 羊村客运中心
 
-网址：[bookmark.yangvillage.top](https://bookmark.yangvillage.top)
+网址：<https://bookmark.yangvillage.top>
 
-羊村客运中心收藏了众多热门网站，你可以从这里快速前往。这些热门网站按照内容分类。目前，网站已经收录了多个类别的热门网站：
-
-- 程序文档
-- 多个wiki
-- 二次元
-- 游戏
-- 小工具
-- 社区
-- 文章
+羊村客运中心收藏了众多热门网站，你可以从这里快速前往。这些热门网站按照内容分类。~~你甚至还能发现村长的特殊XP。~~
 
 ### 羊村广播站
 
-网址：[music.yangvillage.top](https://music.yangvillage.top)
+网址：<https://music.yangvillage.top>
 
 你可以在羊村广播站听音乐。广播站内目前收藏了600+部动漫的歌曲，你一定能找到不少已经刻进你DNA的音乐。不幸的是，由于歌曲会产生大量流量，村子无法承受~~只是村长不想付钱~~，以及由于版权问题，广播站暂不对本村村民以外的人员开放。
 
 ### 羊村村长室
 
-网址：[author.yangvillage.top](https://author.yangvillage.top)
+网址：<https://author.yangvillage.top>
 
 村长室并不是村长办公的地方，当然也不是村长居住的地方，也许可以把这里叫做**关于作者**。
 
 ### 羊村统计局
 
-网址：[status.yangvillage.top](https://status.yangvillage.top)
+网址：<https://status.yangvillage.top>
 
 目前由于服务器所在网络条件限制，经常会发生掉线情况。如果你暂时访问不了其他的部门，来这里瞧瞧也许就能明白些什么了。羊村统计局是独立于羊村之外的部门，一般情况下你都可以找到这里来。
