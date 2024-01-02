@@ -68,7 +68,7 @@ About::About(): Section("about"){
     WContainerWidget *website = addGridCell(1, 0);
     addChevron(website);
     addLabel(website, "主页：");
-    WLink webAddr("https://author.yangvillage.top");
+    WLink webAddr("https://yangvillage.top");
     WAnchor *webLink = website->addWidget(
         make_unique<WAnchor>(webAddr, "yangvillage"));
     font = WFont();
