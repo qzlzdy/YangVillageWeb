@@ -263,3 +263,30 @@ $Interrupt$位表示陷阱是否由中断引起。
 ## 4.1. 页式虚拟内存
 
 # 5. mesy特权指令集列表
+
+<table border="1" style="border-collapse:collapse;width:100%;text-align:center">
+<caption>陷阱返回指令</caption>
+<tr>
+    <td style="width:20%">0001000</th>
+    <td style="width:14%">00010</th>
+    <td style="width:14%">00000</th>
+    <td style="width:8%">000</th>
+    <td style="width:14%">00000</th>
+    <td style="width:20%">1110011</th>
+    <td>SRET</td>
+</tr>
+<tr><td>0011000</td><td>00010</td><td>00000</td><td>000</td><td>00000</td><td>1110011</td><td>MRET</td></tr>
+</table>
+
+<table border="1" style="border-collapse:collapse;width:100%;text-align:center">
+<caption>中断管理指令</caption>
+<tr>
+    <td style="width:20%">0001000</th>
+    <td style="width:14%">00101</th>
+    <td style="width:14%">00000</th>
+    <td style="width:8%">000</th>
+    <td style="width:14%">00000</th>
+    <td style="width:20%">1110011</th>
+    <td>WFI</td>
+</tr>
+</table>
