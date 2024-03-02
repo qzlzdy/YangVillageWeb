@@ -116,7 +116,7 @@ syndesmos一共有5个通道，每个通道都是半工通信，其中A、C、E�
 |e_valid|V|$1$| |
 |e_ready|R|$1$| |
 
-!! E通道只有一种操作，即`GrantAck`，无需额外字段
+!!! E通道只有一种操作，即`GrantAck`，无需额外字段
 
 # 4. 序列化
 
@@ -126,12 +126,12 @@ syndesmos一共有5个通道，每个通道都是半工通信，其中A、C、E�
 
 |命令|操作码|A|B|C|D|E|响应|
 |:--|:--|:--|:--|:--|:--|:--|:--|
-|`AcquireBlock`|`0`|y|.|.|.|.|`Grant`/`GrantData`|
+|`AcquireBlock`|`0`|y|.|.|.|.|`GrantData`|
 |`AcquirePerm`|`1`|y|.|.|.|.|`Grant`|
 |`Grant`|`0`|.|.|.|y|.|`GrantAck`|
 |`GrantData`|`1`|.|.|.|y|.|`GrantAck`|
 |`GrantAck`|`-`|.|.|.|.|y| |
-|`ProbeBlock`|`0`|.|y|.|.|.|`ProbeAck`|
+|`ProbeBlock`|`0`|.|y|.|.|.|`ProbeAckData`|
 |`ProbePerm`|`1`|.|y|.|.|.|`ProbeAck`|
 |`ProbeAck`|`0`|.|.|y|.|.| |
 |`ProbeAckData`|`1`|.|.|y|.|.| |
