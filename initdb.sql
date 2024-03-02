@@ -14,7 +14,7 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('ref',
     'C++参考手册',
-    '为程序员提供 C 和 C++ 语言及标准库的完整在线参考资料',
+    '为程序员提供C/C++语言及标准库的完整在线参考资料',
     'https://en.cppreference.com/w/'
 );
 INSERT INTO bookmarks
@@ -119,15 +119,8 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('ref',
     'Eigen库官方文档',
-    '用于线性代数，矩阵和向量运算，几何变换，数值求解器和相关算法的模板标题的高级C++库',
+    '用于线性代数、矩阵和向量运算、几何变换、数值求解器和相关算法的模板标题的高级C++库',
     'https://eigen.tuxfamily.org/dox/index.html'
-);
-INSERT INTO bookmarks
-("catalog", "title", "desc", "url")
-VALUES('ref',
-    'Funkwhale官方文档',
-    '自托管、现代、免费和开源的音乐服务器',
-    'https://docs.funkwhale.audio/administrator/index.html'
 );
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
@@ -135,6 +128,13 @@ VALUES('ref',
     'Grav官方文档',
     '一个快速、简单、灵活的基于文件的网络平台',
     'https://learn.getgrav.org/17/content'
+);
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('ref',
+    'Navidrome官方文档',
+    '兼容Subsonic API的轻量级音乐服务器',
+    'https://www.navidrome.org/docs/'
 );
   -- wikis
 INSERT INTO bookmarks
@@ -177,7 +177,7 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('anime',
     '动漫花园',
-    '一個動漫愛好者交流的平台,提供最及時,最全面的服务',
+    '一個動漫愛好者交流的平台，提供最及時，最全面的服务',
     'https://share.dmhy.org/'
 );
 INSERT INTO bookmarks
@@ -192,13 +192,13 @@ INSERT INTO bookmarks
 VALUES('anime',
     '異世界動漫',
     '異世界動漫',
-    'https://www.sbdm.net/'
+    'https://www.mikudm.com/'
 );
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('anime',
     'Nyaa',
-    '专注于东亚媒体（包括动画、漫画、音乐等）的BitTorrent社区',
+    '专注于东亚媒体的BitTorrent社区',
     'https://nyaa.si/'
 );
 INSERT INTO bookmarks
@@ -226,7 +226,7 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('anime',
     '蜜柑计划',
-    '蜜柑计划：新一代的动漫下载站',
+    '新一代的动漫下载站',
     'https://mikanani.me/'
 );
 INSERT INTO bookmarks
@@ -283,7 +283,7 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('game',
     'MC百科',
-    '我的世界MOD百科，提供Minecraft(我的世界)MOD(模组)物品资料介绍教程攻略和MOD下载',
+    '我的世界MOD百科，提供Minecraft MOD物品资料介绍教程攻略和MOD下载',
     'https://www.mcmod.cn/'
 );
   -- tools
@@ -291,7 +291,7 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('tool',
     'DeepL',
-    '即时翻译文本&完整的文档文件。为个人和团队提供准确的翻译。每天有数百万人使用DeepL进行翻译',
+    '即时翻译文本&完整的文档文件。为个人和团队提供准确的翻译。',
     'https://www.deepl.com/translator'
 );
 INSERT INTO bookmarks
@@ -312,7 +312,7 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('tool',
     'WolframAlpha',
-    '使用Wolfram的突破性技术和知识库计算答案，数百万学生和专业人士都信赖Wolfram的技术和知识库',
+    '使用Wolfram的突破性技术和知识库计算答案',
     'https://www.wolframalpha.com/'
 );
 INSERT INTO bookmarks
@@ -328,20 +328,6 @@ VALUES('tool',
     'FlightAware',
     '最好的飞行跟踪站点：实时跟踪地图、飞行状态、航空公司航班延误、私人/通用航空飞行及机场信息',
     'https://zh.flightaware.com/'
-);
-INSERT INTO bookmarks
-("catalog", "title", "desc", "url")
-VALUES('tool',
-    'draw.io',
-    '免费的在线图表软件，用于制作流程图、流程图、组织结构图、UML、ER和网络图',
-    'https://app.diagrams.net/'
-);
-INSERT INTO bookmarks
-("catalog", "title", "desc", "url")
-VALUES('tool',
-    'ReceiveSMS',
-    '免费在线接收短信。无需注册。用于短信验证的临时电话号码',
-    'https://www.receivesms.io/'
 );
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
@@ -369,7 +355,7 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('comm',
     'stack overflow',
-    '全球最大开发者在线社区',
+    '全球第二大同♂️性交友网站（别闹了啊）全球最大开发者在线社区',
     'https://stackoverflow.com/questions'
 );
   -- article
@@ -442,6 +428,13 @@ VALUES('artc',
     'grabcad',
     'CAD 模型收集',
     'https://grabcad.com/library'
+);
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('artc',
+    'Around The World blog',
+    '随机游戏地图',
+    'https://frozenfractal.com/blog/2023/11/2/around-the-world-1-continents/'
 );
   -- Ypologist
 INSERT INTO bookmarks
