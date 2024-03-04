@@ -136,6 +136,13 @@ VALUES('ref',
     '兼容Subsonic API的轻量级音乐服务器',
     'https://www.navidrome.org/docs/'
 );
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('ref',
+    'Penrose官方文档',
+    '只需在纯文本中输入符号，即可创建精美的图表。',
+    'https://penrose.cs.cmu.edu/docs/ref'
+);
   -- wikis
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
@@ -184,14 +191,14 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('anime',
     'AGE动漫',
-    'Age动漫专业的在线动漫网站，动漫免费在线观看，高品质画质，实时更新，追番利器!',
+    '在线动漫网站',
     'https://www.agedm.org/'
 );
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('anime',
     '異世界動漫',
-    '異世界動漫',
+    '在线动漫网站',
     'https://www.mikudm.com/'
 );
 INSERT INTO bookmarks
@@ -205,7 +212,7 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('anime',
     'AniList',
-    '通过AniList跟踪、发现和分享动漫。通过评论和推荐发现评分最高的热门节目。免费注册！',
+    '通过AniList跟踪、发现和分享动漫。通过评论和推荐发现评分最高的热门节目。',
     'https://anilist.co/'
 );
 INSERT INTO bookmarks
@@ -219,7 +226,7 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('anime',
     '番组计划',
-    '一个专注于动漫、音乐、游戏领域，帮助你分享、发现与结识同好的ACG网络',
+    '专注于动漫、音乐、游戏领域，帮助你分享、发现与结识同好的ACG网络',
     'https://bangumi.tv/'
 );
 INSERT INTO bookmarks
@@ -247,7 +254,7 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('anime',
     '熱辣漫畫',
-    '熱辣漫畫Hotmangas，為全球華人提供高質量中文全本漫畫，同人志。',
+    '為全球華人提供高質量中文全本漫畫、同人志。',
     'https://www.manga2022.com/'
 );
   -- game
@@ -426,7 +433,7 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('artc',
     'grabcad',
-    'CAD 模型收集',
+    'CAD模型收集',
     'https://grabcad.com/library'
 );
 INSERT INTO bookmarks
