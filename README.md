@@ -70,13 +70,13 @@ cp wt_config.xml /etc/yangvillage/
 ## 4.3. Create databse
 
 ```bash
-sqlite /var/lib/yangvillage/yangvillage.db -init initdb.sql
+sqlite3 /var/lib/yangvillage/yangvillage.db -init initdb.sql
 ```
 
 ## 4.4. Config Nginx
 
 ```bash
-cp nginx-config/wt_*.conf     /etc/nginx/
+cp nginx-config/wt_*.conf /etc/nginx/
 cp nginx-config/yangvillage.conf /etc/nginx/sites-available/
 ln -s /etc/nginx/sites-available/yangvillage.conf /etc/nginx/sites-enabled/yangvillage.conf
 ```
