@@ -1,0 +1,63 @@
+Row MUL
+implement(b31_25, MUL, "0000001")
+implement(b24_20, MUL, "rs2")
+implement(b19_15, MUL, "rs1")
+implement(b14_12, MUL, "000")
+implement(b11_7, MUL, "rd")
+implement(b6_0, MUL, "0110011")
+
+Row MULH
+implement(b31_25, MULH, "0000001")
+implement(b24_20, MULH, "rs2")
+implement(b19_15, MULH, "rs1")
+implement(b14_12, MULH, "001")
+implement(b11_7, MULH, "rd")
+implement(b6_0, MULH, "0110011")
+
+Row MULHSU
+implement(b31_25, MULHSU, "0000001")
+implement(b24_20, MULHSU, "rs2")
+implement(b19_15, MULHSU, "rs1")
+implement(b14_12, MULHSU, "010")
+implement(b11_7, MULHSU, "rd")
+implement(b6_0, MULHSU, "0110011")
+
+Row MULHU
+implement(b31_25, MULHU, "0000001")
+implement(b24_20, MULHU, "rs2")
+implement(b19_15, MULHU, "rs1")
+implement(b14_12, MULHU, "011")
+implement(b11_7, MULHU, "rd")
+implement(b6_0, MULHU, "0110011")
+
+Row DIV
+implement(b31_25, DIV, "0000001")
+implement(b24_20, DIV, "rs2")
+implement(b19_15, DIV, "rs1")
+implement(b14_12, DIV, "100")
+implement(b11_7, DIV, "rd")
+implement(b6_0, DIV, "0110011")
+
+Row DIVU
+implement(b31_25, DIVU, "0000001")
+implement(b24_20, DIVU, "rs2")
+implement(b19_15, DIVU, "rs1")
+implement(b14_12, DIVU, "101")
+implement(b11_7, DIVU, "rd")
+implement(b6_0, DIVU, "0110011")
+
+Row REM
+implement(b31_25, REM, "0000001")
+implement(b24_20, REM, "rs2")
+implement(b19_15, REM, "rs1")
+implement(b14_12, REM, "110")
+implement(b11_7, REM, "rd")
+implement(b6_0, REM, "0110011")
+
+Row REMU
+implement(b31_25, REMU, "0000001")
+implement(b24_20, REMU, "rs2")
+implement(b19_15, REMU, "rs1")
+implement(b14_12, REMU, "111")
+implement(b11_7, REMU, "rd")
+implement(b6_0, REMU, "0110011")

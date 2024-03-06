@@ -1,0 +1,41 @@
+Row CSRRW
+implement(b31_20, CSRRW, "csr")
+implement(b19_15, CSRRW, "rs1")
+implement(b14_12, CSRRW, "001")
+implement(b11_7, CSRRW, "rd")
+implement(b6_0, CSRRW, "1110011")
+
+Row CSRRS
+implement(b31_20, CSRRS, "csr")
+implement(b19_15, CSRRS, "rs1")
+implement(b14_12, CSRRS, "010")
+implement(b11_7, CSRRS, "rd")
+implement(b6_0, CSRRS, "1110011")
+
+Row CSRRC
+implement(b31_20, CSRRC, "csr")
+implement(b19_15, CSRRC, "rs1")
+implement(b14_12, CSRRC, "011")
+implement(b11_7, CSRRC, "rd")
+implement(b6_0, CSRRC, "1110011")
+
+Row CSRRWI
+implement(b31_20, CSRRWI, "csr")
+implement(b19_15, CSRRWI, "uimm")
+implement(b14_12, CSRRWI, "101")
+implement(b11_7, CSRRWI, "rd")
+implement(b6_0, CSRRWI, "1110011")
+
+Row CSRRSI
+implement(b31_20, CSRRSI, "csr")
+implement(b19_15, CSRRSI, "uimm")
+implement(b14_12, CSRRSI, "110")
+implement(b11_7, CSRRSI, "rd")
+implement(b6_0, CSRRSI, "1110011")
+
+Row CSRRCI
+implement(b31_20, CSRRCI, "csr")
+implement(b19_15, CSRRCI, "uimm")
+implement(b14_12, CSRRCI, "111")
+implement(b11_7, CSRRCI, "rd")
+implement(b6_0, CSRRCI, "1110011")

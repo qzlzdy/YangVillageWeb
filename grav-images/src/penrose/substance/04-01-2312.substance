@@ -1,0 +1,53 @@
+AutoLabel All
+
+markBit("31", 31)
+markBit("25", 25)
+markBit("24", 24)
+markBit("20", 20)
+markBit("19", 19)
+markBit("15", 15)
+markBit("14", 14)
+markBit("12", 12)
+markBit("11", 11)
+markBit("7", 7)
+markBit("6", 6)
+markBit("0", 0)
+
+Field immh
+Field imml
+Field rs1
+Field func3
+Field rd
+Field opcode
+Label immh "imm[11:5]"
+Label imml "imm[4:0]"
+makeHeader(immh, 31, 25)
+makeHeader(imml, 24, 20)
+makeHeader(rs1, 19, 15)
+makeHeader(func3, 14, 12)
+makeHeader(rd, 11, 7)
+makeHeader(opcode, 6, 0)
+
+Row slli
+implement(immh, slli, "0000000")
+implement(imml, slli, "shamt")
+implement(rs1, slli, "src")
+implement(func3, slli, "SLLI")
+implement(rd, slli, "dest")
+implement(opcode, slli, "OP-IMM")
+
+Row srli
+implement(immh, srli, "0000000")
+implement(imml, srli, "shamt")
+implement(rs1, srli, "src")
+implement(func3, srli, "SRLI")
+implement(rd, srli, "dest")
+implement(opcode, srli, "OP-IMM")
+
+Row srai
+implement(immh, srai, "0000000")
+implement(imml, srai, "shamt")
+implement(rs1, srai, "src")
+implement(func3, srai, "SRAI")
+implement(rd, srai, "dest")
+implement(opcode, srai, "OP-IMM")

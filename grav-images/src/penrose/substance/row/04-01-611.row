@@ -1,0 +1,13 @@
+Row rdcycle
+implement(csr, rdcycle, "RDCYCLE[H]")
+implement(rs1, rdcycle, "00000")
+implement(func3, rdcycle, "CSRRS")
+implement(rd, rdcycle, "dest")
+implement(opcode, rdcycle, "SYSTEM")
+
+Row rdinstret
+implement(csr, rdinstret, "RDINSTRET[H]")
+implement(rs1, rdinstret, "00000")
+implement(func3, rdinstret, "CSRRS")
+implement(rd, rdinstret, "dest")
+implement(opcode, rdinstret, "SYSTEM")

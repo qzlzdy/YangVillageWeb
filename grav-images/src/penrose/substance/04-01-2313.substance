@@ -1,0 +1,26 @@
+AutoLabel All
+
+markBit("31", 31)
+markBit("12", 12)
+markBit("11", 11)
+markBit("7", 7)
+markBit("6", 6)
+markBit("0", 0)
+
+Field imm
+Field rd
+Field opcode
+Label imm "imm[31:12]"
+makeHeader(imm, 31, 12)
+makeHeader(rd, 11, 7)
+makeHeader(opcode, 6, 0)
+
+Row lui
+implement(imm, lui, "U型立即数")
+implement(rd, lui, "dest")
+implement(opcode, lui, "LUI")
+
+Row auipc
+implement(imm, auipc, "U型立即数")
+implement(rd, auipc, "dest")
+implement(opcode, auipc, "AUIPC")

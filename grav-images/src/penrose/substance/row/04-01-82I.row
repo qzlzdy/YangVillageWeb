@@ -1,0 +1,281 @@
+Row LUI
+implement(b31_12, LUI, "imm[31:12]")
+implement(b11_7, LUI, "rd")
+implement(b6_0, LUI, "0110111")
+
+Row AUIPC
+implement(b31_12, AUIPC, "imm[31:12]")
+implement(b11_7, AUIPC, "rd")
+implement(b6_0, AUIPC, "0010111")
+
+Row JAL
+implement(b31_12, JAL, "imm[21|10:2|11|20:12]")
+implement(b11_7, JAL, "rd")
+implement(b6_0, JAL, "1101111")
+
+Row JALR
+implement(b31_20, JALR, "imm[11:0]")
+implement(b19_15, JALR, "rs1")
+implement(b14_12, JALR, "000")
+implement(b11_7, JALR, "rd")
+implement(b6_0, JALR, "1100111")
+
+Row BEQ
+implement(b31_25, BEQ, "imm[13|10:5]")
+implement(b24_20, BEQ, "rs2")
+implement(b19_15, BEQ, "rs1")
+implement(b14_12, BEQ, "000")
+implement(b11_7, BEQ, "imm[4:2|12:11]")
+implement(b6_0, BEQ, "1100011")
+
+Row BNE
+implement(b31_25, BNE, "imm[13|10:5]")
+implement(b24_20, BNE, "rs2")
+implement(b19_15, BNE, "rs1")
+implement(b14_12, BNE, "001")
+implement(b11_7, BNE, "imm[4:2|12:11]")
+implement(b6_0, BNE, "1100011")
+
+Row BLT
+implement(b31_25, BLT, "imm[13|10:5]")
+implement(b24_20, BLT, "rs2")
+implement(b19_15, BLT, "rs1")
+implement(b14_12, BLT, "100")
+implement(b11_7, BLT, "imm[4:2|12:11]")
+implement(b6_0, BLT, "1100011")
+
+Row BGE
+implement(b31_25, BGE, "imm[13|10:5]")
+implement(b24_20, BGE, "rs2")
+implement(b19_15, BGE, "rs1")
+implement(b14_12, BGE, "101")
+implement(b11_7, BGE, "imm[4:2|12:11]")
+implement(b6_0, BGE, "1100011")
+
+Row BLTU
+implement(b31_25, BLTU, "imm[13|10:5]")
+implement(b24_20, BLTU, "rs2")
+implement(b19_15, BLTU, "rs1")
+implement(b14_12, BLTU, "110")
+implement(b11_7, BLTU, "imm[4:2|12:11]")
+implement(b6_0, BLTU, "1100011")
+
+Row BGEU
+implement(b31_25, BGEU, "imm[13|10:5]")
+implement(b24_20, BGEU, "rs2")
+implement(b19_15, BGEU, "rs1")
+implement(b14_12, BGEU, "111")
+implement(b11_7, BGEU, "imm[4:2|12:11]")
+implement(b6_0, BGEU, "1100011")
+
+Row LB
+implement(b31_20, LB, "imm[11:0]")
+implement(b19_15, LB, "rs1")
+implement(b14_12, LB, "000")
+implement(b11_7, LB, "rd")
+implement(b6_0, LB, "0000011")
+
+Row LH
+implement(b31_20, LH, "imm[11:0]")
+implement(b19_15, LH, "rs1")
+implement(b14_12, LH, "001")
+implement(b11_7, LH, "rd")
+implement(b6_0, LH, "0000011")
+
+Row LW
+implement(b31_20, LW, "imm[11:0]")
+implement(b19_15, LW, "rs1")
+implement(b14_12, LW, "010")
+implement(b11_7, LW, "rd")
+implement(b6_0, LW, "0000011")
+
+Row LBU
+implement(b31_20, LBU, "imm[11:0]")
+implement(b19_15, LBU, "rs1")
+implement(b14_12, LBU, "100")
+implement(b11_7, LBU, "rd")
+implement(b6_0, LBU, "0000011")
+
+Row LHU
+implement(b31_20, LHU, "imm[11:0]")
+implement(b19_15, LHU, "rs1")
+implement(b14_12, LHU, "101")
+implement(b11_7, LHU, "rd")
+implement(b6_0, LHU, "0000011")
+
+Row SB
+implement(b31_25, SB, "imm[11:5]")
+implement(b24_20, SB, "rs2")
+implement(b19_15, SB, "rs1")
+implement(b14_12, SB, "000")
+implement(b11_7, SB, "imm[4:0]")
+implement(b6_0, SB, "0100011")
+
+Row SH
+implement(b31_25, SH, "imm[11:5]")
+implement(b24_20, SH, "rs2")
+implement(b19_15, SH, "rs1")
+implement(b14_12, SH, "001")
+implement(b11_7, SH, "imm[4:0]")
+implement(b6_0, SH, "0100011")
+
+Row SW
+implement(b31_25, SW, "imm[11:5]")
+implement(b24_20, SW, "rs2")
+implement(b19_15, SW, "rs1")
+implement(b14_12, SW, "010")
+implement(b11_7, SW, "imm[4:0]")
+implement(b6_0, SW, "0100011")
+
+Row ADDI
+implement(b31_20, ADDI, "imm[11:0]")
+implement(b19_15, ADDI, "rs1")
+implement(b14_12, ADDI, "000")
+implement(b11_7, ADDI, "rd")
+implement(b6_0, ADDI, "0010011")
+
+Row SLTI
+implement(b31_20, SLTI, "imm[11:0]")
+implement(b19_15, SLTI, "rs1")
+implement(b14_12, SLTI, "001")
+implement(b11_7, SLTI, "rd")
+implement(b6_0, SLTI, "0010011")
+
+Row SLTIU
+implement(b31_20, SLTIU, "imm[11:0]")
+implement(b19_15, SLTIU, "rs1")
+implement(b14_12, SLTIU, "011")
+implement(b11_7, SLTIU, "rd")
+implement(b6_0, SLTIU, "0010011")
+
+Row XORI
+implement(b31_20, XORI, "imm[11:0]")
+implement(b19_15, XORI, "rs1")
+implement(b14_12, XORI, "100")
+implement(b11_7, XORI, "rd")
+implement(b6_0, XORI, "0010011")
+
+Row ORI
+implement(b31_20, ORI, "imm[11:0]")
+implement(b19_15, ORI, "rs1")
+implement(b14_12, ORI, "110")
+implement(b11_7, ORI, "rd")
+implement(b6_0, ORI, "0010011")
+
+Row ANDI
+implement(b31_20, ANDI, "imm[11:0]")
+implement(b19_15, ANDI, "rs1")
+implement(b14_12, ANDI, "111")
+implement(b11_7, ANDI, "rd")
+implement(b6_0, ANDI, "0010011")
+
+Row SLLI
+implement(b31_25, SLLI, "0000000")
+implement(b24_20, SLLI, "shamt")
+implement(b19_15, SLLI, "rs1")
+implement(b14_12, SLLI, "001")
+implement(b11_7, SLLI, "rd")
+implement(b6_0, SLLI, "0010011")
+
+Row SRLI
+implement(b31_25, SRLI, "0000000")
+implement(b24_20, SRLI, "shamt")
+implement(b19_15, SRLI, "rs1")
+implement(b14_12, SRLI, "101")
+implement(b11_7, SRLI, "rd")
+implement(b6_0, SRLI, "0010011")
+
+Row SRAI
+implement(b31_25, SRAI, "0100000")
+implement(b24_20, SRAI, "shamt")
+implement(b19_15, SRAI, "rs1")
+implement(b14_12, SRAI, "101")
+implement(b11_7, SRAI, "rd")
+implement(b6_0, SRAI, "0010011")
+
+Row ADD
+implement(b31_25, ADD, "0000000")
+implement(b24_20, ADD, "rs2")
+implement(b19_15, ADD, "rs1")
+implement(b14_12, ADD, "000")
+implement(b11_7, ADD, "rd")
+implement(b6_0, ADD, "0110011")
+
+Row SUB
+implement(b31_25, SUB, "0100000")
+implement(b24_20, SUB, "rs2")
+implement(b19_15, SUB, "rs1")
+implement(b14_12, SUB, "000")
+implement(b11_7, SUB, "rd")
+implement(b6_0, SUB, "0110011")
+
+Row SLL
+implement(b31_25, SLL, "0000000")
+implement(b24_20, SLL, "rs2")
+implement(b19_15, SLL, "rs1")
+implement(b14_12, SLL, "001")
+implement(b11_7, SLL, "rd")
+implement(b6_0, SLL, "0110011")
+
+Row SLT
+implement(b31_25, SLT, "0000000")
+implement(b24_20, SLT, "rs2")
+implement(b19_15, SLT, "rs1")
+implement(b14_12, SLT, "010")
+implement(b11_7, SLT, "rd")
+implement(b6_0, SLT, "0110011")
+
+Row SLTU
+implement(b31_25, SLTU, "0000000")
+implement(b24_20, SLTU, "rs2")
+implement(b19_15, SLTU, "rs1")
+implement(b14_12, SLTU, "011")
+implement(b11_7, SLTU, "rd")
+implement(b6_0, SLTU, "0110011")
+
+Row XOR
+implement(b31_25, XOR, "0000000")
+implement(b24_20, XOR, "rs2")
+implement(b19_15, XOR, "rs1")
+implement(b14_12, XOR, "100")
+implement(b11_7, XOR, "rd")
+implement(b6_0, XOR, "0110011")
+
+Row SRL
+implement(b31_25, SRL, "0000000")
+implement(b24_20, SRL, "rs2")
+implement(b19_15, SRL, "rs1")
+implement(b14_12, SRL, "101")
+implement(b11_7, SRL, "rd")
+implement(b6_0, SRL, "0110011")
+
+Row SRA
+implement(b31_25, SRA, "0100000")
+implement(b24_20, SRA, "rs2")
+implement(b19_15, SRA, "rs1")
+implement(b14_12, SRA, "101")
+implement(b11_7, SRA, "rd")
+implement(b6_0, SRA, "0110011")
+
+Row OR
+implement(b31_25, OR, "0000000")
+implement(b24_20, OR, "rs2")
+implement(b19_15, OR, "rs1")
+implement(b14_12, OR, "110")
+implement(b11_7, OR, "rd")
+implement(b6_0, OR, "0110011")
+
+Row AND
+implement(b31_25, AND, "0000000")
+implement(b24_20, AND, "rs2")
+implement(b19_15, AND, "rs1")
+implement(b14_12, AND, "111")
+implement(b11_7, AND, "rd")
+implement(b6_0, AND, "0110011")
+
+Row ECALL
+implement(b31_20, ECALL, "0000 0000 0000")
+implement(b19_15, ECALL, "00000")
+implement(b14_12, ECALL, "000")
+implement(b11_7, ECALL, "00000")
+implement(b6_0, ECALL, "1110011")

@@ -1,0 +1,22 @@
+\documentclass[preview]{standalone}
+\usepackage{multirow}
+
+\author{Qzlzdy}
+
+\begin{document}
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+    \hline
+    \multirow{2}{*}{instr[6:5]} & \multicolumn{8}{|c|}{instr[4:2]} \\
+    \cline{2-9}
+    & 000 & 001 & 010 & 011 & 100 & 101 & 110 & 111 \\
+    \hline
+    00 & LOAD & & & & OP-IMM & AUIPC & & \\
+    \hline
+    01 & STORE & & & & OP & LUI & & \\
+    \hline
+    10 & & & & & & & & \\
+    \hline
+    11 & BRANCH & JALR & & JAL & SYSTEM & & & \\
+    \hline
+  \end{tabular}
+\end{document}

@@ -1,0 +1,31 @@
+Row arith
+implement(func7, arith, "0000000")
+implement(rs2, arith, "src2")
+implement(rs1, arith, "src1")
+implement(func3, arith, "ADD/SLT/SLTU")
+implement(rd, arith, "dest")
+implement(opcode, arith, "OP")
+
+Row logic
+implement(func7, logic, "0000000")
+implement(rs2, logic, "src2")
+implement(rs1, logic, "src1")
+implement(func3, logic, "AND/OR/XOR")
+implement(rd, logic, "dest")
+implement(opcode, logic, "OP")
+
+Row shift
+implement(func7, shift, "0000000")
+implement(rs2, shift, "src2")
+implement(rs1, shift, "src1")
+implement(func3, shift, "SLL/SRL")
+implement(rd, shift, "dest")
+implement(opcode, shift, "OP")
+
+Row vari
+implement(func7, vari, "0100000")
+implement(rs2, vari, "src2")
+implement(rs1, vari, "src1")
+implement(func3, vari, "SUB/SRA")
+implement(rd, vari, "dest")
+implement(opcode, vari, "OP")

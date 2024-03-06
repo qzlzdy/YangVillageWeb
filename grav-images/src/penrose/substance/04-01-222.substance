@@ -1,0 +1,44 @@
+markBit("31", 31)
+markBit("21", 21)
+markBit("20", 20)
+markBit("13", 14)
+markBit("12", 13)
+markBit("11", 11)
+markBit("10", 10)
+markBit("5", 5)
+markBit("4", 4)
+markBit("2", 2)
+markBit("1", 1)
+markBit("0", 0)
+
+Encode IType
+encoding("instr[31]", IType, 31, 11)
+encoding("instr[30:20]", IType, 10, 0)
+Label IType "I型"
+
+Encode SType
+encoding("instr[31]", SType, 31, 11)
+encoding("instr[30:25]", SType, 10, 5)
+encoding("instr[11:7]", SType, 4, 0)
+Label SType "S型"
+
+Encode BType
+encoding("instr[31]", BType, 31, 14)
+encoding("instr[8:7]", BType, 13, 11)
+encoding("instr[25:30]", BType, 10, 5)
+encoding("instr[11:9]", BType, 4, 2)
+encoding("0", BType, 1, 0)
+Label BType "B型"
+
+Encode UType
+encoding("instr[31:12]", UType, 31, 13)
+encoding("0", UType, 12, 0)
+Label UType "U型"
+
+Encode JType
+encoding("instr[31]", JType, 31, 21)
+encoding("instr[20:12]", JType, 20, 13)
+encoding("instr[21]", JType, 12, 11)
+encoding("instr[30:22]", JType, 10, 2)
+encoding("0", JType, 1, 0)
+Label JType "J型"

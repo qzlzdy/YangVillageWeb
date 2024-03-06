@@ -1,0 +1,8 @@
+type Encode
+type Field
+type Row
+
+predicate encoding(String s, Encode e, Number high, Number low)
+predicate markBit(String str, Number bit)
+predicate makeHeader(Field f, Number high, Number low)
+predicate implement(Field f, Row r, String s)

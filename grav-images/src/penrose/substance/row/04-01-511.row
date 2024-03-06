@@ -1,0 +1,41 @@
+Row csrrw
+implement(csr, csrrw, "source/dest")
+implement(rs1, csrrw, "source")
+implement(func3, csrrw, "CSRRW")
+implement(rd, csrrw, "dest")
+implement(opcode, csrrw, "SYSTEM")
+
+Row csrrs
+implement(csr, csrrs, "source/dest")
+implement(rs1, csrrs, "source")
+implement(func3, csrrs, "CSRRS")
+implement(rd, csrrs, "dest")
+implement(opcode, csrrs, "SYSTEM")
+
+Row csrrc
+implement(csr, csrrc, "source/dest")
+implement(rs1, csrrc, "source")
+implement(func3, csrrc, "CSRRC")
+implement(rd, csrrc, "dest")
+implement(opcode, csrrc, "SYSTEM")
+
+Row csrrwi
+implement(csr, csrrwi, "source/dest")
+implement(rs1, csrrwi, "uimm")
+implement(func3, csrrwi, "CSRRWI")
+implement(rd, csrrwi, "dest")
+implement(opcode, csrrwi, "SYSTEM")
+
+Row csrrsi
+implement(csr, csrrsi, "source/dest")
+implement(rs1, csrrsi, "uimm")
+implement(func3, csrrsi, "CSRRSI")
+implement(rd, csrrsi, "dest")
+implement(opcode, csrrsi, "SYSTEM")
+
+Row csrrci
+implement(csr, csrrci, "source/dest")
+implement(rs1, csrrci, "uimm")
+implement(func3, csrrci, "CSRRCI")
+implement(rd, csrrci, "dest")
+implement(opcode, csrrci, "SYSTEM")

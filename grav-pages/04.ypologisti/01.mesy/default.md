@@ -9,20 +9,24 @@ title: mesy指令集架构
 - [2. 基础整数指令组](#2-基础整数指令组)
   - [2.1. 编程模型](#21-编程模型)
   - [2.2. 指令格式](#22-指令格式)
-  - [2.3. 立即数编码](#23-立即数编码)
-  - [2.4. 整数计算指令](#24-整数计算指令)
-  - [2.5. 控制转移指令](#25-控制转移指令)
-  - [2.6. 载入和储存指令](#26-载入和储存指令)
-  - [2.7. 环境调用](#27-环境调用)
-- [3. 整数乘除扩展(M)](#3-整数乘除扩展m)
-  - [3.1. 乘法操作](#31-乘法操作)
-  - [3.2. 除法操作](#32-除法操作)
-- [4. 原子指令扩展(A)](#4-原子指令扩展a)
-- [5. 控制状态寄存器指令扩展(Zicsr)](#5-控制状态寄存器指令扩展zicsr)
+  - [2.3. 整数计算指令](#23-整数计算指令)
+    - [2.3.1. RI指令](#231-ri指令)
+    - [2.3.2. RR指令](#232-rr指令)
+    - [2.3.3. NOP指令](#233-nop指令)
+  - [2.4. 控制转移指令](#24-控制转移指令)
+    - [2.4.1. 无条件跳转](#241-无条件跳转)
+    - [2.4.2. 条件分支](#242-条件分支)
+  - [2.5. 载入和储存指令](#25-载入和储存指令)
+  - [2.6. 环境调用](#26-环境调用)
+- [3. 整数乘除指令组(M)](#3-整数乘除指令组m)
+  - [3.1. 乘法运算](#31-乘法运算)
+  - [3.2. 除法运算](#32-除法运算)
+- [4. 原子指令组(A)](#4-原子指令组a)
+- [5. 控制状态寄存器指令组(Zicsr)](#5-控制状态寄存器指令组zicsr)
   - [5.1. CSR指令](#51-csr指令)
 - [6. 计数器](#6-计数器)
   - [6.1. 基础计数器和计时器](#61-基础计数器和计时器)
-- [7. 单精度浮点数扩展(F)](#7-单精度浮点数扩展f)
+- [7. 单精度浮点数指令组(F)](#7-单精度浮点数指令组f)
 - [8. mesy指令集列表](#8-mesy指令集列表)
 - [9. 汇编手册](#9-汇编手册)
 
@@ -45,7 +49,7 @@ mesy指令集的目标：
 
 ## 1.1. 内存
 
-mesy有一块$2^{32}B$的内存空间。一个**字**对应$32$位；一个**半字**对应$16$位；一个**双字**对应$64$位。内存空间是循环的，即$2^{31}-1$地址与$0$地址相邻。
+mesy有一块$2^{32}B$的内存空间。一个*字*对应$32$位；一个*半字*对应$16$位；一个*双字*对应$64$位。内存空间是循环的，即$2^{31}-1$地址与$0$地址相邻。
 
 ## 1.2. 指令长度编码
 
@@ -53,7 +57,7 @@ mesy的指令长度固定为$32$位，必须自然对齐。指令位全为$0$或
 
 ## 1.3. 异常、陷阱和中断
 
-**异常**指运行时出现的与当前指令相关的异常情况。**中断**指可能导致意外控制转移的外部异步事件。**陷阱**指由异常或中断导致的向服务程序的控制转移。
+*异常*指运行时出现的与当前指令相关的异常情况。*中断*指可能导致意外控制转移的外部异步事件。*陷阱*指由异常或中断导致的向服务程序的控制转移。
 
 # 2. 基础整数指令组
 
@@ -63,549 +67,186 @@ mesy的基础整数指令组中有32个$32$位通用寄存器`x0-x31`，以及�
 
 ## 2.2. 指令格式
 
-mesy的指令格式根据立即数编码方式分为6类。
+mesy的指令格式分为6类。所有格式的指令总是$32$位，必须自然对齐。源寄存器`rs1`、`rs2`，目的寄存器`rd`在所有格式中的位置保持一致。除CSR指令的立即数以外，所有立即数使用符号扩展。立即数的符号位总是指令中的最高位。
 
-**R型指令**
+![指令格式](/images/04-01-221.png)
 
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center"><tr>
-    <td style="width:22%"><ruby>func7<rt>31:25</rt></ruby></td>
-    <td style="width:16%"><ruby>rs2<rt>24:20</rt></ruby></td>
-    <td style="width:16%"><ruby>rs1<rt>19:15</rt></ruby></td>
-    <td style="width:9%"><ruby>func3<rt>14:12</rt></ruby></td>
-    <td style="width:16%"><ruby>rd<rt>11:7</rt></ruby></td>
-    <td><ruby>opcode<rt>6:0</rt></ruby></td>
-</tr></table>
+立即数在指令中编码的原则遵循最大重叠规则。
 
-**I型指令**
+![立即数格式](/images/04-01-222.png)
 
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center"><tr>
-    <td style="width:38%"><ruby>imm[11:0]<rt>31:20</rt></ruby></td>
-    <td style="width:16%"><ruby>rs1<rt>19:15</rt></ruby></td>
-    <td style="width:9%"><ruby>func3<rt>14:12</rt></ruby></td>
-    <td style="width:16%"><ruby>rd<rt>11:7</rt></ruby></td>
-    <td><ruby>opcode<rt>6:0</rt></ruby></td>
-</tr></table>
+## 2.3. 整数计算指令
 
-**S型指令**
+### 2.3.1. RI指令
 
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center"><tr>
-    <td style="width:22%"><ruby>imm[11:5]<rt>31:25</rt></ruby></td>
-    <td style="width:16%"><ruby>rs2<rt>24:20</rt></ruby></td>
-    <td style="width:16%"><ruby>rs1<rt>19:15</rt></ruby></td>
-    <td style="width:9%"><ruby>func3<rt>14:12</rt></ruby></td>
-    <td style="width:16%"><ruby>imm[4:0]<rt>11:7</rt></ruby></td>
-    <td><ruby>opcode<rt>6:0</rt></ruby></td>
-</tr></table>
+![整数计算指令](/images/04-01-2311.png)
 
-**B型指令**
+`ADDI`计算立即数与$rs1$的合，结果存入$rd$。
 
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center"><tr>
-    <td style="width:22%"><ruby>imm[13|11:6]<rt>31|30:25</rt></ruby></td>
-    <td style="width:16%"><ruby>rs2<rt>24:20</rt></ruby></td>
-    <td style="width:16%"><ruby>rs1<rt>19:15</rt></ruby></td>
-    <td style="width:9%"><ruby>func3<rt>14:12</rt></ruby></td>
-    <td style="width:16%"><ruby>imm[5:2|12]<rt>11:8|7</rt></ruby></td>
-    <td><ruby>opcode<rt>6:0</rt></ruby></td>
-</tr></table>
+`SLTI`做有符号比较，当$rs1$小于立即数时$rd$置$1$。`SLTIU`与`SLTI`相似，但做无符号比较。
 
-**U型指令**
+`ANDI`，`ORI`，`XORI`分别做位与，位或，位异或运算，结果存入$rd$。
 
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center"><tr>
-    <td style="width:62%"><ruby>imm[31:12]<rt>31:12</rt></ruby></td>
-    <td style="width:16%"><ruby>rd<rt>11:7</rt></ruby></td>
-    <td><ruby>opcode<rt>6:0</rt></ruby></td>
-</tr></table>
+![整数计算指令](/images/04-01-2312.png)
 
-**J型指令**
+立即数移位指令编码为I型，偏移量编码在立即数低$5$位。右移位的类型编码在第$30$位。`SLLI`做逻辑左移；`SRLI`做逻辑右移；`SRAI`做算术右移。
 
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center"><tr>
-    <td style="width:62%">
-        <ruby>imm[21|11:2|12|20:13]<rt>31|30:21|20|19:12</rt></ruby>
-    </td>
-    <td style="width:16%"><ruby>rd<rt>11:7</rt></ruby></td>
-    <td><ruby>opcode<rt>6:0</rt></ruby></td>
-</tr></table>
+![整数计算指令](/images/04-01-2313.png)
 
-## 2.3. 立即数编码
+`LUI`将立即数存入$rd$高$20$位，并在低$12$位填$0$。
 
-mesy的立即数编码与RISC-V基本一致。因为mesy中不包含$16$位长指令，指令地址偏移量固定为$4$字节，因此B型、J型指令中的立即数的低$2$位均为$0$。
-
-**I型立即数**
-
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center"><tr>
-    <td style="width:66%"><ruby>inst[31]<rt>31:11</rt></ruby></td>
-    <td><ruby>inst[30:20]<rt>10:0</rt></ruby></td>
-</tr></table>
-
-**S型立即数**
-
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center"><tr>
-    <td style="width:66%"><ruby>inst[31]<rt>31:11</rt></ruby></td>
-    <td style="width:19%"><ruby>inst[30:25]<rt>10:5</rt></ruby></td>
-    <td><ruby>inst[11:7]<rt>4:0</rt></ruby></td>
-</tr></table>
-
-**B型立即数**
-
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center"><tr>
-    <td style="width:59%"><ruby>inst[31]<rt>31:13</rt></ruby></td>
-    <td style="width:34%">
-        <ruby>inst[7|30:25|11:8]<rt>12|11:6|5:2</rt></ruby>
-    </td>
-    <td><ruby>0<rt>1:0</rt></ruby></td>
-</tr></table>
-
-**U型立即数**
-
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center"><tr>
-    <td style="width:62%"><ruby>inst[31:12]<rt>31:12</rt></ruby></td>
-    <td><ruby>0<rt>11:0</rt></ruby></td>
-</tr></table>
-
-**J型立即数**
-
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center"><tr>
-    <td style="width:34%"><ruby>inst[31]<rt>31:21</rt></ruby></td>
-    <td style="width:59%">
-        <ruby>inst[19:12|20|30:21]<rt>20:13|12|11:2</rt></ruby>
-    </td>
-    <td><ruby>0<rt>1:0</rt></ruby></td>
-</tr></table>
-
-## 2.4. 整数计算指令
-
-**整数RI指令**
-
-<table style="width:100%;text-align:center">
-<tr>
-    <th style="width:38%;text-align:center">imm[11:0]</th>
-    <th style="width:16%;text-align:center">rs1</th>
-    <th style="width:9%;text-align:center">func3</th>
-    <th style="width:16%;text-align:center">rd</th>
-    <th style="text-align:center">opcode</th>
-</tr>
-<tr><td><i>I-Imm[11:0]</i></td><td><i>src</i></td><td>ADDI/SLTI[U]</td><td><i>dest</i></td><td>OP-IMM</td></tr>
-<tr><td><i>I-Imm[11:0]</i></td><td><i>src</i></td><td>ANDI/ORI/XORI</td><td><i>dest</i></td><td>OP-IMM</td></tr>
-</table>
-
-`ADDI`将立即数与$rs1$相加。
-
-`SLTI`做有符号数比较，当$rs1$小于立即数时在$rd$写入$1$，否则写入$0$。`SLTIU`与`SLTI`相似，但做无符号数比较。
-
-`ANDI`，`ORI`，`XORI`分别做位与，位或，位异或运算。
-
-<table style="width:100%;text-align:center">
-<tr>
-    <th style="width:22%;text-align:center">imm[11:5]</th>
-    <th style="width:16%;text-align:center">imm[4:0]</th>
-    <th style="width:16%;text-align:center">rs1</th>
-    <th style="width:9%;text-align:center">func3</th>
-    <th style="width:16%;text-align:center">rd</th>
-    <th style="text-align:center">opcode</th>
-</tr>
-<tr><td><i>0000000</i></td><td><i>shamt</i></td><td><i>rs1</i></td><td>SLLI</td><td><i>dest</i></td><td>OP-IMM</td></tr>
-<tr><td><i>0000000</i></td><td><i>shamt</i></td><td><i>rs1</i></td><td>SRLI</td><td><i>dest</i></td><td>OP-IMM</td></tr>
-<tr><td><i>0100000</i></td><td><i>shamt</i></td><td><i>rs1</i></td><td>SRAI</td><td><i>dest</i></td><td>OP-IMM</td></tr>
-</table>
-
-I型移位指令，将$rs1$偏移常数位，偏移量取立即数低$5$位。`SLLI`做逻辑左移；`SRLI`做逻辑右移；`SRAI`做算术右移。
-
-<table style="width:100%;text-align:center">
-<tr>
-    <th style="width:62%;text-align:center">imm[31:12]</th>
-    <th style="width:16%;text-align:center">rd</th>
-    <th style="text-align:center">opcode</th>
-</tr>
-<tr><td><i>U-Imm[31:12]</i></td><td><i>dest</i></td><td>LUI</td></tr>
-<tr><td><i>U-Imm[31:12]</i></td><td><i>dest</i></td><td>AUIPC</td></tr>
-</table>
-
-`LUI`将立即数在低位补$12$位$0$后存入$rd$。
-
-`AUIPC`将立即数在低位补$12$位$0$后与$pc$相加。
+`AUIPC`将立即数作为偏移量高$20$位，计算相对$pc$的偏移地址，结果存入$rd$。
 
 !!! `AUIPC`使用的$pc$值实际上是紧跟`AUIPC`后一条指令的地址，即$pc+4$。
 
-**整数RR指令**
+### 2.3.2. RR指令
 
-<table style="width:100%;text-align:center">
-<tr>
-    <th style="width:22%;text-align:center">func7</th>
-    <th style="width:16%;text-align:center">rs2</th>
-    <th style="width:16%;text-align:center">rs1</th>
-    <th style="width:9%;text-align:center">func3</th>
-    <th style="width:16%;text-align:center">rd</th>
-    <th style="text-align:center">opcode</th>
-</tr>
-<tr><td><i>0000000</i></td><td><i>src2</i></td><td><i>src1</i></td><td>ADD/SLT/SLTU</td><td><i>dest</i></td><td>OP</td></tr>
-<tr><td><i>0000000</i></td><td><i>src2</i></td><td><i>src1</i></td><td>AND/OR/XOR</td><td><i>dest</i></td><td>OP</td></tr>
-<tr><td><i>0000000</i></td><td><i>src2</i></td><td><i>src1</i></td><td>SLL/SRL</td><td><i>dest</i></td><td>OP</td></tr>
-<tr><td><i>0100000</i></td><td><i>src2</i></td><td><i>src1</i></td><td>SUB/SRA</td><td><i>dest</i></td><td>OP</td></tr>
-</table>
+所有整数RR指令的源寄存器为`rs1`和`rs2`，目的寄存器是`rd`。`func7`和`func3`字段表示指令的操作类型。
 
-`ADD`将$rs1$和$rs2$相加。`SUB`将$rs1$减去$rs2$。`SLT`和`SLTU`分别做无符号和有符号比较，当$rs1$小于$rs2$时在$rd$写入$1$，否则写入$0$。`AND`，`OR`，`XOR`分别做位与，位或，位异或操作。
+![整数计算指令](/images/04-01-2321.png)
 
-`SLL`，`SRL`，`SRA`分别做逻辑左移，逻辑右移，算术右移操作，偏移量取$rs2$低$5$位。
+`ADD`计算$rs1$和$rs2$的合。`SUB`计算$rs1$与$rs2$的差。`SLT`和`SLTU`分别做有符号和无符号比较，当$rs1$小于$rs2$时$rd$置$1$。`AND`，`OR`和`XOR`分别做位与，位或和位异或运算。
 
-**NOP指令**
+`SLL`，`SRL`和`SRA`分别做逻辑左移，逻辑右移，算术右移运算，偏移量取$rs2$的低$5$位。
 
-<table style="width:100%;text-align:center">
-<tr>
-    <th style="width:38%;text-align:center">imm[11:0]</th>
-    <th style="width:16%;text-align:center">rs1</th>
-    <th style="width:9%;text-align:center">func3</th>
-    <th style="width:16%;text-align:center">rd</th>
-    <th style="text-align:center">opcode</th>
-</tr>
-<tr><td><i>0000_0000_0000</i></td><td><i>00000</i></td><td>ADDI</td><td><i>00000</i></td><td>OP-IMM</td></tr>
-</table>
+### 2.3.3. NOP指令
 
-NOP指令即空指令。
+![整数计算指令](/images/04-01-2331.png)
 
-## 2.5. 控制转移指令
+NOP指令即空指令，仅修改$pc$和启用的计数器的值。
 
-**无条件跳转**
+## 2.4. 控制转移指令
+
+mesy提供两类控制转移指令：无条件跳转和条件分支。mesy中没有延迟槽
+
+### 2.4.1. 无条件跳转
 
 `JAL`可以寻址$\pm2MB$的空间，并把紧跟的指令地址，即$pc+4$存入$rd$。
 
-<table style="width:100%;text-align:center">
-<tr>
-    <th style="width:62%;text-align:center">imm[21|11:2|12|20:13]</th>
-    <th style="width:16%;text-align:center">rd</th>
-    <th style="text-align:center">opcode</th>
-</tr>
-<tr><td><i>offset[21:2]</i></td><td><i>dest</i></td><td>JAL</td></tr>
-</table>
+![控制转移指令](/images/04-01-2411.png)
 
 `JALR`通过基址寻址，并把紧跟的指令地址，即$pc+4$存入$rd$。
 
-<table style="width:100%;text-align:center">
-<tr>
-    <th style="width:38%;text-align:center">imm[11:0]</th>
-    <th style="width:16%;text-align:center">rs1</th>
-    <th style="width:9%;text-align:center">func3</th>
-    <th style="width:16%;text-align:center">rd</th>
-    <th style="text-align:center">opcode</th>
-</tr>
-<tr><td><i>offset[11:0]</i></td><td><i>base</i></td><td><i>000</i></td><td><i>dest</i></td><td>JALR</td></tr>
-</table>
+![控制转移指令](/images/04-01-2412.png)
 
-**条件分支**
+### 2.4.2. 条件分支
 
 条件分支的寻址范围是$\pm8KB$。
 
-<table style="width:100%;text-align:center">
-<tr>
-    <th style="width:22%;text-align:center">imm[13|11:6]</th>
-    <th style="width:16%;text-align:center">rs2</th>
-    <th style="width:16%;text-align:center">rs1</th>
-    <th style="width:9%;text-align:center">func3</th>
-    <th style="width:16%;text-align:center">imm[5:2|12]</th>
-    <th style="text-align:center">opcode</th>
-</tr>
-<tr><td><i>offset[13|11:6]</i></td><td><i>src2</i></td><td><i>src1</i></td><td>BEQ/BNE</td><td><i>offset[5:2|12]</i></td><td>BRANCH</td></tr>
-<tr><td><i>offset[13|11:6]</i></td><td><i>src2</i></td><td><i>src1</i></td><td>BLT[U]</td><td><i>offset[5:2|12]</i></td><td>BRANCH</td></tr>
-<tr><td><i>offset[13|11:6]</i></td><td><i>src2</i></td><td><i>src1</i></td><td>BGE[U]</td><td><i>offset[5:2|12]</i></td><td>BRANCH</td></tr>
-</table>
+![控制转移指令](/images/04-01-2421.png)
 
 `BEQ`，`BNE`分别在$rs1$和$rs2$相等，不相等时跳转。`BLT`，`BLTU`分别在有符号，无符号情况下$rs1$小于$rs2$时跳转。`BGE`，`BGEU`分别在有符号，无符号情况下$rs1$大于等于$rs2$时跳转。
 
-## 2.6. 载入和储存指令
+## 2.5. 载入和储存指令
 
 mesy固定使用小端格式。
 
-<table style="width:100%;text-align:center">
-<tr>
-    <th style="width:38%;text-align:center">imm[11:0]</th>
-    <th style="width:16%;text-align:center">rs1</th>
-    <th style="width:9%;text-align:center">func3</th>
-    <th style="width:16%;text-align:center">rd</th>
-    <th style="text-align:center">opcode</th>
-</tr>
-<tr><td><i>offset[11:0]</i></td><td><i>base</i></td><td><i>width</i></td><td><i>dest</i></td><td>LOAD</td></tr>
-</table>
+![载入指令](/images/04-01-251.png)
 
-<table style="width:100%;text-align:center">
-<tr>
-    <th style="width:22%;text-align:center">imm[11:5]</th>
-    <th style="width:16%;text-align:center">rs1</th>
-    <th style="width:16%;text-align:center">rs1</th>
-    <th style="width:9%;text-align:center">func3</th>
-    <th style="width:16%;text-align:center">imm[4:0]</th>
-    <th style="text-align:center">opcode</th>
-</tr>
-<tr><td><i>offset[11:5]</i></td><td><i>src</i></td><td><i>base</i></td><td><i>width</i></td><td><i>offset[4:0]</i></td><td>STORE</td></tr>
-</table>
+![储存指令](/images/04-01-252.png)
 
-载入和储存指令在寄存器与内存之间传输数据。
+载入和储存指令在寄存器与内存之间传输数据。载入指令将内存中的值拷贝到寄存器。储存指令将寄存器中的值拷贝到内存。
 
-`LW`载入$32$位字。`LH`载入$16$位有符号半字。`LHU`载入$16$位无符号半字。`LB`载入$8$位有符号字节。`LBU`载入$8$位无符号字节。`SW`，`SH`，`SB`分别储存$32$位，$16$位，$8$位数据。
+`LW`载入$32$位数据。`LH`载入$16$位有符号数据。`LHU`载入$16$位无符号数据。`LB`载入$8$位有符号数据。`LBU`载入$8$位无符号数据。`SW`，`SH`，`SB`分别储存$32$位，$16$位，$8$位数据。
 
 载入和存储指令只支持地址自然对齐。
 
-## 2.7. 环境调用
+## 2.6. 环境调用
 
-mesy删除了用于调试环境的`EBREAK`指令。
+`SYSTEM`指令用于访问需要特权级的系统功能。这些指令分为两大类：原子读写CSR的指令和其他指令。
 
-<table style="width:100%;text-align:center">
-<tr>
-    <th style="width:38%;text-align:center">func12</th>
-    <th style="width:16%;text-align:center">rs1</th>
-    <th style="width:9%;text-align:center">func3</th>
-    <th style="width:16%;text-align:center">rd</th>
-    <th style="text-align:center">opcode</th>
-</tr>
-<tr><td>ECALL</td><td><i>00000</i></td><td>PRIV</td><td><i>00000</i></td><td>SYSTEM</td></tr>
-</table>
+![环境调用](/images/04-01-261.png)
 
 `ECALL`用于调用执行环境的服务。
 
-# 3. 整数乘除扩展(M)
+# 3. 整数乘除指令组(M)
 
-## 3.1. 乘法操作
+## 3.1. 乘法运算
 
-<table style="width:100%;text-align:center">
-<tr>
-    <th style="width:22%;text-align:center">func7</th>
-    <th style="width:16%;text-align:center">rs2</th>
-    <th style="width:16%;text-align:center">rs1</th>
-    <th style="width:9%;text-align:center">func3</th>
-    <th style="width:16%;text-align:center">rd</th>
-    <th style="text-align:center">opcode</th>
-</tr>
-<tr><td>MULDIV</td><td><i>multiplier</i></td><td><i>multiplicand</i></td><td>MUL/MULH[[S]U]</td><td><i>dest</i></td><td>OP</td></tr>
-</table>
+![乘法运算](/images/04-01-311.png)
 
 `MUL`做有符号乘法运算，取低$32$位结果。`MULH`，`MULHU`，`MULHSU`分别做有符号，无符号，混合符号乘法运算，取高$32$位结果。
 
-## 3.2. 除法操作
+## 3.2. 除法运算
 
-<table style="width:100%;text-align:center">
-<tr>
-    <th style="width:22%;text-align:center">func7</th>
-    <th style="width:16%;text-align:center">rs2</th>
-    <th style="width:16%;text-align:center">rs1</th>
-    <th style="width:9%;text-align:center">func3</th>
-    <th style="width:16%;text-align:center">rd</th>
-    <th style="text-align:center">opcode</th>
-</tr>
-<tr><td>MULDIV</td><td><i>divisor</i></td><td><i>dividend</i></td><td>DIV[U]/REM[U]</td><td><i>dest</i></td><td>OP</td></tr>
-</table>
+![除法运算](/images/04-01-321.png)
 
-`DIV`，`DIVU`分别做有符号，无符号除法运算，结果取商，向零取整。运算时$rs1$做被除数，$rs2$做除数。`REM`，`REMU`分别作有符号，无符号除法运算，结果取余数。余数的符号与被除数的符号相同。
+`DIV`，`DIVU`分别做有符号，无符号除法运算，结果取商，向零取整。`REM`，`REMU`分别作有符号，无符号除法运算，结果取余数。余数的符号与被除数的符号相同。
 
 |条件|被除数|除数|DIVU|REMU|DIV|REM|
 |:--|:--:|:--:|:--:|:--:|:--:|:--:|
 |除数为零|$x$|$0$|$2^L-1$|$x$|$-1$|$x$|
 |除法溢出|$-2^{L-1}$|$-1$|$-$|$-$|$-2^{L-1}$|$0$|
 
-# 4. 原子指令扩展(A)
+# 4. 原子指令组(A)
 
-# 5. 控制状态寄存器指令扩展(Zicsr)
+# 5. 控制状态寄存器指令组(Zicsr)
+
+mesy定义了一个分离的地址空间，包含4096个CSR。
 
 ## 5.1. CSR指令
 
-<table style="width:100%;text-align:center">
-<tr>
-    <th style="width:38%;text-align:center">csr</th>
-    <th style="width:16%;text-align:center">rs1</th>
-    <th style="width:9%;text-align:center">func3</th>
-    <th style="width:16%;text-align:center">rd</th>
-    <th style="text-align:center">opcode</th>
-</tr>
-<tr><td><i>source/dest<i></td><td><i>source</i></td><td>CSRRW</td><td><i>dest</i></td><td>SYSTEM</td></tr>
-<tr><td><i>source/dest<i></td><td><i>source</i></td><td>CSRRS</td><td><i>dest</i></td><td>SYSTEM</td></tr>
-<tr><td><i>source/dest<i></td><td><i>source</i></td><td>CSRRC</td><td><i>dest</i></td><td>SYSTEM</td></tr>
-<tr><td><i>source/dest<i></td><td><i>uimm[4:0]</i></td><td>CSRRWI</td><td><i>dest</i></td><td>SYSTEM</td></tr>
-<tr><td><i>source/dest<i></td><td><i>uimm[4:0]</i></td><td>CSRRSI</td><td><i>dest</i></td><td>SYSTEM</td></tr>
-<tr><td><i>source/dest<i></td><td><i>uimm[4:0]</i></td><td>CSRRCI</td><td><i>dest</i></td><td>SYSTEM</td></tr>
-</table>
+CSR指令对一个CSR做原子读写。CSR地址在指令高$12$位编码。立即数在`rs1`字段编码，做无符号扩展。
 
-`CSRRW`原子交换CSR与整数寄存器的值。
+![CSR指令](/images/04-01-511.png)
 
-**寄存器操作数**
+`CSRRW`原子交换CSR与寄存器中的值。该指令读取CSR中的值存入$rd$，并将$rs1$写入CSR。
 
-|指令|rd|rs1|读CSR|写CSR|
-|:--|:--:|:--:|:--:|:--:|
-|`CSRRW`|$x0$|$-$|$\times$|$\bigcirc$|
-|`CSRRW`|$\overline{x0}$|$-$|$\bigcirc$|$\bigcirc$|
-|`CSRRS/C`|$-$|$x0$|$\bigcirc$|$\times$|
-|`CSRRS/C`|$-$|$\overline{x0}$|$\bigcirc$|$\bigcirc$|
+`CSRRS`读取CSR的值存入$rd$，并以$rs1$为掩码将CSR置$1$。
 
-**立即数操作数**
+`CSRRC`读取CSR的值存入$rd$，并以$rs1$为掩码将CSR置$0$。
 
-|指令|rd|uimm|读CSR|写CSR|
-|:--|:--:|:--:|:--:|:--:|
-|`CSRRWI`|$x0$|$-$|$\times$|$\bigcirc$|
-|`CSRRWI`|$\overline{x0}$|$-$|$\bigcirc$|$\bigcirc$|
-|`CSRRS/CI`|$-$|$0$|$\bigcirc$|$\times$|
-|`CSRRS/CI`|$-$|$\overline0$|$\bigcirc$|$\bigcirc$|
-
-`CSRRS`读CSR后置$1$，$rs1$为掩码。
-
-`CSRRC`读CSR后置$0$，$rs1$为掩码。
-
-`CSRRWI`，`CSRRSI`和`CSRRCI`与`CSRRW`，`CSRRS`和`CSRRC`相似，但用立即数代替$rs1$。
+`CSRRWI`，`CSRRSI`和`CSRRCI`与`CSRRW`，`CSRRS`和`CSRRC`相似，但用无符号立即数代替$rs1$。
 
 # 6. 计数器
 
 ## 6.1. 基础计数器和计时器
 
-mesy删除了$time$计数器。
+![计数器](/images/04-01-511.png)
 
-<table style="width:100%;text-align:center">
-<tr>
-    <th style="width:38%;text-align:center">csr</th>
-    <th style="width:16%;text-align:center">rs1</th>
-    <th style="width:9%;text-align:center">func3</th>
-    <th style="width:16%;text-align:center">rd</th>
-    <th style="text-align:center">opcode</th>
-</tr>
-<tr><td>RDCYCLE[H]</td><td><i>00000</i></td><td>CSRRS</td><td><i>dest</i></td><td>SYSTEM</td></tr>
-<tr><td>RDINSTRET[H]</td><td><i>00000</i></td><td>CSRRS</td><td><i>dest</i></td><td>SYSTEM</td></tr>
-</table>
+mesy提供了数个$64$位只读用户态计数器。
 
-`RDCYCLE`和`RDCYCLEH`分别读取$cycle$的低$32$位和高$32$位。
+`RDCYCLE`和`RDCYCLEH`分别读取`cycle`的低$32$位和高$32$位。`cycle`计数器在每个机器周期自增。
 
-`RDINSTRET`和`RDINSTRETH`分别读取$instret$的低$32$位和高$32$位。
+`RDINSTRET`和`RDINSTRETH`分别读取`instret`的低$32$位和高$32$位。
 
-**读取$64$位计数器示例代码**
+!!! 读取64位计数器的示例代码
+!!!
+!!! ```gas
+!!! again:
+!!!     rdcycleh    $3
+!!!     rdcycle     $2
+!!!     rdcycleh    $4
+!!!     bne         $3, $4, again
+!!! ```
 
-```gas
-again:
-    rdcycleh    $3
-    rdcycle     $2
-    rdcycleh    $4
-    bne         $3, $4, again
-```
-
-# 7. 单精度浮点数扩展(F)
+# 7. 单精度浮点数指令组(F)
 
 # 8. mesy指令集列表
 
-**mesy基础编码表**，$inst[1:0]=11$
+**mesy编码表**，$instr[1:0]=11$。
 
-<table border="1" style="border-collapse:collapse;text-align:center">
-<tr>
-    <th style="text-align:center">inst[4:2]</th>
-    <th rowspan="2" style="text-align:center">000</th>
-    <th rowspan="2" style="text-align:center">001</th>
-    <th rowspan="2" style="text-align:center">010</th>
-    <th rowspan="2" style="text-align:center">011</th>
-    <th rowspan="2" style="text-align:center">100</th>
-    <th rowspan="2" style="text-align:center">101</th>
-    <th rowspan="2" style="text-align:center">110</th>
-    <th rowspan="2" style="text-align:center">111</th>
-</tr>
-<tr><th>inst[6:5]</th></tr>
-<tr>
-    <th style="text-align:center">00</th>
-    <td>LOAD</td><td></td><td></td><td></td><td>OP-IMM</td><td>AUIPC</td><td></td><td></td>
-</tr>
-<tr>
-    <th style="text-align:center">01</th>
-    <td>STORE</td><td></td><td></td><td></td><td>OP</td><td>LUI</td><td></td><td></td>
-</tr>
-<tr>
-    <th style="text-align:center">10</th>
-    <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-</tr>
-<tr>
-    <th style="text-align:center">11</th>
-    <td>BRANCH</td><td>JALR</td><td></td><td>JAL</td><td>SYSTEM</td><td></td><td></td><td></td>
-</tr>
-</table>
+![编码表](/images/04-01-81.png)
 
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center">
-<caption>mesy基础指令集</caption>
-<tr><td colspan="4">imm[31:12]</td><td>rd</td><td>0110111</td><td>LUI</td></tr>
-<tr><td colspan="4">imm[31:12]</td><td>rd</td><td>0010111</td><td>AUIPC</td></tr>
-<tr><td colspan="4">imm[21|11:2|12|20:13]</td><td>rd</td><td>1101111</td><td>JAL</td></tr>
-<tr><td colspan="2">imm[11:0]</td><td>rs1</td><td>000</td><td>rd</td><td>1100111</td><td>JALR</td></tr>
-<tr>
-    <td style="width:20%">imm[13|11:6]</td>
-    <td style="width:14%">rs2</td>
-    <td style="width:14%">rs1</td>
-    <td style="width:8%">000</td>
-    <td style="width:14%">imm[5:2|12]</td>
-    <td style="width:20%">1100011</td>
-    <td>BEQ</td>
-</tr>
-<tr><td>imm[13|11:6]</td><td>rs2</td><td>rs1</td><td>001</td><td>imm[5:2|12]</td><td>1100011</td><td>BNE</td></tr>
-<tr><td>imm[13|11:6]</td><td>rs2</td><td>rs1</td><td>100</td><td>imm[5:2|12]</td><td>1100011</td><td>BLT</td></tr>
-<tr><td>imm[13|11:6]</td><td>rs2</td><td>rs1</td><td>101</td><td>imm[5:2|12]</td><td>1100011</td><td>BGE</td></tr>
-<tr><td>imm[13|11:6]</td><td>rs2</td><td>rs1</td><td>110</td><td>imm[5:2|12]</td><td>1100011</td><td>BLTU</td></tr>
-<tr><td>imm[13|11:6]</td><td>rs2</td><td>rs1</td><td>111</td><td>imm[5:2|12]</td><td>1100011</td><td>BGEU</td></tr>
-<tr><td colspan="2">imm[11:0]</td><td>rs1</td><td>000</td><td>rd</td><td>0000011</td><td>LB</td></tr>
-<tr><td colspan="2">imm[11:0]</td><td>rs1</td><td>001</td><td>rd</td><td>0000011</td><td>LH</td></tr>
-<tr><td colspan="2">imm[11:0]</td><td>rs1</td><td>010</td><td>rd</td><td>0000011</td><td>LW</td></tr>
-<tr><td colspan="2">imm[11:0]</td><td>rs1</td><td>100</td><td>rd</td><td>0000011</td><td>LBU</td></tr>
-<tr><td colspan="2">imm[11:0]</td><td>rs1</td><td>101</td><td>rd</td><td>0000011</td><td>LHU</td></tr>
-<tr><td>imm[11:5]</td><td>rs2</td><td>rs1</td><td>000</td><td>imm[4:0]</td><td>0100011</td><td>SB</td></tr>
-<tr><td>imm[11:5]</td><td>rs2</td><td>rs1</td><td>001</td><td>imm[4:0]</td><td>0100011</td><td>SH</td></tr>
-<tr><td>imm[11:5]</td><td>rs2</td><td>rs1</td><td>010</td><td>imm[4:0]</td><td>0100011</td><td>SW</td></tr>
-<tr><td colspan="2">imm[11:0]</td><td>rs1</td><td>000</td><td>rd</td><td>0010011</td><td>ADDI</td></tr>
-<tr><td colspan="2">imm[11:0]</td><td>rs1</td><td>010</td><td>rd</td><td>0010011</td><td>SLTI</td></tr>
-<tr><td colspan="2">imm[11:0]</td><td>rs1</td><td>011</td><td>rd</td><td>0010011</td><td>SLTIU</td></tr>
-<tr><td colspan="2">imm[11:0]</td><td>rs1</td><td>100</td><td>rd</td><td>0010011</td><td>XORI</td></tr>
-<tr><td colspan="2">imm[11:0]</td><td>rs1</td><td>110</td><td>rd</td><td>0010011</td><td>ORI</td></tr>
-<tr><td colspan="2">imm[11:0]</td><td>rs1</td><td>111</td><td>rd</td><td>0010011</td><td>ANDI</td></tr>
-<tr><td>0000000</td><td>shamt</td><td>rs1</td><td>001</td><td>rd</td><td>0010011</td><td>SLLI</td></tr>
-<tr><td>0000000</td><td>shamt</td><td>rs1</td><td>101</td><td>rd</td><td>0010011</td><td>SRLI</td></tr>
-<tr><td>0100000</td><td>shamt</td><td>rs1</td><td>101</td><td>rd</td><td>0010011</td><td>SRAI</td></tr>
-<tr><td>0000000</td><td>rs2</td><td>rs1</td><td>000</td><td>rd</td><td>0110011</td><td>ADD</td></tr>
-<tr><td>0100000</td><td>rs2</td><td>rs1</td><td>000</td><td>rd</td><td>0110011</td><td>SUB</td></tr>
-<tr><td>0000000</td><td>rs2</td><td>rs1</td><td>001</td><td>rd</td><td>0110011</td><td>SLL</td></tr>
-<tr><td>0000000</td><td>rs2</td><td>rs1</td><td>010</td><td>rd</td><td>0110011</td><td>SLT</td></tr>
-<tr><td>0000000</td><td>rs2</td><td>rs1</td><td>011</td><td>rd</td><td>0110011</td><td>SLTU</td></tr>
-<tr><td>0000000</td><td>rs2</td><td>rs1</td><td>100</td><td>rd</td><td>0110011</td><td>XOR</td></tr>
-<tr><td>0000000</td><td>rs2</td><td>rs1</td><td>101</td><td>rd</td><td>0110011</td><td>SRL</td></tr>
-<tr><td>0100000</td><td>rs2</td><td>rs1</td><td>101</td><td>rd</td><td>0110011</td><td>SRA</td></tr>
-<tr><td>0000000</td><td>rs2</td><td>rs1</td><td>110</td><td>rd</td><td>0110011</td><td>OR</td></tr>
-<tr><td>0000000</td><td>rs2</td><td>rs1</td><td>111</td><td>rd</td><td>0110011</td><td>AND</td></tr>
-<tr><td colspan="2">0000_0000_0000</td><td>00000</td><td>000</td><td>00000</td><td>1110011</td><td>ECALL</td></tr>
-</table>
+**基础指令组**
 
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center">
-<caption>Zicsr标准扩展</caption>
-<tr>
-    <td style="width:34%">csr</td>
-    <td style="width:14%">rs1</td>
-    <td style="width:8%">001</td>
-    <td style="width:14%">rd</td>
-    <td style="width:20%">1110011</td>
-    <td>CSRRW</td>
-</tr>
-<tr><td>csr</td><td>rs1</td><td>010</td><td>rd</td><td>1110011</td><td>CSRRS</td></tr>
-<tr><td>csr</td><td>rs1</td><td>011</td><td>rd</td><td>1110011</td><td>CSRRC</td></tr>
-<tr><td>csr</td><td>uimm</td><td>101</td><td>rd</td><td>1110011</td><td>CSRRWI</td></tr>
-<tr><td>csr</td><td>uimm</td><td>110</td><td>rd</td><td>1110011</td><td>CSRRSI</td></tr>
-<tr><td>csr</td><td>uimm</td><td>111</td><td>rd</td><td>1110011</td><td>CSRRCI</td></tr>
-</table>
+![基础指令组](/images/04-01-82I.png)
 
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center">
-<caption>M标准扩展</caption>
-<tr>
-    <td style="width:20%">0000001</td>
-    <td style="width:14%">rs2</td>
-    <td style="width:14%">rs1</td>
-    <td style="width:8%">000</td>
-    <td style="width:14%">rd</td>
-    <td style="width:20%">0110011</td>
-    <td>MUL</td>
-</tr>
-<tr><td>0000001</td><td>rs2</td><td>rs1</td><td>001</td><td>rd</td><td>0110011</td><td>MULH</td></tr>
-<tr><td>0000001</td><td>rs2</td><td>rs1</td><td>010</td><td>rd</td><td>0110011</td><td>MULHSU</td></tr>
-<tr><td>0000001</td><td>rs2</td><td>rs1</td><td>011</td><td>rd</td><td>0110011</td><td>MULHU</td></tr>
-<tr><td>0000001</td><td>rs2</td><td>rs1</td><td>100</td><td>rd</td><td>0110011</td><td>DIV</td></tr>
-<tr><td>0000001</td><td>rs2</td><td>rs1</td><td>101</td><td>rd</td><td>0110011</td><td>DIVU</td></tr>
-<tr><td>0000001</td><td>rs2</td><td>rs1</td><td>110</td><td>rd</td><td>0110011</td><td>REM</td></tr>
-<tr><td>0000001</td><td>rs2</td><td>rs1</td><td>111</td><td>rd</td><td>0110011</td><td>REMU</td></tr>
-</table>
+**Zicsr指令组**
+
+![Zicsr指令组](/images/04-01-82Zicsr.png)
+
+**M指令组**
+
+![M指令组](/images/04-01-82M.png)
+
+**A指令组**
+
+**F指令组**
 
 # 9. 汇编手册
 
-**汇编助记符**
+**汇编寄存器助记符**
 
 |寄存器|别名|描述|保存方|
 |:--|:--|:--|:--:|
@@ -622,6 +263,8 @@ again:
 |$x12-17$|$a2-7$|函数参数|调用者|
 |$x18-27$|$s2-11$|非临时|被调用者|
 |$x28-31$|$t3-6$|临时|调用者|
+
+**汇编伪指令**
 
 |伪指令|基础指令|语义|
 |:--|:--|:--|

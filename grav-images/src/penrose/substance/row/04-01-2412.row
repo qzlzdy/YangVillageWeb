@@ -1,0 +1,6 @@
+Row jalr
+implement(imm, jalr, "offset")
+implement(rs1, jalr, "base")
+implement(func3, jalr, "000")
+implement(rd, jalr, "dest")
+implement(opcode, jalr, "JALR")

@@ -1,0 +1,21 @@
+AutoLabel All
+
+markBit("31", 31)
+markBit("12", 12)
+markBit("11", 11)
+markBit("7", 7)
+markBit("6", 6)
+markBit("0", 0)
+
+Field imm
+Field rd
+Field opcode
+Label imm "imm[21|10:2|11|20:12]"
+makeHeader(imm, 31, 12)
+makeHeader(rd, 11, 7)
+makeHeader(opcode, 6, 0)
+
+Row jal
+implement(imm, jal, "target")
+implement(rd, jal, "dest")
+implement(opcode, jal, "JAL")
