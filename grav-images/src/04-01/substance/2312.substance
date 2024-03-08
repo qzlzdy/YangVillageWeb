@@ -1,0 +1,35 @@
+Column immh
+Column imml
+Column rs1
+Column func3
+Column rd
+Column opcode
+Row r_i for i in [0, 3]
+
+cell(r_0, immh, "imm[11:5]")
+cell(r_0, imml, "imm[4:0]")
+cell(r_0, rs1, "rs1")
+cell(r_0, func3, "func3")
+cell(r_0, rd, "rd")
+cell(r_0, opcode, "opcode")
+
+cell(r_1, immh, "0000000")
+cell(r_1, imml, "shamt")
+cell(r_1, rs1, "src")
+cell(r_1, func3, "SLLI")
+cell(r_1, rd, "dest")
+cell(r_1, opcode, "OP-IMM")
+
+cell(r_2, immh, "0000000")
+cell(r_2, imml, "shamt")
+cell(r_2, rs1, "src")
+cell(r_2, func3, "SRLI")
+cell(r_2, rd, "dest")
+cell(r_2, opcode, "OP-IMM")
+
+cell(r_3, immh, "0000000")
+cell(r_3, imml, "shamt")
+cell(r_3, rs1, "src")
+cell(r_3, func3, "SRAI")
+cell(r_3, rd, "dest")
+cell(r_3, opcode, "OP-IMM")

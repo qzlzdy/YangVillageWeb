@@ -1,0 +1,68 @@
+Column c_i for i in [0, 8]
+Row r_i for i in [0, 5]
+
+Column c1m2 := mergecol(c_1, c_2)
+Column c3m2 := mergecol(c_3, c_4)
+Column c5m2 := mergecol(c_5, c_6)
+Column c7m2 := mergecol(c_7, c_8)
+Column c1m4 := mergecol(c1m2, c3m2)
+Column c5m4 := mergecol(c5m2, c7m2)
+Column c1m8 := mergecol(c1m4, c5m4)
+
+Row r0m2 := mergerow(r_0, r_1)
+
+cell(r0m2, c_0, "instr[6:5]")
+cell(r_0, c1m8, "instr[4:2]")
+cell(r_1, c_1, "000")
+cell(r_1, c_2, "001")
+cell(r_1, c_3, "010")
+cell(r_1, c_4, "011")
+cell(r_1, c_5, "100")
+cell(r_1, c_6, "101")
+cell(r_1, c_7, "110")
+cell(r_1, c_8, "111")
+
+cell(r_2, c_0, "00")
+cell(r_3, c_0, "01")
+cell(r_4, c_0, "10")
+cell(r_5, c_0, "11")
+
+cell(r_2, c_1, "LOAD")
+cell(r_3, c_1, "STORE")
+cell(r_4, c_1, "")
+cell(r_5, c_1, "BRANCH")
+
+cell(r_2, c_2, "")
+cell(r_3, c_2, "")
+cell(r_4, c_2, "")
+cell(r_5, c_2, "JALR")
+
+cell(r_2, c_3, "")
+cell(r_3, c_3, "")
+cell(r_4, c_3, "")
+cell(r_5, c_3, "")
+
+cell(r_2, c_4, "")
+cell(r_3, c_4, "")
+cell(r_4, c_4, "")
+cell(r_5, c_4, "JAL")
+
+cell(r_2, c_5, "OP-IMM")
+cell(r_3, c_5, "OP")
+cell(r_4, c_5, "")
+cell(r_5, c_5, "SYSTEM")
+
+cell(r_2, c_6, "AUIPC")
+cell(r_3, c_6, "LUI")
+cell(r_4, c_6, "")
+cell(r_5, c_6, "")
+
+cell(r_2, c_7, "")
+cell(r_3, c_7, "")
+cell(r_4, c_7, "")
+cell(r_5, c_7, "")
+
+cell(r_2, c_8, "")
+cell(r_3, c_8, "")
+cell(r_4, c_8, "")
+cell(r_5, c_8, "")

@@ -1,0 +1,24 @@
+Column csr
+Column rs1
+Column func3
+Column rd
+Column opcode
+Row r_i for i in [0, 3]
+
+cell(r_0, csr, "csr")
+cell(r_0, rs1, "rs1")
+cell(r_0, func3, "func3")
+cell(r_0, rd, "rd")
+cell(r_0, opcode, "opcode")
+
+cell(r_1, csr, "RDCYCLE[H]")
+cell(r_1, rs1, "00000")
+cell(r_1, func3, "CSRRS")
+cell(r_1, rd, "dest")
+cell(r_1, opcode, "SYSTEM")
+
+cell(r_2, csr, "RDINSTRET[H]")
+cell(r_2, rs1, "00000")
+cell(r_2, func3, "CSRRS")
+cell(r_2, rd, "dest")
+cell(r_2, opcode, "SYSTEM")

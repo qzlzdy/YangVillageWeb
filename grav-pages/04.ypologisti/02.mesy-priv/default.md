@@ -10,13 +10,13 @@ title: mesy特权架构
   - [2.2. CSR列表](#22-csr列表)
 - [3. 机器态ISA](#3-机器态isa)
   - [3.1. 机器态CSR](#31-机器态csr)
-    - [3.1.1. ISA寄存器`misa`](#311-isa寄存器misa)
-    - [3.1.2. 供应商ID寄存器`mvendorid`](#312-供应商id寄存器mvendorid)
-    - [3.1.3. 架构ID寄存器`marchid`](#313-架构id寄存器marchid)
-    - [3.1.4. 实现ID寄存器`mimpid`](#314-实现id寄存器mimpid)
-    - [3.1.5. 状态寄存器`mstatus`](#315-状态寄存器mstatus)
-      - [3.1.5.1. 特权和全局中断使能栈](#3151-特权和全局中断使能栈)
-    - [3.1.6. 中断向量基址寄存器`mtvec`](#316-中断向量基址寄存器mtvec)
+    - [3.1.1. 供应商ID寄存器`mvendorid`](#311-供应商id寄存器mvendorid)
+    - [3.1.2. 架构ID寄存器`marchid`](#312-架构id寄存器marchid)
+    - [3.1.3. 实现ID寄存器`mimpid`](#313-实现id寄存器mimpid)
+    - [3.1.4. 状态寄存器`mstatus`](#314-状态寄存器mstatus)
+      - [3.1.4.1. 特权和全局中断使能栈](#3141-特权和全局中断使能栈)
+    - [3.1.5. 陷阱向量基址寄存器`mtvec`](#315-陷阱向量基址寄存器mtvec)
+    - [3.1.6. 硬件性能计数器](#316-硬件性能计数器)
     - [3.1.7. 异常程序计数器`mepc`](#317-异常程序计数器mepc)
     - [3.1.8. 原因寄存器`mcause`](#318-原因寄存器mcause)
   - [3.2. 机器态特权指令](#32-机器态特权指令)
@@ -25,268 +25,196 @@ title: mesy特权架构
     - [3.2.3. 等待中断](#323-等待中断)
   - [3.3. 复位](#33-复位)
   - [3.4. 不可屏蔽中断](#34-不可屏蔽中断)
-- [4. 操作系统态ISA](#4-操作系统态isa)
-  - [4.1. 页式虚拟内存](#41-页式虚拟内存)
+- [4. 内核态ISA](#4-内核态isa)
+  - [4.1. 内核态CSR](#41-内核态csr)
+  - [4.2. 页式虚拟内存](#42-页式虚拟内存)
+    - [4.2.1. 内存保护](#421-内存保护)
+    - [4.2.2. 虚拟地址翻译过程](#422-虚拟地址翻译过程)
 - [5. mesy特权指令集列表](#5-mesy特权指令集列表)
 
 # 1. mesy特权架构
 
 ## 1.1. mesy特权软件栈
 
-mesy特权架构固定具有操作系统层，但不具有虚拟化层，即应用程序通过ABI与OS交互，OS通过SBI与SEE交互。
+mesy特权架构具有操作系统层，但不具有虚拟化层，即应用程序通过ABI与OS交互，OS通过SBI与SEE交互。
 
 ## 1.2. 特权等级
 
-mesy支持三种特权等级，不支持调试模式。
+mesy支持三种特权等级。特权等级用于在软件栈的不同组件之间提供保护，执行比当前态更高级的操作将导致异常。
 
 |等级|编码|名称|缩写|
 |:--:|:--:|:--:|:--:|
 |0|00|用户态|U|
-|1|01|操作系统态|S|
+|1|01|内核态|S|
 |3|11|机器态|M|
 
 # 2. 控制状态寄存器
 
-mesy仅包含部分必要的RISC-V CSR。
-
 ## 2.1. CSR地址映射
 
-mesy用$12$位地址空间（$csr[11:0]$）编码最多4096个CSR。其中，最高两位（$csr[11:10]$）编码读写权限，次高两位（$csr[9:8]$）编码最低允许特权等级。
+mesy用$12$位地址空间编码最多4096个CSR。其中最高$2$位编码读写权限，次高$2$位编码允许最低的特权等级。
+
+访问不存在的CSR、写只读CSR导致非法指令异常。
 
 ## 2.2. CSR列表
 
-<table border="1" style="border-collapse:collapse">
-<caption>mesy非特权CSR地址</caption>
-<tr><th>地址</th><th>权限</th><th>名称</th><th>描述</th></tr>
-<tr><th colspan="4">非特权计数器/计时器</th></tr>
-<tr><td>0xC00</td><td>URO</td><td>cycle</td><td>周期计数器</td></tr>
-<tr><td>0xC02</td><td>URO</td><td>instret</td><td>指令计数器</td></tr>
-<tr><td>0xC80</td><td>URO</td><td>cycleh</td><td>cycle高$32$位</td></tr>
-<tr><td>0xC82</td><td>URO</td><td>instreth</td><td>instret高$32$位</td></tr>
-</table>
+计时器、计数器、浮点CSR是非特权CSR，除此之外的CSR是特权CSR。
 
-<table border="1" style="border-collapse:collapse">
-<caption>mesy机器态CSR地址</caption>
-<tr><th>地址</th><th>权限</th><th>名称</th><th>描述</th></tr>
-<tr><th colspan="4">机器信息寄存器</th></tr>
-<tr><td>0xF11</td><td>MRO</td><td>mvendorid</td><td>供应商ID</td></tr>
-<tr><td>0xF12</td><td>MRO</td><td>marchid</td><td>架构ID</td></tr>
-<tr><td>0xF13</td><td>MRO</td><td>mimpid</td><td>实现ID</td></tr>
-<tr><th colspan="4">机器中断设置</th></tr>
-<tr><td>0x300</td><td>MRW</td><td>mstatus</td><td>机器状态寄存器</td></tr>
-<tr><td>0x301</td><td>MRW</td><td>misa</td><td>指令集架构和扩展</td></tr>
-<tr><td>0x305</td><td>MRW</td><td>mtvec</td><td>机器中断服务基址</td></tr>
-<tr><th colspan="4">机器中断服务</th></tr>
-<tr><td>0x341</td><td>MRW</td><td>mepc</td><td>机器异常程序寄存器</td></tr>
-<tr><td>0x342</td><td>MRW</td><td>mcause</td><td>机器中断原因</td></tr>
-<tr><th colspan="4">机器计数器/计时器</th></tr>
-<tr><td>0xB00</td><td>MRW</td><td>mcycle</td><td>机器周期计数器</td></tr>
-<tr><td>0xB02</td><td>MRW</td><td>minstret</td><td>机器指令计数器</td></tr>
-<tr><td>0xB80</td><td>MRW</td><td>mcycleh</td><td>mcycle高$32$位</td></tr>
-<tr><td>0xB82</td><td>MRW</td><td>minstreth</td><td>minstret高$32$位</td></tr>
-</table>
+**非特权CSR地址**
+
+![非特权地址](/images/04-02/221.png)
+
+**机器态CSR地址**
+
+![机器态地址](/images/04-02/222.png)
 
 # 3. 机器态ISA
 
+机器态是mesy中权限最高的等级。
+
 ## 3.1. 机器态CSR
 
-### 3.1.1. ISA寄存器`misa`
+### 3.1.1. 供应商ID寄存器`mvendorid`
 
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center"><tr>
-    <td style="width:6%"><ruby>MXL[1:0]<rt>31:30</rt></ruby></td>
-    <td style="width:12%"><ruby>0<rt>29:26</rt></ruby></td>
-    <td><ruby>Extensions<rt>25:0</rt></ruby></td>
-</tr></table>
+`mvendorid`是只读寄存器，记录供应商ID。
 
-mesy只支持机器字长为$32$位，故$MXL[1:0]$固定为$1$。
+![mvendorid](/images/04-02/3111.png)
 
-|位|字符|描述|
-|--:|--:|:--|
-|0|A|原子扩展|
-|1-4|B-E|保留|
-|5|F|单精度浮点扩展|
-|8|I|基础ISA|
-|12|M|整数乘除扩展|
-|18|S|操作系统态|
-|20|U|用户态|
+!!! 羊村科技的供应商ID为`0x59616e67`，即`Yang`。
 
-### 3.1.2. 供应商ID寄存器`mvendorid`
+### 3.1.2. 架构ID寄存器`marchid`
 
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center"><tr>
-    <td><ruby>Vendor ID<rt>31:0</rt></ruby></td>
-</tr></table>
+`marchid`是只读寄存器，记录架构ID。
 
-对于本工程中的ylikou架构，$mvendorid=0x59616e67$。
+![marchid](/images/04-02/3121.png)
 
-### 3.1.3. 架构ID寄存器`marchid`
+!!! ylikou架构的架构ID为`0x4d455359`，即`MESY`。
 
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center"><tr>
-    <td><ruby>Architecture ID<rt>31:0</rt></ruby></td>
-</tr></table>
+### 3.1.3. 实现ID寄存器`mimpid`
 
-对于本工程中的ylikou架构，$marchid=0x4d455359$。
+`mimpid`是只读寄存器，记录处理器实现的版本。
 
-### 3.1.4. 实现ID寄存器`mimpid`
+![mimpid](/images/04-02/3131.png)
 
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center"><tr>
-    <td><ruby>Implementation<rt>31:0</rt></ruby></td>
-</tr></table>
+!!! ylikou架构的实现ID为`0x796c696b`，即`ylik`。
 
-对于本工程中的ylikou架构，$mimpid=0x796c696b$。
+### 3.1.4. 状态寄存器`mstatus`
 
-### 3.1.5. 状态寄存器`mstatus`
+`mstatus`记录当前处理器的状态和控制操作模式。
 
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center"><tr>
-    <td style="width:88%"><ruby>0<rt>31:4</rt></ruby></td>
-    <td style="width:6%"><ruby>MPP[1:0]<rt>3:2</rt></ruby></td>
-    <td style="width:3%"><ruby>MPIE<rt>1</rt></ruby></td>
-    <td><ruby>MIE<rt>0</rt></ruby></td>
-</tr></table>
+![mstatus](/images/04-02/3141.png)
 
-#### 3.1.5.1. 特权和全局中断使能栈
+#### 3.1.4.1. 特权和全局中断使能栈
 
-全局中断使能位$MIE$用于机器态。
+`MIE`是机器态的全局中断使能位，用于保证当前等级下中断处理的原子性。
 
-当程序在$x$态执行，$xIE=1$时开启全局中断，$xIE=0$时关闭全局中断。对于低特权级$w<x$的中断，不管$xIE$值总是关闭。对于高特权级$y>x$的中断，不管$xIE$值总是开启。
+当程序在$x$态执行，$x$`IE=`$1$时开启全局中断，$x$`IE=`$0$时关闭全局中断。对于低特权级$w<x$的中断，与$x$`IE`值无关且总是关闭。对于高特权级$y>x$的中断，与$x$`IE`值无关且总是开启。
 
-对于嵌套陷阱，特权等级$x$对应两个字段表示中断栈。$xPIE$表示陷阱前的中断使能位，$xPP$表示陷阱前的特权等级。当发生陷阱将特权等级从$y$转到$x$，$xPIE$置为$xIE$，$xIE$置为$0$，$xPP$置为$y$。
+对于嵌套陷阱，特权等级$x$对应两个字段表示中断栈。$x$`PIE`表示陷阱前的中断使能位，$x$`PP`表示陷阱前的特权等级。当发生陷阱将特权等级从$y$转到$x$，$x$`PIE`置为$x$`IE`，$x$`IE`置为$0$，$x$`PP`置为$y$。
 
-`MRET`和`SRET`指令用于用M态和S态陷阱返回。当`xRET`执行时，设$xPP=y$，$xIE$置为$xPIE$，特权等级转为$y$，$xPIE$置为$1$，$xPP$置为$U$。
+`MRET`和`SRET`指令用于用M态和S态返回。当$x$`RET`执行时，设$x$`PP=`$y$，$x$`IE`置为$x$`PIE`，特权等级转为$y$，$x$`PIE`置为$1$，$x$`PP`置为`U`。
 
-### 3.1.6. 中断向量基址寄存器`mtvec`
+### 3.1.5. 陷阱向量基址寄存器`mtvec`
 
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center"><tr>
-    <td style="width:94%"><ruby>BASE<rt>31:2</rt></ruby></td>
-    <td><ruby>MODE<rt>1:0</rt></ruby></td>
-</tr></table>
+`mtvec`记录陷阱向量的配置，由向量基址`BASE`和向量模式`MODE`组成。
 
-|MODE值|名称|描述|
+![mtvec](/images/04-02/3151.png)
+
+|`MODE`值|名称|描述|
 |--:|:--:|:--|
-|0|直接式|所有异常置$pc$为$BASE$|
-|1|向量式|异步中断置$pc$为$BASE+4\times cause$|
+|$0$|直接模式|所有异常将$pc$设置为$BASE$|
+|$1$|向量模式|异步中断将$pc$设置为$BASE+4\times cause$|
+
+当`MODE`设置为向量模式时，`BASE`的低$4$位被忽略，直接与中断号拼接产生陷阱向量。
+
+### 3.1.6. 硬件性能计数器
+
+`mcycle`计数机器时钟。`minstret`记录完成的指令数。`mcycle`和`minstret`都有$64$位精度。
 
 ### 3.1.7. 异常程序计数器`mepc`
 
-$mepc$的低两位总是$0$。
+`mepc`的低两位总是$0$，可以记录虚拟地址。
 
-当因陷阱进入M态时，$mepc$存入被中断或导致异常的指令虚拟地址。
+当因陷阱进入`M`态时，`mepc`存入被中断或导致异常的指令虚拟地址。
 
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center"><tr>
-    <td><ruby>mepc<rt>31:0</rt></ruby></td>
-</tr></table>
+![mepc](/images/04-02/3171.png)
 
 ### 3.1.8. 原因寄存器`mcause`
 
-$Interrupt$位表示陷阱是否由中断引起。
+当因陷阱进入`M`态时，`mcause`存入导致该陷阱的事件代码。
 
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center"><tr>
-    <td style="width:3%"><ruby>Interrupt<rt>31</rt></ruby></td>
-    <td><ruby>Exception Code<rt>30:0</rt></ruby></td>
-</tr></table>
+`Interrupt`位表示陷阱是否由中断引起。`Exception Code`字段记录上一次异常或中断的代码。
 
-|Interrupt|Exception Code|描述|
+![mcause](/images/04-02/3181.png)
+
+**陷阱代码**
+
+|`Interrupt`|`Exception Code`|描述|
 |--:|--:|:--|
-|1|1|S态软件中断|
-|1|3|M态软件中断|
-|1|5|S态计时器中断|
-|1|7|M态计时器中断|
-|1|9|S态外部中断|
-|1|11|M态外部中断|
-|0|2|非法指令|
-|0|8|U态环境调用|
-|0|9|S态环境调用|
-|0|11|M态环境调用|
-|0|13|缺页异常|
+|$1$|1|S态软件中断|
+|$1$|3|M态软件中断|
+|$1$|5|S态计时器中断|
+|$1$|7|M态计时器中断|
+|$1$|9|S态外部中断|
+|$1$|11|M态外部中断|
+|$0$|2|非法指令|
+|$0$|8|U态环境调用|
+|$0$|9|S态环境调用|
+|$0$|11|M态环境调用|
+|$0$|13|缺页异常|
+
+指令可能同时产生多个同步异常，它们的优先级按降序排列如下。
 
 |优先级|异常码|描述|
 |:--:|--:|:--|
 |最高|2|非法指令|
-|最低|8,9,11|环境调用|
+| |8,9,11|环境调用|
+|最低|13|访存缺页异常|
 
 ## 3.2. 机器态特权指令
 
 ### 3.2.1. 环境调用
 
-<table style="width:100%;text-align:center">
-<tr>
-    <th style="width:38%;text-align:center">func12</th>
-    <th style="width:16%;text-align:center">rs1</th>
-    <th style="width:9%;text-align:center">func3</th>
-    <th style="width:16%;text-align:center">rd</th>
-    <th style="text-align:center">opcode</th>
-</tr>
-<tr><td>ECALL</td><td><i>00000</i></td><td>PRIV</td><td><i>00000</i></td><td>SYSTEM</td></tr>
-</table>
+![环境调用](/images/04-01/261.png)
 
-`ECALL`在U态，S态，M态执行时，分别产生`environment-call-from-U-mode`，`environment-call-from-S-mode`，`environment-call-from-M-mode`异常。
+`ECALL`用于发出执行环境请求。在U态，S态，M态执行时，分别产生对应特权等级的环境调用异常。
 
 ### 3.2.2. 陷阱返回指令
 
-<table style="width:100%;text-align:center">
-<tr>
-    <th style="width:38%;text-align:center">func12</th>
-    <th style="width:16%;text-align:center">rs1</th>
-    <th style="width:9%;text-align:center">func3</th>
-    <th style="width:16%;text-align:center">rd</th>
-    <th style="text-align:center">opcode</th>
-</tr>
-<tr><td>MRET/SRET</td><td><i>00000</i></td><td>PRIV</td><td><i>00000</i></td><td>SYSTEM</td></tr>
-</table>
+![陷阱返回指令](/images/04-02/3221.png)
 
-`MRET`和`SRET`用于在陷阱处理后从对应特权等级返回。
+`MRET`和`SRET`用于在陷阱处理后从对应特权等级返回。$x$`RET`可以在$x$态及更高特权等级执行，执行低等级的$x$`RET`时，会弹出低等级的中断使能和特权模式栈。除[3.1.4.1节](#3141-特权和全局中断使能栈)中描述的操作以外，$x$`RET`还会设置$pc$为$epc$。
 
 ### 3.2.3. 等待中断
 
-`WFI`用于暂停当前程序知道中断产生。
+`WFI`用于暂停当前程序直到有中断需要被处理。`WFI`可在所有特权等级下执行。
 
-<table style="width:100%;text-align:center">
-<tr>
-    <th style="width:38%;text-align:center">func12</th>
-    <th style="width:16%;text-align:center">rs1</th>
-    <th style="width:9%;text-align:center">func3</th>
-    <th style="width:16%;text-align:center">rd</th>
-    <th style="text-align:center">opcode</th>
-</tr>
-<tr><td>WFI</td><td><i>00000</i></td><td>PRIV</td><td><i>00000</i></td><td>SYSTEM</td></tr>
-</table>
+![等待中断](/images/04-02/3231.png)
 
 ## 3.3. 复位
 
-机器复位后，特权等级置为$M$，$mstatus$的$MIE$字段置为$0$。$pc$置为实现确定的特定值。
+机器复位后，特权等级置为`M`，`mstatus`的`MIE`字段置为$0$。$pc$置为特定值。
 
 ## 3.4. 不可屏蔽中断
 
-不可屏蔽中断只用于硬件错误，立即跳转到实现确定的NMI地址上，特权等级置为$M$。
+不可屏蔽中断只用于硬件错误，立即跳转到实现确定的NMI向量地址上，特权等级置为`M`。`mepc`存入被中断的指令虚拟地址，`mcause`存入指明NMI源的值。
 
-# 4. 操作系统态ISA
+# 4. 内核态ISA
 
-## 4.1. 页式虚拟内存
+## 4.1. 内核态CSR
+
+## 4.2. 页式虚拟内存
+
+### 4.2.1. 内存保护
+
+### 4.2.2. 虚拟地址翻译过程
 
 # 5. mesy特权指令集列表
 
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center">
-<caption>陷阱返回指令</caption>
-<tr>
-    <td style="width:20%">0001000</th>
-    <td style="width:14%">00010</th>
-    <td style="width:14%">00000</th>
-    <td style="width:8%">000</th>
-    <td style="width:14%">00000</th>
-    <td style="width:20%">1110011</th>
-    <td>SRET</td>
-</tr>
-<tr><td>0011000</td><td>00010</td><td>00000</td><td>000</td><td>00000</td><td>1110011</td><td>MRET</td></tr>
-</table>
+**陷阱返回指令**
 
-<table border="1" style="border-collapse:collapse;width:100%;text-align:center">
-<caption>中断管理指令</caption>
-<tr>
-    <td style="width:20%">0001000</th>
-    <td style="width:14%">00101</th>
-    <td style="width:14%">00000</th>
-    <td style="width:8%">000</th>
-    <td style="width:14%">00000</th>
-    <td style="width:20%">1110011</th>
-    <td>WFI</td>
-</tr>
-</table>
+![陷阱返回](/images/04-02/51.png)
+
+**中断管理指令**
+
+![中断管理](/images/04-02/52.png)

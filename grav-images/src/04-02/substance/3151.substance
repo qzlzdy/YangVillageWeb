@@ -1,0 +1,6 @@
+Column BASE
+Column MODE
+Row mtvec
+
+cell(mtvec, BASE, "BASE[31:2]")
+cell(mtvec, MODE, "MODE")

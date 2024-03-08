@@ -1,0 +1,33 @@
+Column c_i for i in [0, 3]
+Row r_i for i in [0, 5]
+
+Column c0m2 := mergecol(c_0, c_1)
+Column c2m2 := mergecol(c_2, c_3)
+Column c0m4 := mergecol(c0m2, c2m2)
+
+cell(r_0, c_0, "地址")
+cell(r_0, c_1, "权限")
+cell(r_0, c_2, "名称")
+cell(r_0, c_3, "描述")
+
+cell(r_1, c0m4, "非特权计数器/计时器")
+
+cell(r_2, c_0, "0xC00")
+cell(r_2, c_1, "URO")
+cell(r_2, c_2, "cycle")
+cell(r_2, c_3, "机器时钟计数器")
+
+cell(r_3, c_0, "0xC02")
+cell(r_3, c_1, "URO")
+cell(r_3, c_2, "instret")
+cell(r_3, c_3, "指令计数器")
+
+cell(r_4, c_0, "0xC80")
+cell(r_4, c_1, "URO")
+cell(r_4, c_2, "cycleh")
+cell(r_4, c_3, "机器时钟计数器高32位")
+
+cell(r_5, c_0, "0xC82")
+cell(r_5, c_1, "URO")
+cell(r_5, c_2, "instreth")
+cell(r_5, c_3, "指令计数器高32位")

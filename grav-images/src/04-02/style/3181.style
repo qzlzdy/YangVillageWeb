@@ -1,0 +1,80 @@
+canvas {
+    width = 970 -- sum(ws) + 10
+    height = 60 -- h * rs + 20 + 10
+}
+
+consts {
+    W = canvas.width
+    H = canvas.height
+
+    x0 = -W/2 + 5
+    y0 = H/2 - 5
+    h = 30
+    yb = y0 - 10
+}
+
+colors {
+    black = rgba(0, 0, 0, 1)
+    blank = rgba(0, 0, 0, 0)
+}
+
+forall Column c {
+    c.a = "middle"
+    c.ofst = 0
+}
+
+forall Column `Int` {
+    h = 31
+    l = 29
+    `Int`.w = (h - l + 1) * 30
+    `Int`.x = consts.x0 + (31 - h) * 30 + `Int`.w/2
+
+    Text {
+        string: "31"
+        center: (`Int`.x, consts.yb)
+        fontSize: "10.5pt"
+    }
+}
+
+forall Column `Except` {
+    h = 28
+    l = 0
+    `Except`.w = (h - l + 1) * 30
+    `Except`.x = consts.x0 + (31 - h) * 30 + `Except`.w/2
+
+    Text {
+        string: "30"
+        center: (consts.x0 + (31 - h) * 30 + 15, consts.yb)
+        fontSize: "10.5pt"
+    }
+
+    Text {
+        string: "0"
+        center: (consts.x0 + (31 - l) * 30 + 15, consts.yb)
+        fontSize: "10.5pt"
+    }
+}
+
+forall Row `mcause` {
+    `mcause`.h = consts.h
+    `mcause`.y = consts.y0 - 20 - `mcause`.h/2
+}
+
+forall Row r; Column c
+where cell(r, c, s)
+with String s {
+    Rectangle {
+        center: (c.x, r.y)
+        width: c.w
+        height: r.h
+        fillColor: colors.blank
+        strokeWidth: 1
+        strokeColor: colors.black
+    }
+    Text {
+        string: s
+        center: (c.x + c.ofst, r.y)
+        fontSize: "12pt"
+        textAnchor: c.a
+    }
+}

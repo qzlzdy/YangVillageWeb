@@ -1,0 +1,48 @@
+Column csr
+Column rs1
+Column func3
+Column rd
+Column opcode
+Row r_i for i in [0, 6]
+
+cell(r_0, csr, "csr")
+cell(r_0, rs1, "rs1")
+cell(r_0, func3, "func3")
+cell(r_0, rd, "rd")
+cell(r_0, opcode, "opcode")
+
+cell(r_1, csr, "source/dest")
+cell(r_1, rs1, "source")
+cell(r_1, func3, "CSRRW")
+cell(r_1, rd, "dest")
+cell(r_1, opcode, "SYSTEM")
+
+cell(r_2, csr, "source/dest")
+cell(r_2, rs1, "source")
+cell(r_2, func3, "CSRRS")
+cell(r_2, rd, "dest")
+cell(r_2, opcode, "SYSTEM")
+
+cell(r_3, csr, "source/dest")
+cell(r_3, rs1, "source")
+cell(r_3, func3, "CSRRC")
+cell(r_3, rd, "dest")
+cell(r_3, opcode, "SYSTEM")
+
+cell(r_4, csr, "source/dest")
+cell(r_4, rs1, "uimm")
+cell(r_4, func3, "CSRRWI")
+cell(r_4, rd, "dest")
+cell(r_4, opcode, "SYSTEM")
+
+cell(r_5, csr, "source/dest")
+cell(r_5, rs1, "uimm")
+cell(r_5, func3, "CSRRSI")
+cell(r_5, rd, "dest")
+cell(r_5, opcode, "SYSTEM")
+
+cell(r_6, csr, "source/dest")
+cell(r_6, rs1, "uimm")
+cell(r_6, func3, "CSRRCI")
+cell(r_6, rd, "dest")
+cell(r_6, opcode, "SYSTEM")

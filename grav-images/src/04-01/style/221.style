@@ -1,0 +1,192 @@
+canvas {
+    width = 1030 -- sum(ws) + 10
+    height = 250 -- h * rs + 20
+}
+
+consts {
+    W = canvas.width
+    H = canvas.height
+
+    x0 = -W/2 + 5
+    y0 = H/2 - 5
+    h = 20
+    yb = y0 - 10
+
+    ws = (210, 150, 150, 90, 150, 210, 60)
+}
+
+colors {
+    black = rgba(0, 0, 0, 1)
+    blank = rgba(0, 0, 0, 0)
+}
+
+forall Column c {
+    c.a = "middle"
+    c.txtoff = 0
+    c.border = 1
+}
+
+forall Column `func7` {
+    `func7`.w = consts.ws[0]
+    `func7`.x = consts.x0 + `func7`.w/2
+
+    `func7`.hb = Text {
+        string: "31"
+        center: (consts.x0 + 10, consts.yb)
+        fontSize: "10.5pt"
+    }
+
+    `func7`.lb = Text {
+        string: "25"
+        center: (`func7`.hb.center[0] + `func7`.w - 20, consts.yb)
+        fontSize: "10.5pt"
+    }
+}
+
+forall Column `rs2` {
+    `rs2`.w = consts.ws[1]
+    `rs2`.x = `func7`.x + (`func7`.w + `rs2`.w)/2
+
+    `rs2`.hb = Text {
+        string: "24"
+        center: (`func7`.lb.center[0] + 20, consts.yb)
+        fontSize: "10.5pt"
+    }
+
+    `rs2`.lb = Text {
+        string: "20"
+        center: (`rs2`.hb.center[0] + `rs2`.w - 20, consts.yb)
+        fontSize: "10.5pt"
+    }
+}
+
+forall Column `rs1` {
+    `rs1`.w = consts.ws[2]
+    `rs1`.x = `rs2`.x + (`rs2`.w + `rs1`.w)/2
+
+    `rs1`.hb = Text {
+        string: "19"
+        center: (`rs2`.lb.center[0] + 20, consts.yb)
+        fontSize: "10.5pt"
+    }
+
+    `rs1`.lb = Text {
+        string: "15"
+        center: (`rs1`.hb.center[0] + `rs1`.w - 20, consts.yb)
+        fontSize: "10.5pt"
+    }
+}
+
+forall Column `func3` {
+    `func3`.w = consts.ws[3]
+    `func3`.x = `rs1`.x + (`rs1`.w + `func3`.w)/2
+
+    `func3`.hb = Text {
+        string: "14"
+        center: (`rs1`.lb.center[0] + 20, consts.yb)
+        fontSize: "10.5pt"
+    }
+
+    `func3`.lb = Text {
+        string: "12"
+        center: (`func3`.hb.center[0] + `func3`.w - 20, consts.yb)
+        fontSize: "10.5pt"
+    }
+}
+
+forall Column `rd` {
+    `rd`.w = consts.ws[4]
+    `rd`.x = `func3`.x + (`func3`.w + `rd`.w)/2
+
+    `rd`.hb = Text {
+        string: "11"
+        center: (`func3`.lb.center[0] + 20, consts.yb)
+        fontSize: "10.5pt"
+    }
+
+    `rd`.lb = Text {
+        string: "7"
+        center: (`rd`.hb.center[0] + `rd`.w - 20, consts.yb)
+        fontSize: "10.5pt"
+    }
+}
+
+forall Column `opcode` {
+    `opcode`.w = consts.ws[5]
+    `opcode`.x = `rd`.x + (`rd`.w + `opcode`.w)/2
+
+    `opcode`.hb = Text {
+        string: "6"
+        center: (`rd`.lb.center[0] + 20, consts.yb)
+        fontSize: "10.5pt"
+    }
+
+    `opcode`.lb = Text {
+        string: "0"
+        center: (`opcode`.hb.center[0] + `opcode`.w - 20, consts.yb)
+        fontSize: "10.5pt"
+    }
+}
+
+forall Column `encoding` {
+    `encoding`.w = consts.ws[6]
+    `encoding`.x = `opcode`.x + (`opcode`.w + `encoding`.w)/2
+    override `encoding`.a = "start"
+    override `encoding`.txtoff = -20
+    override `encoding`.border = 0
+}
+
+forall Row `r_0` {
+    `r_0`.h = consts.h
+    `r_0`.y = consts.y0 - 20 - `r_0`.h/2
+}
+
+forall Row `r_1` {
+    `r_1`.h = consts.h
+    `r_1`.y = `r_0`.y - 2 * consts.h
+}
+
+forall Row `r_2` {
+    `r_2`.h = consts.h
+    `r_2`.y = `r_1`.y - 2 * consts.h
+}
+
+forall Row `r_3` {
+    `r_3`.h = consts.h
+    `r_3`.y = `r_2`.y - 2 * consts.h
+}
+
+forall Row `r_4` {
+    `r_4`.h = consts.h
+    `r_4`.y = `r_3`.y - 2 * consts.h
+}
+
+forall Row `r_5` {
+    `r_5`.h = consts.h
+    `r_5`.y = `r_4`.y - 2 * consts.h
+}
+
+forall Column c; Column c1; Column c2
+where c := mergecol(c1, c2) {
+    c.w = c1.w + c2.w
+    c.x = (c1.x * c1.w + c2.x * c2.w) / c.w
+}
+
+forall Row r; Column c
+where cell(r, c, s)
+with String s {
+    Rectangle {
+        center: (c.x, r.y)
+        width: c.w
+        height: r.h
+        fillColor: colors.blank
+        strokeWidth: c.border
+        strokeColor: colors.black
+    }
+    Text {
+        string: s
+        center: (c.x + c.txtoff, r.y)
+        fontSize: "12pt"
+        textAnchor: c.a
+    }
+}

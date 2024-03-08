@@ -1,0 +1,21 @@
+Column func7
+Column rs2
+Column rs1
+Column func3
+Column rd
+Column opcode
+Row r_i for i in [0, 1]
+
+cell(r_0, func7, "func7")
+cell(r_0, rs2, "rs2")
+cell(r_0, rs1, "rs1")
+cell(r_0, func3, "func3")
+cell(r_0, rd, "rd")
+cell(r_0, opcode, "opcode")
+
+cell(r_1, func7, "MULDIV")
+cell(r_1, rs2, "除数")
+cell(r_1, rs1, "被除数")
+cell(r_1, func3, "DIV[U]/REM[U]")
+cell(r_1, rd, "dest")
+cell(r_1, opcode, "OP")

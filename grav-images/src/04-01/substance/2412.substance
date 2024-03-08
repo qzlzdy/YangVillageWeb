@@ -1,0 +1,18 @@
+Column imm
+Column rs1
+Column func3
+Column rd
+Column opcode
+Row r_i for i in [0, 1]
+
+cell(r_0, imm, "imm[11:0]")
+cell(r_0, rs1, "rs1")
+cell(r_0, func3, "func3")
+cell(r_0, rd, "rd")
+cell(r_0, opcode, "opcode")
+
+cell(r_1, imm, "offset")
+cell(r_1, rs1, "base")
+cell(r_1, func3, "000")
+cell(r_1, rd, "dest")
+cell(r_1, opcode, "JALR")

@@ -1,7 +1,0 @@
-Row mul
-implement(func7, mul, "MULDIV")
-implement(rs2, mul, "乘数")
-implement(rs1, mul, "被乘数")
-implement(func3, mul, "MUL/MULH[[S]U]")
-implement(rd, mul, "dest")
-implement(opcode, mul, "OP")

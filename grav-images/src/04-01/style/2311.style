@@ -1,0 +1,89 @@
+canvas {
+    width = 970 -- sum(ws) + 10
+    height = 100 -- h * rs + 10
+}
+
+consts {
+    W = canvas.width
+    H = canvas.height
+
+    x0 = -W/2 + 5
+    y0 = H/2 - 5
+    h = 30
+
+    ws = (360, 150, 90, 150, 210)
+}
+
+colors {
+    black = rgba(0, 0, 0, 1)
+    blank = rgba(0, 0, 0, 0)
+}
+
+forall Column c {
+    c.a = "middle"
+    c.txtoff = 0
+}
+
+forall Column `imm` {
+    `imm`.w = consts.ws[0]
+    `imm`.x = consts.x0 + `imm`.w/2
+}
+
+forall Column `rs1` {
+    `rs1`.w = consts.ws[1]
+    `rs1`.x = `imm`.x + (`imm`.w + `rs1`.w)/2
+}
+
+forall Column `func3` {
+    `func3`.w = consts.ws[2]
+    `func3`.x = `rs1`.x + (`rs1`.w + `func3`.w)/2
+}
+
+forall Column `rd` {
+    `rd`.w = consts.ws[3]
+    `rd`.x = `func3`.x + (`func3`.w + `rd`.w)/2
+}
+
+forall Column `opcode` {
+    `opcode`.w = consts.ws[4]
+    `opcode`.x = `rd`.x + (`rd`.w + `opcode`.w)/2
+}
+
+forall Row r {
+    r.border = 0
+}
+
+forall Row `r_0` {
+    `r_0`.h = consts.h
+    `r_0`.y = consts.y0 - `r_0`.h/2
+    override `r_0`.border = 1
+}
+
+forall Row `r_1` {
+    `r_1`.h = consts.h
+    `r_1`.y = `r_0`.y - consts.h
+}
+
+forall Row `r_2` {
+    `r_2`.h = consts.h
+    `r_2`.y = `r_1`.y - consts.h
+}
+
+forall Row r; Column c
+where cell(r, c, s)
+with String s {
+    Rectangle {
+        center: (c.x, r.y)
+        width: c.w
+        height: r.h
+        fillColor: colors.blank
+        strokeWidth: r.border
+        strokeColor: colors.black
+    }
+    Text {
+        string: s
+        center: (c.x + c.txtoff, r.y)
+        fontSize: "12pt"
+        textAnchor: c.a
+    }
+}

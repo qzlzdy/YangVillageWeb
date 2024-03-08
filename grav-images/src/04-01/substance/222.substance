@@ -1,0 +1,34 @@
+Column i_x for x in [0, 1]
+Column s_x for x in [0, 2]
+Column b_x for x in [0, 4]
+Column u_x for x in [0, 1]
+Column j_x for x in [0, 4]
+column encoding
+Row r_i for i in [0, 4]
+
+cell(r_0, i_0, "instr[31]")
+cell(r_0, i_1, "instr[30:20]")
+cell(r_0, encoding, "I型立即数")
+
+cell(r_1, s_0, "instr[31]")
+cell(r_1, s_1, "instr[30:25]")
+cell(r_1, s_2, "instr[11:7]")
+cell(r_1, encoding, "S型立即数")
+
+cell(r_2, b_0, "instr[31]")
+cell(r_2, b_1, "instr[8:7]")
+cell(r_2, b_2, "instr[25:20]")
+cell(r_2, b_3, "instr[11:9]")
+cell(r_2, b_4, "0")
+cell(r_2, encoding, "B型立即数")
+
+cell(r_3, u_0, "instr[31:12]")
+cell(r_3, u_1, "0")
+cell(r_3, encoding, "U型立即数")
+
+cell(r_4, j_0, "instr[31]")
+cell(r_4, j_1, "instr[20:12]")
+cell(r_4, j_2, "instr[21]")
+cell(r_4, j_3, "instr[30:22]")
+cell(r_4, j_4, "0")
+cell(r_4, encoding, "J型立即数")

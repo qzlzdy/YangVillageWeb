@@ -1,0 +1,53 @@
+Column func7
+Column rs2
+Column rs1
+Column func3
+Column rd
+Column opcode
+Column imm12 := mergecol(func7, rs2)
+Column tmp := mergecol(rs1, func3)
+Column imm20 := mergecol(imm12, tmp)
+Column encoding
+
+Row r_i for i in [0, 5]
+
+cell(r_0, func7, "func7")
+cell(r_0, rs2, "rs2")
+cell(r_0, rs1, "rs1")
+cell(r_0, func3, "func3")
+cell(r_0, rd, "rd")
+cell(r_0, opcode, "opcode")
+cell(r_0, encoding, "R型")
+
+cell(r_1, imm12, "imm[11:0]")
+cell(r_1, rs1, "rs1")
+cell(r_1, func3, "func3")
+cell(r_1, rd, "rd")
+cell(r_1, opcode, "opcode")
+cell(r_1, encoding, "I型")
+
+cell(r_2, func7, "imm[11:5]")
+cell(r_2, rs2, "rs2")
+cell(r_2, rs1, "rs1")
+cell(r_2, func3, "func3")
+cell(r_2, rd, "imm[4:0]")
+cell(r_2, opcode, "opcode")
+cell(r_2, encoding, "S型")
+
+cell(r_3, func7, "imm[13|10:5]")
+cell(r_3, rs2, "rs2")
+cell(r_3, rs1, "rs1")
+cell(r_3, func3, "func3")
+cell(r_3, rd, "imm[4:2|12:11]")
+cell(r_3, opcode, "opcode")
+cell(r_3, encoding, "B型")
+
+cell(r_4, imm20, "imm[31:12]")
+cell(r_4, rd, "rd")
+cell(r_4, opcode, "opcode")
+cell(r_4, encoding, "U型")
+
+cell(r_5, imm20, "imm[21|10:2|11|20:12]")
+cell(r_5, rd, "rd")
+cell(r_5, opcode, "opcode")
+cell(r_5, encoding, "J型")

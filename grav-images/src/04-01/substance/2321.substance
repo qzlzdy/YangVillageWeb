@@ -1,0 +1,42 @@
+Column func7
+Column rs2
+Column rs1
+Column func3
+Column rd
+Column opcode
+Row r_i for i in [0, 4]
+
+cell(r_0, func7, "func7")
+cell(r_0, rs2, "rs2")
+cell(r_0, rs1, "rs1")
+cell(r_0, func3, "func3")
+cell(r_0, rd, "rd")
+cell(r_0, opcode, "opcode")
+
+cell(r_1, func7, "0000000")
+cell(r_1, rs2, "src2")
+cell(r_1, rs1, "src1")
+cell(r_1, func3, "ADD/SLT/SLTU")
+cell(r_1, rd, "dest")
+cell(r_1, opcode, "OP")
+
+cell(r_2, func7, "0000000")
+cell(r_2, rs2, "src2")
+cell(r_2, rs1, "src1")
+cell(r_2, func3, "AND/OR/XOR")
+cell(r_2, rd, "dest")
+cell(r_2, opcode, "OP")
+
+cell(r_3, func7, "0000000")
+cell(r_3, rs2, "src2")
+cell(r_3, rs1, "src1")
+cell(r_3, func3, "SLL/SRL")
+cell(r_3, rd, "dest")
+cell(r_3, opcode, "OP")
+
+cell(r_4, func7, "0100000")
+cell(r_4, rs2, "src2")
+cell(r_4, rs1, "src1")
+cell(r_4, func3, "SUB/SRA")
+cell(r_4, rd, "dest")
+cell(r_4, opcode, "OP")

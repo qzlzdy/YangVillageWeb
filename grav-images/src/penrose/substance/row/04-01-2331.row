@@ -1,6 +1,0 @@
-Row nop
-implement(imm, nop, "0000 0000 0000")
-implement(rs1, nop, "00000")
-implement(func3, nop, "ADDI")
-implement(rd, nop, "00000")
-implement(opcode, nop, "OP-IMM")

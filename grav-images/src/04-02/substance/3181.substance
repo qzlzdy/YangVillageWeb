@@ -1,0 +1,6 @@
+Column Int
+Column Except
+Row mcause
+
+cell(mcause, Int, "Interrupt")
+cell(mcause, Except, "Exception Code")

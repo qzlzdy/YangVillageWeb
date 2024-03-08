@@ -1,7 +1,0 @@
-Row div
-implement(func7, div, "MULDIV")
-implement(rs2, div, "除数")
-implement(rs1, div, "被除数")
-implement(func3, div, "DIV[U]/REM[U]")
-implement(rd, div, "dest")
-implement(opcode, div, "OP")

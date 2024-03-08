@@ -1,0 +1,154 @@
+canvas {
+    width = 510 -- sum(ws) + 10
+    height = 490 -- h * rs + 10
+}
+
+consts {
+    W = canvas.width
+    H = canvas.height
+
+    x0 = -W/2 + 5
+    y0 = H/2 - 5
+    h = 30
+
+    ws = (100, 100, 100, 200)
+}
+
+colors {
+    black = rgba(0, 0, 0, 1)
+    blank = rgba(0, 0, 0, 0)
+}
+
+forall Column c {
+    c.a = "middle"
+    c.ofst = 0
+}
+
+forall Column `c_0` {
+    `c_0`.w = consts.ws[0]
+    `c_0`.x = consts.x0 + `c_0`.w/2
+}
+
+forall Column `c_1` {
+    `c_1`.w = consts.ws[1]
+    `c_1`.x = `c_0`.x + (`c_0`.w + `c_1`.w)/2
+}
+
+forall Column `c_2` {
+    `c_2`.w = consts.ws[2]
+    `c_2`.x = `c_1`.x + (`c_1`.w + `c_2`.w)/2
+    override `c_2`.a = "start"
+    override `c_2`.ofst = -40
+}
+
+forall Column `c_3` {
+    `c_3`.w = consts.ws[3]
+    `c_3`.x = `c_2`.x + (`c_2`.w + `c_3`.w)/2
+    override `c_3`.a = "start"
+    override `c_3`.ofst = -90
+}
+
+forall Row `r_0` {
+    `r_0`.h = consts.h
+    `r_0`.y = consts.y0 - `r_0`.h/2
+}
+
+forall Row `r_1` {
+    `r_1`.h = consts.h
+    `r_1`.y = `r_0`.y - consts.h
+}
+
+forall Row `r_2` {
+    `r_2`.h = consts.h
+    `r_2`.y = `r_1`.y - consts.h
+}
+
+forall Row `r_3` {
+    `r_3`.h = consts.h
+    `r_3`.y = `r_2`.y - consts.h
+}
+
+forall Row `r_4` {
+    `r_4`.h = consts.h
+    `r_4`.y = `r_3`.y - consts.h
+}
+
+forall Row `r_5` {
+    `r_5`.h = consts.h
+    `r_5`.y = `r_4`.y - consts.h
+}
+
+forall Row `r_6` {
+    `r_6`.h = consts.h
+    `r_6`.y = `r_5`.y - consts.h
+}
+
+forall Row `r_7` {
+    `r_7`.h = consts.h
+    `r_7`.y = `r_6`.y - consts.h
+}
+
+forall Row `r_8` {
+    `r_8`.h = consts.h
+    `r_8`.y = `r_7`.y - consts.h
+}
+
+forall Row `r_9` {
+    `r_9`.h = consts.h
+    `r_9`.y = `r_8`.y - consts.h
+}
+
+forall Row `r_10` {
+    `r_10`.h = consts.h
+    `r_10`.y = `r_9`.y - consts.h
+}
+
+forall Row `r_11` {
+    `r_11`.h = consts.h
+    `r_11`.y = `r_10`.y - consts.h
+}
+
+forall Row `r_12` {
+    `r_12`.h = consts.h
+    `r_12`.y = `r_11`.y - consts.h
+}
+
+forall Row `r_13` {
+    `r_13`.h = consts.h
+    `r_13`.y = `r_12`.y - consts.h
+}
+
+forall Row `r_14` {
+    `r_14`.h = consts.h
+    `r_14`.y = `r_13`.y - consts.h
+}
+
+forall Row `r_15` {
+    `r_15`.h = consts.h
+    `r_15`.y = `r_14`.y - consts.h
+}
+
+forall Column c; Column c1; Column c2
+where c := mergecol(c1, c2) {
+    c.w = c1.w + c2.w
+    c.x = (c1.x * c1.w + c2.x * c2.w) / c.w
+}
+
+forall Row r; Column c
+where cell(r, c, s)
+with String s {
+    Rectangle {
+        center: (c.x, r.y)
+        width: c.w
+        height: r.h
+        fillColor: colors.blank
+        strokeWidth: 1
+        strokeColor: colors.black
+    }
+    Text {
+        string: s
+        center: (c.x + c.ofst, r.y)
+        fontSize: "12pt"
+        textAnchor: c.a
+    }
+}

@@ -1,0 +1,14 @@
+Column func12
+Column rs1
+Column func3
+Column rd
+Column opcode
+Column instr
+Row r_0
+
+cell(r_0, func12, "0001 0000 0101")
+cell(r_0, rs1, "00000")
+cell(r_0, func3, "000")
+cell(r_0, rd, "00000")
+cell(r_0, opcode, "1110011")
+cell(r_0, instr, "WFI")

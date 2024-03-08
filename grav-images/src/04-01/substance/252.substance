@@ -1,0 +1,21 @@
+Column immh
+Column rs2
+Column rs1
+Column func3
+Column imml
+Column opcode
+Row r_i for i in [0, 1]
+
+cell(r_0, immh, "imm[11:5]")
+cell(r_0, rs2, "rs2")
+cell(r_0, rs1, "rs1")
+cell(r_0, func3, "func3")
+cell(r_0, imml, "imm[4:0]")
+cell(r_0, opcode, "opcode")
+
+cell(r_1, immh, "offset[11:5]")
+cell(r_1, rs2, "src")
+cell(r_1, rs1, "base")
+cell(r_1, func3, "width")
+cell(r_1, imml, "offset[4:0]")
+cell(r_1, opcode, "STORE")

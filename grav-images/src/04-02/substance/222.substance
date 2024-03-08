@@ -1,0 +1,74 @@
+Column c_i for i in [0, 3]
+Row r_i for i in [0, 15]
+
+Column c0m2 := mergecol(c_0, c_1)
+Column c2m2 := mergecol(c_2, c_3)
+Column c0m4 := mergecol(c0m2, c2m2)
+
+cell(r_0, c_0, "地址")
+cell(r_0, c_1, "权限")
+cell(r_0, c_2, "名称")
+cell(r_0, c_3, "描述")
+
+cell(r_1, c0m4, "信息寄存器")
+
+cell(r_2, c_0, "0xF11")
+cell(r_2, c_1, "MRO")
+cell(r_2, c_2, "mvendorid")
+cell(r_2, c_3, "供应商ID")
+
+cell(r_3, c_0, "0xF12")
+cell(r_3, c_1, "MRO")
+cell(r_3, c_2, "marchid")
+cell(r_3, c_3, "架构ID")
+
+cell(r_4, c_0, "0xF13")
+cell(r_4, c_1, "MRO")
+cell(r_4, c_2, "mimpid")
+cell(r_4, c_3, "实现ID")
+
+cell(r_5, c0m4, "陷阱设置")
+
+cell(r_6, c_0, "0x300")
+cell(r_6, c_1, "MRW")
+cell(r_6, c_2, "mstatus")
+cell(r_6, c_3, "状态寄存器")
+
+cell(r_7, c_0, "0x305")
+cell(r_7, c_1, "MRW")
+cell(r_7, c_2, "mtvec")
+cell(r_7, c_3, "陷阱服务基址")
+
+cell(r_8, c0m4, "陷阱服务")
+
+cell(r_9, c_0, "0x341")
+cell(r_9, c_1, "MRW")
+cell(r_9, c_2, "mepc")
+cell(r_9, c_3, "异常程序计数器")
+
+cell(r_10, c_0, "0x342")
+cell(r_10, c_1, "MRW")
+cell(r_10, c_2, "mcause")
+cell(r_10, c_3, "陷阱原因")
+
+cell(r_11, c0m4, "计数器/计时器")
+
+cell(r_12, c_0, "0xB00")
+cell(r_12, c_1, "MRW")
+cell(r_12, c_2, "mcycle")
+cell(r_12, c_3, "机器时钟计数器")
+
+cell(r_13, c_0, "0xB02")
+cell(r_13, c_1, "MRW")
+cell(r_13, c_2, "minstret")
+cell(r_13, c_3, "指令计数器")
+
+cell(r_14, c_0, "0xB80")
+cell(r_14, c_1, "MRW")
+cell(r_14, c_2, "mcycleh")
+cell(r_14, c_3, "mcycle高32位")
+
+cell(r_15, c_0, "0xB82")
+cell(r_15, c_1, "MRW")
+cell(r_15, c_2, "minstreth")
+cell(r_15, c_3, "minstret高32位")

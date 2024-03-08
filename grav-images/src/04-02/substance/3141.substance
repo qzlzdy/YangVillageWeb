@@ -1,0 +1,10 @@
+Column pad
+Column MPP
+Column MPIE
+Column MIE
+Row mstatus
+
+cell(mstatus, pad, "0")
+cell(mstatus, MPP, "MPP[1:0]")
+cell(mststus, MPIE, "MPIE")
+cell(mstatus, MIE, "MIE")

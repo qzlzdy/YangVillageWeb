@@ -1,0 +1,35 @@
+Column immh
+Column rs2
+Column rs1
+Column func3
+Column imml
+Column opcode
+Row r_i for i in [0, 3]
+
+cell(r_0, immh, "imm[13|10:5]")
+cell(r_0, rs2, "rs2")
+cell(r_0, rs1, "rs1")
+cell(r_0, func3, "func3")
+cell(r_0, imml, "imm[4:2|12:11]")
+cell(r_0, opcode, "opcode")
+
+cell(r_1, immh, "offset[13|10:5]")
+cell(r_1, rs2, "src2")
+cell(r_1, rs1, "src1")
+cell(r_1, func3, "BEQ/BNE")
+cell(r_1, imml, "offset[4:2|12:11]")
+cell(r_1, opcode, "BRANCH")
+
+cell(r_2, immh, "offset[13|10:5]")
+cell(r_2, rs2, "src2")
+cell(r_2, rs1, "src1")
+cell(r_2, func3, "BLT[U]")
+cell(r_2, imml, "offset[4:2|12:11]")
+cell(r_2, opcode, "BRANCH")
+
+cell(r_3, immh, "offset[13|10:5]")
+cell(r_3, rs2, "src2")
+cell(r_3, rs1, "src1")
+cell(r_3, func3, "BGE[U]")
+cell(r_3, imml, "offset[4:2|12:11]")
+cell(r_3, opcode, "BRANCH")

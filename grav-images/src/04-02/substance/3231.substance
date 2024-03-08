@@ -1,0 +1,18 @@
+Column func12
+Column rs1
+Column func3
+Column rd
+Column opcode
+Row r_i for i in [0, 1]
+
+cell(r_0, func12, "func12")
+cell(r_0, rs1, "rs1")
+cell(r_0, func3, "func3")
+cell(r_0, rd, "rd")
+cell(r_0, opcode, "opcode")
+
+cell(r_1, func12, "WFI")
+cell(r_1, rs1, "00000")
+cell(r_1, func3, "PRIV")
+cell(r_1, rd, "00000")
+cell(r_1, opcode, "SYSTEM")

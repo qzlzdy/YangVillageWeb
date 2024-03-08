@@ -1,0 +1,16 @@
+Column imm
+Column rd
+Column opcode
+Row r_i for i in [0, 2]
+
+cell(r_0, imm, "imm[31:12]")
+cell(r_0, rd, "rd")
+cell(r_0, opcode, "opcode")
+
+cell(r_1, imm, "uimm")
+cell(r_1, rd, "dest")
+cell(r_1, opcode, "LUI")
+
+cell(r_2, imm, "uimm")
+cell(r_2, rd, "dest")
+cell(r_2, opcode, "AUIPC")
