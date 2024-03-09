@@ -4,7 +4,7 @@ title: Ypologisti工程
 
 # 1. Ypologisti工程
 
-Ypologosti工程是一个在Minecraft中建造红石计算机的工程。该工程包括从计算机硬件结构、操作系统到用户软件的全套实现。这个工程的产生源自村长对这款游戏的热爱。同时，通过这项工程，村长也可以从中深入学习到现代计算机的运行原理。
+Ypologosti工程是一个在Minecraft中建造红石计算机的工程。该工程包括从计算机硬件结构、操作系统到用户软件的全套实现。这个工程的产生源自村长对这款游戏的热爱。同时，通过这项工程，村长也可以从中深入学习到现代数字计算机的运行原理。
 
 - [1. Ypologisti工程](#1-ypologisti工程)
   - [1.1. 工程要实现什么](#11-工程要实现什么)
@@ -33,7 +33,7 @@ Ypologosti工程是一个在Minecraft中建造红石计算机的工程。该工�
 - 使用流水线，但不使用超流水线和超标量。
 - 指令顺序流出，顺序执行。
 - 通过旁路和空泡消除流水线冒险。
-- 只使用L1级Cache。Cache为哈佛结构，内存为冯·诺伊曼结构。
+- 只有L1级Cache，且为哈佛结构；内存为冯·诺伊曼结构。
 
 综合考虑以上条件，工程选择[`ucb-bar/riscv-mini`][1]项目为基础。由于`riscv-mini`不包含Cache，因此Cache的实现选择了[`OpenXiangShan/XiangShan`][2]项目为基础。Cache使用的通信协议则基于[`TileLink`][3]。
 
@@ -47,11 +47,9 @@ Ypologosti工程是一个在Minecraft中建造红石计算机的工程。该工�
 
 ---
 
-[mesy指令集架构](./mesy) [mesy特权架构](./mesy-priv)
+[mesy指令集架构](./mesy)  [mesy特权架构](./mesy-priv)  [syndesmos协议](./syndesmos)
 
 [ylikou处理器](./ylikou)
-
-[syndesmos协议](./syndesmos)
 
 ### 1.1.2. 操作系统
 

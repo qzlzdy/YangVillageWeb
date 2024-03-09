@@ -1,0 +1,81 @@
+Column c_i for i in [0, 4]
+Row r_i for i in [0, 12]
+
+Row ch_a := mergerow(r_1, r_2)
+Row ch_b := mergerow(r_3, r_4)
+Row tmp1 := mergerow(r_5, r_6)
+Row tmp2 := mergerow(r_7, r_8)
+Row ch_c := mergerow(tmp1, tmp2)
+Row tmp3 := mergerow(r_9, r_10)
+Row ch_d := mergerow(tmp3, r_11)
+
+cell(r_0, c_0, "通道")
+cell(r_0, c_1, "opcode")
+cell(r_0, c_2, "消息")
+cell(r_0, c_3, "操作")
+cell(r_0, c_4, "响应")
+
+cell(ch_a, c_0, "A")
+cell(r_1, c_1, "0")
+cell(r_1, c_2, "AcquireBlock")
+cell(r_1, c_3, "Acquire")
+cell(r_1, c_4, "GrantData")
+
+cell(r_2, c_1, "1")
+cell(r_2, c_2, "AcquirePerm")
+cell(r_2, c_3, "Acquire")
+cell(r_2, c_4, "Grant")
+
+cell(ch_b, c_0, "B")
+cell(r_3, c_1, "0")
+cell(r_3, c_2, "ProbeBlock")
+cell(r_3, c_3, "Probe")
+cell(r_3, c_4, "ProbeAckData")
+
+cell(r_4, c_1, "1")
+cell(r_4, c_2, "ProbePerm")
+cell(r_4, c_3, "Probe")
+cell(r_4, c_4, "ProbeAck")
+
+cell(ch_c, c_0, "C")
+cell(r_5, c_1, "0")
+cell(r_5, c_2, "ProbeAck")
+cell(r_5, c_3, "Probe")
+cell(r_5, c_4, "")
+
+cell(r_6, c_1, "1")
+cell(r_6, c_2, "ProbeAckData")
+cell(r_6, c_3, "Probe")
+cell(r_6, c_4, "")
+
+cell(r_7, c_1, "2")
+cell(r_7, c_2, "Release")
+cell(r_7, c_3, "Release")
+cell(r_7, c_4, "ReleaseAck")
+
+cell(r_8, c_1, "3")
+cell(r_8, c_2, "ReleaseData")
+cell(r_8, c_3, "Release")
+cell(r_8, c_4, "ReleaseAck")
+
+cell(ch_d, c_0, "D")
+cell(r_9, c_1, "0")
+cell(r_9, c_2, "Grant")
+cell(r_9, c_3, "Grant")
+cell(r_9, c_4, "GrantAck")
+
+cell(r_10, c_1, "1")
+cell(r_10, c_2, "GrantData")
+cell(r_10, c_3, "Grant")
+cell(r_10, c_4, "GrantAck")
+
+cell(r_11, c_1, "2")
+cell(r_11, c_2, "ReleaseAck")
+cell(r_11, c_3, "Release")
+cell(r_11, c_4, "")
+
+cell(r_12, c_0, "E")
+cell(r_12, c_1, "-")
+cell(r_12, c_2, "GrantAck")
+cell(r_12, c_3, "Grant")
+cell(r_12, c_4, "")

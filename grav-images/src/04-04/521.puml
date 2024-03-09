@@ -1,0 +1,26 @@
+@startuml
+
+:操作;
+split
+    #39C5BB:Acquire;
+    #66CCFF:Acquire[Block/Perm]; <<save>>
+    -[dotted]->
+    #66CCFF:Grant[Data]; <<save>>
+    -[dotted]->
+    #66CCFF:GrantAck; <<save>>
+    kill
+split again
+    #39C5BB:Probe;
+    #66CCFF:Probe[Block/Perm]; <<save>>
+    -[dotted]->
+    #66CCFF:ProbeAck[Data]; <<save>>
+    kill
+split again
+    #39C5BB:Release;
+    #66CCFF:Release[Data]; <<save>>
+    -[dotted]->
+    #66CCFF:ReleaseAck; <<save>>
+    kill
+end split
+
+@enduml

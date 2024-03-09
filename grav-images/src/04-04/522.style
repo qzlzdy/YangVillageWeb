@@ -1,6 +1,6 @@
 canvas {
-    width = 550 -- sum(ws) + 10
-    height = 190 -- h * rs + 10
+    width = 540 -- sum(ws) + 10
+    height = 400 -- h * rs + 10
 }
 
 consts {
@@ -11,7 +11,7 @@ consts {
     y0 = H/2 - 5
     h = 30
 
-    ws = (80, 80, 50, 40, 50, 80, 80, 40, 40)
+    ws = (50, 80, 150, 100, 150)
 }
 
 colors {
@@ -20,53 +20,39 @@ colors {
 }
 
 forall Column c {
-    c.a = "middle"
+    c.a = "start"
     c.txtoff = 0
 }
 
 forall Column `c_0` {
     `c_0`.w = consts.ws[0]
     `c_0`.x = consts.x0 + `c_0`.w/2
+    override `c_0`.a = "middle"
 }
 
 forall Column `c_1` {
     `c_1`.w = consts.ws[1]
     `c_1`.x = `c_0`.x + (`c_0`.w + `c_1`.w)/2
+    override `c_1`.a = "end"
+    override `c_1`.txtoff = `c_1`.w/2 - 10
 }
 
 forall Column `c_2` {
     `c_2`.w = consts.ws[2]
     `c_2`.x = `c_1`.x + (`c_1`.w + `c_2`.w)/2
+    override `c_2`.txtoff = -`c_2`.w/2 + 10
 }
 
 forall Column `c_3` {
     `c_3`.w = consts.ws[3]
     `c_3`.x = `c_2`.x + (`c_2`.w + `c_3`.w)/2
+    override `c_3`.txtoff = -`c_3`.w/2 + 10
 }
 
 forall Column `c_4` {
     `c_4`.w = consts.ws[4]
     `c_4`.x = `c_3`.x + (`c_3`.w + `c_4`.w)/2
-}
-
-forall Column `c_5` {
-    `c_5`.w = consts.ws[5]
-    `c_5`.x = `c_4`.x + (`c_4`.w + `c_5`.w)/2
-}
-
-forall Column `c_6` {
-    `c_6`.w = consts.ws[6]
-    `c_6`.x = `c_5`.x + (`c_5`.w + `c_6`.w)/2
-}
-
-forall Column `c_7` {
-    `c_7`.w = consts.ws[7]
-    `c_7`.x = `c_6`.x + (`c_6`.w + `c_7`.w)/2
-}
-
-forall Column `c_8` {
-    `c_8`.w = consts.ws[8]
-    `c_8`.x = `c_7`.x + (`c_7`.w + `c_8`.w)/2
+    override `c_4`.txtoff = -`c_4`.w/2 + 10
 }
 
 forall Row `r_0` {
@@ -99,10 +85,39 @@ forall Row `r_5` {
     `r_5`.y = `r_4`.y - consts.h
 }
 
-forall Column c; Column c1; Column c2
-where c := mergecol(c1, c2) {
-    c.w = c1.w + c2.w
-    c.x = (c1.x * c1.w + c2.x * c2.w) / c.w
+forall Row `r_6` {
+    `r_6`.h = consts.h
+    `r_6`.y = `r_5`.y - consts.h
+}
+
+forall Row `r_7` {
+    `r_7`.h = consts.h
+    `r_7`.y = `r_6`.y - consts.h
+}
+
+forall Row `r_8` {
+    `r_8`.h = consts.h
+    `r_8`.y = `r_7`.y - consts.h
+}
+
+forall Row `r_9` {
+    `r_9`.h = consts.h
+    `r_9`.y = `r_8`.y - consts.h
+}
+
+forall Row `r_10` {
+    `r_10`.h = consts.h
+    `r_10`.y = `r_9`.y - consts.h
+}
+
+forall Row `r_11` {
+    `r_11`.h = consts.h
+    `r_11`.y = `r_10`.y - consts.h
+}
+
+forall Row `r_12` {
+    `r_12`.h = consts.h
+    `r_12`.y = `r_11`.y - consts.h
 }
 
 forall Row r; Row r1; Row r2
