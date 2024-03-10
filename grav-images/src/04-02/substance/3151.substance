@@ -1,5 +1,4 @@
-Column BASE
-Column MODE
+Column BASE, MODE
 Row mtvec
 
 cell(mtvec, BASE, "BASE[31:2]")

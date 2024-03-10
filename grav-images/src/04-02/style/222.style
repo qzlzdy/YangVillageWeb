@@ -14,11 +14,6 @@ consts {
     ws = (100, 100, 100, 200)
 }
 
-colors {
-    black = rgba(0, 0, 0, 1)
-    blank = rgba(0, 0, 0, 0)
-}
-
 forall Column c {
     c.a = "middle"
     c.ofst = 0
@@ -141,9 +136,9 @@ with String s {
         center: (c.x, r.y)
         width: c.w
         height: r.h
-        fillColor: colors.blank
+        fillColor: none()
         strokeWidth: 1
-        strokeColor: colors.black
+        strokeColor: #000000
     }
     Text {
         string: s

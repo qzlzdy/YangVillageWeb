@@ -1,8 +1,4 @@
-Column csr
-Column rs1
-Column func3
-Column rd
-Column opcode
+Column csr, rs1, func3, rd, opcode
 Row r_i for i in [0, 6]
 
 cell(r_0, csr, "csr")

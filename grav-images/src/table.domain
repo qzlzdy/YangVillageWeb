@@ -2,5 +2,5 @@ type Column
 type Row
 
 predicate cell(Row r, Column c, String s)
-function mergecol(Column l, Column r) -> Column
-function mergerow(Row t, Row b) -> Row
+constructor mergecol(Column l, Column r) -> Column
+constructor mergerow(Row t, Row b) -> Row

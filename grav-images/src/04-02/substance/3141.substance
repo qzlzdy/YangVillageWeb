@@ -1,7 +1,4 @@
-Column pad
-Column MPP
-Column MPIE
-Column MIE
+Column pad, MPP, MPIE, MIE
 Row mstatus
 
 cell(mstatus, pad, "0")

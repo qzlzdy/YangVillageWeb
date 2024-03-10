@@ -1,10 +1,4 @@
-Column func7
-Column rs2
-Column rs1
-Column func3
-Column rd
-Column opcode
-Column instr
+Column func7, rs2, rs1, func3, rd, opcode, instr
 Row r_i for i in [0, 37]
 
 Column imm12 := mergecol(func7, rs2)

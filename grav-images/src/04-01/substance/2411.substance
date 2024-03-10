@@ -1,6 +1,4 @@
-Column imm
-Column rd
-Column opcode
+Column imm, rd, opcode
 Row r_i for i in [0, 1]
 
 cell(r_0, imm, "imm[21|10:2|11|20:12]")

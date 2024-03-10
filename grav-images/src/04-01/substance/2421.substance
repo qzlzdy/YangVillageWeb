@@ -1,9 +1,4 @@
-Column immh
-Column rs2
-Column rs1
-Column func3
-Column imml
-Column opcode
+Column immh, rs2, rs1, func3, imml, opcode
 Row r_i for i in [0, 3]
 
 cell(r_0, immh, "imm[13|10:5]")
