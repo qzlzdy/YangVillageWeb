@@ -79,6 +79,7 @@ sqlite3 /var/lib/yangvillage/yangvillage.db -init initdb.sql
 cp nginx-config/wt_*.conf /etc/nginx/
 cp nginx-config/yangvillage.conf /etc/nginx/sites-available/
 ln -s /etc/nginx/sites-available/yangvillage.conf /etc/nginx/sites-enabled/yangvillage.conf
+nginx -s reload
 ```
 
 > add `include /etc/nginx/sites-enabled/*;` in http block in nginx.conf
@@ -88,7 +89,5 @@ ln -s /etc/nginx/sites-available/yangvillage.conf /etc/nginx/sites-enabled/yangv
 ```bash
 export WT_APP_ROOT=/var/lib/yangvillage
 nohup spawn-fcgi -n /var/lib/yangvillage/bin/bookmark.wt -a 0.0.0.0 -p 9002 >/dev/null &
-nohup spawn-fcgi -n /var/lib/yangvillage/bin/broadcast.wt -a 0.0.0.0 -p 9003 >/dev/null &
 nohup spawn-fcgi -n /var/lib/yangvillage/bin/portfolio.wt -a 0.0.0.0 -p 9004 >/dev/null &
-nginx -s reload
 ```
