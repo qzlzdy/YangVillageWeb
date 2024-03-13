@@ -143,7 +143,7 @@ cell(r_18, instr, "ADDI")
 
 cell(r_19, imm12, "imm[11:0]")
 cell(r_19, rs1, "rs1")
-cell(r_19, func3, "001")
+cell(r_19, func3, "010")
 cell(r_19, rd, "rd")
 cell(r_19, opcode, "0010011")
 cell(r_19, instr, "SLTI")

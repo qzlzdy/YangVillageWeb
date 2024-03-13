@@ -47,7 +47,7 @@ title: ylikou处理器
 
 [1]: https://github.com/ucb-bar/riscv-mini.git
 [2]: https://github.com/OpenXiangShan/XiangShan.git
-[3]: (https://github.com/riscv-mcu/e203_hbirdv2)
+[3]: https://github.com/riscv-mcu/e203_hbirdv2
 
 ---
 
