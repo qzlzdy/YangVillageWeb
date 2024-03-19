@@ -89,5 +89,6 @@ nginx -s reload
 ```bash
 export WT_APP_ROOT=/var/lib/yangvillage
 nohup spawn-fcgi -n /var/lib/yangvillage/bin/bookmark.wt -a 0.0.0.0 -p 9002 >/dev/null &
+nohup spawn-fcgi -n /var/lib/yangvillage/bin/toolkits.wt -a 0.0.0.0 -p 9003 >/dev/null &
 nohup spawn-fcgi -n /var/lib/yangvillage/bin/portfolio.wt -a 0.0.0.0 -p 9004 >/dev/null &
 ```
