@@ -218,7 +218,7 @@ E通道由主接口流向从接口，传输D通道消息的接收确认。
 
 ## 5.2. 消息分类
 
-![消息分类](/images/04-04/521.png)
+![消息分类](/images/syndesmos/OperationsTaxonomy.png)
 
 带有后缀`Data`的消息都有数据载荷。
 
@@ -241,7 +241,7 @@ E通道由主接口流向从接口，传输D通道消息的接收确认。
 
 **消息总览**，以通道分组
 
-![消息总览](/images/04-04/522.png)
+![消息总览](/images/syndesmos/MessagesSummary.png)
 
 ### 5.2.1. `AcquireBlock`
 
