@@ -82,10 +82,10 @@
         <link rel="canonical" href="bookmark.yangvillage.top"/>
       </head-matter>
     </application-settings>
-    <application-settings location="/var/lib/yangvillage/bin/broadcast.wt">
-      <log-file>/var/log/wt/broadcast.log</log-file>
+    <application-settings location="/var/lib/yangvillage/bin/toolkits.wt">
+      <log-file>/var/log/wt/toolkits.log</log-file>
       <head-matter>
-        <link rel="canonical" href="music.yangvillage.top"/>
+        <link rel="canonical" href="api.yangvillage.top"/>
       </head-matter>
     </application-settings>
     <application-settings location="/var/lib/yangvillage/bin/portfolio.wt">
