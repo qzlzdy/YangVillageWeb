@@ -390,20 +390,6 @@ VALUES('artc',
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('artc',
-    'datavizproject',
-    '收集数据可视化，获得灵感并找到合适的类型',
-    'https://datavizproject.com/'
-);
-INSERT INTO bookmarks
-("catalog", "title", "desc", "url")
-VALUES('artc',
-    'PrintableSearch',
-    '搜索引擎，用于从最好的3D模型网站查找顶级3D打印模型、可打印文件',
-    'https://www.printablesearch.com/'
-);
-INSERT INTO bookmarks
-("catalog", "title", "desc", "url")
-VALUES('artc',
     'AI auto-subtitling',
     'AI字幕',
     'https://www.spapas.net/2023/05/22/ai-auto-subtitling/'
@@ -442,6 +428,13 @@ VALUES('artc',
     'Around The World blog',
     '随机游戏地图',
     'https://frozenfractal.com/blog/2023/11/2/around-the-world-1-continents/'
+);
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('artc',
+    'LaTeX教程',
+    'LaTeX教程',
+    'https://latex.lierhua.top/zh/'
 );
   -- Ypologist
 INSERT INTO bookmarks
