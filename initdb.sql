@@ -270,7 +270,7 @@ INSERT INTO bookmarks
 VALUES('game',
     '干员培养表',
     '明日方舟干员培养表',
-    'https://ark-nights.com/'
+    'https://ark-nights.com/table'
 );
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
@@ -292,6 +292,13 @@ VALUES('game',
     'MC百科',
     '我的世界MOD百科，提供Minecraft MOD物品资料介绍教程攻略和MOD下载',
     'https://www.mcmod.cn/'
+);
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('game',
+    'FlightGear wiki',
+    'FlightGear官方文档',
+    'https://wiki.flightgear.org/Main_Page'
 );
   -- tools
 INSERT INTO bookmarks
@@ -343,6 +350,20 @@ VALUES('tool',
     '命令解释搜索引擎',
     'https://explainshell.com'
 );
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('tool',
+    'Microsoft 365',
+    '办公套件',
+    'https://www.landiannews.com/download/103741.html
+');
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('tool',
+    '清华源',
+    '清华大学开源软件镜像站',
+    'https://mirror.tuna.tsinghua.edu.cn/'
+);
   -- communities
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
@@ -364,6 +385,13 @@ VALUES('comm',
     'stack overflow',
     '全球第二大同♂️性交友网站（别闹了啊）全球最大开发者在线社区',
     'https://stackoverflow.com/questions'
+);
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('comm',
+    'THISVID',
+    '#1 PLACE FOR YOUR HOMEMADE VIDEOS',
+    'https://thisvid.com/'
 );
   -- article
 INSERT INTO bookmarks
@@ -404,23 +432,9 @@ VALUES('artc',
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('artc',
-    'DIY Raspberry Pi NAS',
-    'DIY NAS',
-    'https://www.instructables.com/DIY-Raspberry-Orange-Pi-NAS-That-Really-Looks-Like/'
-);
-INSERT INTO bookmarks
-("catalog", "title", "desc", "url")
-VALUES('artc',
     '17 Golden Rules of Financial Safety',
     '个人财务管理',
     'https://thetaoofwealth.wordpress.com/2013/02/17/harry-brownes-17-golden-rules-of-financial-safety/'
-);
-INSERT INTO bookmarks
-("catalog", "title", "desc", "url")
-VALUES('artc',
-    'grabcad',
-    'CAD模型收集',
-    'https://grabcad.com/library'
 );
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
