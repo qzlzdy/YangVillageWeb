@@ -199,7 +199,7 @@ INSERT INTO bookmarks
 VALUES('anime',
     '異世界動漫',
     '在线动漫网站',
-    'https://www.mikudm.com/'
+    'http://www.dmmiku.com/'
 );
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
