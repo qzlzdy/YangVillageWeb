@@ -32,7 +32,7 @@
             <proxy>127.0.0.1/8</proxy>
             <proxy>::1/128</proxy>
             <proxy>192.168.0.0/16</proxy>
-            <proxy>47.74.46.203</proxy>
+            <proxy>47.74.54.142</proxy>
           </trusted-proxies>
         </trusted-proxy-config>
         <inline-css>true</inline-css>
