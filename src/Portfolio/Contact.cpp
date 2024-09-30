@@ -29,7 +29,7 @@ Contact::Contact(): Section("contact"){
     addIcon(address, "<i class=\"bi bi-geo-alt\"/>");
     addH4(address, "地点：");
     address->addWidget(make_unique<WBreak>());
-    addPara(address, "浙江省杭州市钱塘区杭州电子科技大学");
+    addPara(address, "江苏省南京市建邺区中和路126号");
 
     WContainerWidget *email = leftCol->addWidget(make_unique<WContainerWidget>());
     addIcon(email, "<i class=\"bi bi-envelope\"/>");
@@ -66,7 +66,8 @@ Contact::Contact(): Section("contact"){
     row->setStretchFactor(right, 7);
 }
 
-WLeafletMap::Coordinate Contact::Home(30.318400, 120.337750);
+// WLeafletMap::Coordinate Contact::Home(30.318400, 120.337750);   // HDU
+WLeafletMap::Coordinate Contact::Home(31.970000, 118.710000);
 
 WText *Contact::addIcon(WContainerWidget *container, const WString &text){
     WText *icon = container->addWidget(make_unique<WText>(text));

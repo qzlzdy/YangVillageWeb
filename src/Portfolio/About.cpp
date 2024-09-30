@@ -26,7 +26,7 @@ About::About(): Section("about"){
     content->setStyleClass("col-lg-8 pt-4 pt-lg-0");
 
     WText *h3 = content->addWidget(make_unique<WText>(
-        "软件设计师 &amp; C++后端工程师"));
+        "软件设计师 &amp; C++软件研发工程师"));
     WFont font;
     font.setWeight(FontWeight::Bold);
     font.setSize(26);
