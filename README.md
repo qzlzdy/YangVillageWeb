@@ -18,7 +18,7 @@
 ## 2.1. Install packages
 
 ```bash
-sudo pacman -S ccache cmake fcgi git nginx sqlite spawn-fcgi wt
+sudo pacman -S ccache cmake fcgi git nginx ninja sqlite spawn-fcgi wt
 ```
 
 # 3. Build
@@ -27,7 +27,7 @@ sudo pacman -S ccache cmake fcgi git nginx sqlite spawn-fcgi wt
 git clone https://github.com/qzlzdy/YangVillageWeb.git
 cd YangVillageWeb
 
-cmake -B build -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
+cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
 cmake --build build --parallel
 ```
 
