@@ -83,23 +83,9 @@ VALUES('ref',
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('ref',
-    'Bootstrap框架官方文档',
-    '用于网站和网络应用程序开发的开源前端框架',
-    'https://getbootstrap.com/docs/5.2/getting-started/introduction/'
-);
-INSERT INTO bookmarks
-("catalog", "title", "desc", "url")
-VALUES('ref',
     'PlantUML官方文档',
     '用纯文本语言绘制图表的开源软件',
     'https://plantuml.com/zh/'
-);
-INSERT INTO bookmarks
-("catalog", "title", "desc", "url")
-VALUES('ref',
-    'Graphviz官方文档',
-    '由AT&T实验室启动的开源工具包',
-    'https://graphviz.org/doc/info/lang.html'
 );
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
@@ -114,13 +100,6 @@ VALUES('ref',
     'Verilator官方文档',
     '将Verilog转换为C++或SystemC中精确到周期的行为模型的开源软件工具',
     'https://veripool.org/guide/latest/'
-);
-INSERT INTO bookmarks
-("catalog", "title", "desc", "url")
-VALUES('ref',
-    'Eigen库官方文档',
-    '用于线性代数、矩阵和向量运算、几何变换、数值求解器和相关算法的模板标题的高级C++库',
-    'https://eigen.tuxfamily.org/dox/index.html'
 );
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
@@ -150,6 +129,13 @@ VALUES('wiki',
     'Arch Linux',
     '独立开发的x86-64架构通用GNU/Linux发行版',
     'https://archlinux.org/'
+);
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('wiki',
+    'Gentoo',
+    '一种基于 Linux 的免费操作系统，可以针对任何应用程序或需求进行自动优化和定制。',
+    'https://wiki.gentoo.org/wiki/Main_Page'
 );
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
@@ -496,20 +482,6 @@ VALUES('ypo',
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('ypo',
-    'OpenFPGA官方文档',
-    '可定制FPGA架构快速原型开发开放源代码框架。',
-    'https://openfpga.readthedocs.io/en/master/'
-);
-INSERT INTO bookmarks
-("catalog", "title", "desc", "url")
-VALUES('ypo',
-    'Verilog-to-Routing官方文档',
-    '为FPGA架构和CAD研发提供的开源框架',
-    'https://docs.verilogtorouting.org/en/latest/'
-);
-INSERT INTO bookmarks
-("catalog", "title", "desc", "url")
-VALUES('ypo',
     'GPT fdisk Tutorial',
     'gdisk官网',
     'https://www.rodsbooks.com/gdisk/'
@@ -541,34 +513,6 @@ CREATE TABLE projects (
 -- project informations
 -- 1: C/C++ 2: Embedded 3: Java 4: Android 5: Python
 BEGIN TRANSACTION;
-INSERT INTO projects
-("type", "title", "begin", "end", "repoAddr", "repoName", "desc")
-VALUES(5,
-    '基于Scrapy + MongoDB的Instgram爬虫',
-    '2018-09-01', '2019-01-01',
-    NULL, NULL, NULL
-);
-INSERT INTO projects
-("type", "title", "begin", "end", "repoAddr", "repoName", "desc")
-VALUES(3,
-    '基于Spring boot + MySQL的爬虫后台',
-    '2019-03-01', '2019-07-01',
-    NULL, NULL, NULL
-);
-INSERT INTO projects
-("type", "title", "begin", "end", "repoAddr", "repoName", "desc")
-VALUES(5,
-    '基于Protege + D2RQ + Apache Jena Fuseki的知识图谱应用',
-    '2019-09-01', '2020-01-01',
-    NULL, NULL, NULL
-);
-INSERT INTO projects
-("type", "title", "begin", "end", "repoAddr", "repoName", "desc")
-VALUES(2,
-    '基于STM32F207VCT6的触摸屏双人棋类游戏',
-    '2019-09-01', '2020-01-01',
-    NULL, NULL, NULL
-);
 INSERT INTO projects
 ("type", "title", "begin", "end", "repoAddr", "repoName", "desc")
 VALUES(4,
@@ -606,7 +550,7 @@ VALUES(2,
     'Bad Apple (HDU)',
     '2022-03-01', '2022-06-01',
     'https://github.com/qzlzdy/EhduBadApple.git', 'EhduBadApple',
-    'bilibili<a href="https://www.bilibili.com/video/BV1Ua411x7R2">投稿视频</a>源代码。'
+    'BiliBili<a href="https://www.bilibili.com/video/BV1Ua411x7R2">投稿视频</a>源代码。'
 );
 INSERT INTO projects
 ("type", "title", "begin", "end", "repoAddr", "repoName", "desc")
