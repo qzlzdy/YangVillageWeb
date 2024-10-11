@@ -17,8 +17,12 @@ erga编译工具链包含了将glossa语言翻译成ylikou架构机器代码的�
 
 # 2. metag编译器
 
-metag编译器将glossa语言翻译成mesy指令，作为symvo汇编器的输入。
+metag将glossa语言翻译成mesy汇编指令，作为symvo汇编器的输入。
 
 # 3. symvo汇编器
 
+symvo将mesy汇编指令翻译成ylikou机器代码，产生对象文件。
+
 # 4. synde链接器
+
+synde将多个对象文件链接为一个可执行文件。
