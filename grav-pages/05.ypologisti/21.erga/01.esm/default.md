@@ -35,6 +35,13 @@ title: ESM文件格式
   - [4.8. `sh_info`](#48-sh_info)
   - [4.9. `sh_addralign`](#49-sh_addralign)
   - [4.10. `sh_entsize`](#410-sh_entsize)
+- [5. 常见程序段](#5-常见程序段)
+  - [5.1. `.bss`](#51-bss)
+  - [5.2. `.data`](#52-data)
+  - [5.3. `.fini`](#53-fini)
+  - [5.4. `.init`](#54-init)
+  - [5.5. `.rodata`](#55-rodata)
+  - [5.6. `.text`](#56-text)
 
 # 1. ESM文件格式
 
@@ -214,6 +221,7 @@ struct EsmShdr{
 |`SHT_NULL`|表示段头未使用，没有相关的段。段头的其他字段未定义|
 |`SHT_PROGBITS`|保存由程序定义的信息，其格式和含义完全由程序决定|
 |`SHT_STRTAB`|包含一个字符串表，一个对象文件可能有多个字符串表段|
+|`SHT_NOBITS`|这种类型的段在文件中不占空间，但在其他方面和`SHT_PROGBITS`相似|
 
 ## 4.3. `sh_flags`
 
@@ -252,3 +260,29 @@ struct EsmShdr{
 ## 4.10. `sh_entsize`
 
 某些段保存有固定大小的条目表，如符号表。对于这些段，该字段给出每个条目的字节大小。如果段没有固定大小的条目表，该字段为零。
+
+# 5. 常见程序段
+
+## 5.1. `.bss`
+
+保存未初始化的数据。当程序开始运行时，系统将这些数据初始化为零。类型为`SHT_NOBITS`，属性为`SHF_ALLOC`和`SHF_WRITE`。
+
+## 5.2. `.data`
+
+保存初始化数据。类型为`SHT_PROGBITS`，属性为`SHF_ALLOC`和`SHF_WRITE`。
+
+## 5.3. `.fini`
+
+当程序正常退出时，系统执行该段的代码。类型为`SHT_PROGBITS`，属性为`SHF_ALLOC`和`SHF_EXECINSTR`。
+
+## 5.4. `.init`
+
+当程序开始运行时，系统在调用主程序入口点之前执行该段的代码。类型为`SHT_PROGBITS`，属性为`SHF_ALLOC`和`SHF_EXECINSTR`。
+
+## 5.5. `.rodata`
+
+保存只读数据。类型为`SHT_PROGBITS`，属性为`SHF_ALLOC`。
+
+## 5.6. `.text`
+
+包含程序的可执行指令。类型为`SHT_PROGBITS`，属性为`SHF_ALLOC`和`SHF_EXECINSTR`。
