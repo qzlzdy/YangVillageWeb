@@ -133,13 +133,6 @@ VALUES('wiki',
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('wiki',
-    'Gentoo',
-    '一种基于 Linux 的免费操作系统，可以针对任何应用程序或需求进行自动优化和定制。',
-    'https://wiki.gentoo.org/wiki/Main_Page'
-);
-INSERT INTO bookmarks
-("catalog", "title", "desc", "url")
-VALUES('wiki',
     'Wikipedia',
     '维基媒体基金会运营的由受众共同编辑和管理的在线超文本出版物',
     'https://en.wikipedia.org/wiki/Wiki'
@@ -350,6 +343,13 @@ VALUES('tool',
     '清华大学开源软件镜像站',
     'https://mirror.tuna.tsinghua.edu.cn/'
 );
+INSERT INTO bookmarks
+("catalog", "title", "desc", "url")
+VALUES('tool',
+    '机场',
+    'ZERO云',
+    'https://visionworldny.xyz'
+);
   -- communities
 INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
@@ -369,7 +369,7 @@ INSERT INTO bookmarks
 ("catalog", "title", "desc", "url")
 VALUES('comm',
     'stack overflow',
-    '全球第二大同♂️性交友网站（别闹了啊）全球最大开发者在线社区',
+    '全球最大同♂️性交友论坛（别闹了啊）',
     'https://stackoverflow.com/questions'
 );
 INSERT INTO bookmarks
