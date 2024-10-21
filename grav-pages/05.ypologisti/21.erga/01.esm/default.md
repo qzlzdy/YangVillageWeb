@@ -31,10 +31,8 @@ title: ESM文件格式
   - [4.4. `sh_addr`](#44-sh_addr)
   - [4.5. `sh_offset`](#45-sh_offset)
   - [4.6. `sh_size`](#46-sh_size)
-  - [4.7. `sh_link`](#47-sh_link)
-  - [4.8. `sh_info`](#48-sh_info)
-  - [4.9. `sh_addralign`](#49-sh_addralign)
-  - [4.10. `sh_entsize`](#410-sh_entsize)
+  - [4.7. `sh_addralign`](#47-sh_addralign)
+  - [4.8. `sh_entsize`](#48-sh_entsize)
 - [5. 常见程序段](#5-常见程序段)
   - [5.1. `.bss`](#51-bss)
   - [5.2. `.data`](#52-data)
@@ -106,7 +104,7 @@ ESM头的字节大小。
 
 ## 2.8. `e_phnum`
 
-包含程序头表中的条目数，`e_phentsize`和`e_phnum`的乘积就是表大小。如果文件没有程序头，该字段为零。如果程序头表中的条目数大于或等于`PN_XNUM(0xffff)`，该字段为`PN_XNUM`，程序头表中的实际条目数保存在段头表首个条目的`sh_info`字段中；否则，`sh_info`字段为零。
+包含程序头表中的条目数，`e_phentsize`和`e_phnum`的乘积就是表大小。如果文件没有程序头，该字段为零。
 
 ## 2.9. `e_shentsize`
 
@@ -114,11 +112,11 @@ ESM头的字节大小。
 
 ## 2.10. `e_shnum`
 
-包含段头表中的条目数。`e_shentsize`和`e_shnum`的乘积就是表大小。如果文件没有段头，该字段为零。如果段头表中的条目数大于或等于`SHN_LORESERVE(0xff00)`，该字段为`SHN_LORESERVE`，段头表中的实际条目数保存在段头表首个条目的`sh_size`字段中；否则，`sh_size`字段为零。
+包含段头表中的条目数。`e_shentsize`和`e_shnum`的乘积就是表大小。如果文件没有段头，该字段为零。
 
 ## 2.11. `e_shstrndx`
 
-保存与段名字符串表相关的条目的段头表索引。如果文件没有段名字符串表，该字段为`SHN_UNDEF(0)`。如果段名字符串表段的索引大于或等于`SHN_LORESERVE`，该字段为`SHN_XINDEX(0xffff)`，段名字符串表段的实际索引保存在段头表首个条目的`sh_link`字段中；否则，`sh_link`字段为零。
+保存与段名字符串表相关的条目的段头表索引。如果文件没有段名字符串表，该字段为`SHN_UNDEF(0)`。
 
 # 3. 程序头表(Phdr)
 
@@ -184,14 +182,7 @@ struct EsmPhdr{
 
 # 4. 段头表(Shdr)
 
-通过文件的段头表，可以找到文件的所有段。ESM头的`e_shoff`字段提供了从文件开头到段头表的字节偏移量，`e_shnum`字段保存了段头表包含的条目数。`e_shentsize`字段保存了每个条目的大小。段头表索引是指该段在数组的下标。首个条目索引和`SHN_LORESERVE`之后的索引是保留的。首个条目用于`e_phnum`、`e_shnum`和`e_shstrndx`的扩展。在其他情况下，首个条目的每个字段都设置为零。
-
-一些特殊的索引号：
-
-|宏|含义|
-|:--:|:--|
-|`SHN_UNDEF`|表示未定义、缺失、不相关或无意义的段引用|
-|`SHN_LORESERVE`|制定保留索引范围的下限|
+通过文件的段头表，可以找到文件的所有段。ESM头的`e_shoff`字段提供了从文件开头到段头表的字节偏移量，`e_shnum`字段保存了段头表包含的条目数。`e_shentsize`字段保存了每个条目的大小。段头表索引是指该段在数组的下标。
 
 ```C++
 struct EsmShdr{
@@ -201,8 +192,6 @@ struct EsmShdr{
     uint32_t sh_addr;
     uint32_t sh_offset;
     uint32_t sh_size;
-    uint32_t sh_link;
-    uint32_t sh_info;
     uint32_t sh_addralign;
     uint32_t sh_entsize;
 };
@@ -245,19 +234,11 @@ struct EsmShdr{
 
 段的字节大小。
 
-## 4.7. `sh_link`
-
-包含一个段头表索引链接，含义取决于段类型。
-
-## 4.8. `sh_info`
-
-包含额外信息，含义取决于段类型。
-
-## 4.9. `sh_addralign`
+## 4.7. `sh_addralign`
 
 某些段有地址对齐限制。`sh_addr`的值必须与零对齐，且能被`sh_addralign`整除。只允许2的整数次幂。值0或1表示该段没有对齐限制。
 
-## 4.10. `sh_entsize`
+## 4.8. `sh_entsize`
 
 某些段保存有固定大小的条目表，如符号表。对于这些段，该字段给出每个条目的字节大小。如果段没有固定大小的条目表，该字段为零。
 

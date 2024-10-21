@@ -309,5 +309,5 @@ mesy提供了数个$64$位只读用户态计数器。
 |`csrs csr, rs`|`csrrs $0, csr, rs`|CSR置$1$|
 |`csrc csr, rs`|`csrrc $0, csr, rs`|CSR置$0$|
 |`csrwi csr, imm`|`csrwi $0, csr, imm`|写CSR（立即数）|
-|`csrsi csr, imm`|`csrrs $0, csr, imm`|CSR置$1$（立即数）|
-|`csrci csr, imm`|`csrrc $0, csr, imm`|CSR置$0$（立即数）|
+|`csrsi csr, imm`|`csrrsi $0, csr, imm`|CSR置$1$（立即数）|
+|`csrci csr, imm`|`csrrci $0, csr, imm`|CSR置$0$（立即数）|
