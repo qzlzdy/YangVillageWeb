@@ -36,7 +36,7 @@ cmake --build build --parallel
 ## 4.1. Create Directories
 
 ```bash
-mkdir -p /usr/share/yangvillage/{bin,static/resouces{,/tinymce}}
+mkdir -p /usr/share/yangvillage/{bin,static/resources{,/tinymce}}
 mkdir -p /etc/yangvillage
 mkdir -p /var/lib/yangvillage
 mkdir -p /run/yangvillage
