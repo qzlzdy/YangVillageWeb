@@ -94,7 +94,7 @@ About::About(): Section("about"){
     WContainerWidget *city = addGridCell(3, 0);
     addChevron(city);
     addLabel(city, "城市：");
-    addPlain(city, "浙江杭州");
+    addPlain(city, "江苏南京");
 
     WContainerWidget *job = addGridCell(3, 1);
     addChevron(job);

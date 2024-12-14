@@ -45,20 +45,20 @@ Resume::Resume(): Section("resume"){
     p->decorationStyle().setFont(font);
 
     addTitle(rightCol, "工作经历");
-    WVBoxLayout *practice =
-        addItem(rightCol)->setLayout(make_unique<WVBoxLayout>());
-    addH4(practice, "浙江智臾科技有限公司");
-    addH5(practice, "2021.2 - 2021.6");
-    p = practice->addWidget(make_unique<WText>("C++后端开发实习"));
-    p->decorationStyle().setFont(font);
-    // rightCol->addStretch(1);
-
     WVBoxLayout **experience = new WVBoxLayout *[1];
     experience[0] = addItem(rightCol)->setLayout(make_unique<WVBoxLayout>());
     addH4(experience[0], "北京小米移动软件有限公司南京分公司");
     addH5(experience[0], "2024.7-至今");
     p = experience[0]->addWidget(make_unique<WText>("软件研发工程师"));
     p->decorationStyle().setFont(font);
+
+    WVBoxLayout *practice =
+        addItem(rightCol)->setLayout(make_unique<WVBoxLayout>());
+    addH4(practice, "浙江智臾科技有限公司");
+    addH5(practice, "2021.2 - 2021.6");
+    p = practice->addWidget(make_unique<WText>("C++后端开发实习"));
+    p->decorationStyle().setFont(font);
+
     rightCol->addStretch(1);
 
     row->setStretchFactor(left, 6);
