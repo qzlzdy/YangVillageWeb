@@ -5,18 +5,10 @@ title: mesy指令集架构
     YangVillage Website
     Copyright (C) 2024  Qzlzdy
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as published
-    by the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+    This content is licensed under the Creative Commons Attribution Share Alike
+    4.0 International (CC-BY-SA-4.0).
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Affero General Public License for more details.
-
-    You should have received a copy of the GNU Affero General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    See <https://creativecommons.org/licenses/by-sa/4.0/>.
 -->
 - [1. mesy指令集架构](#1-mesy指令集架构)
   - [1.1. 内存](#11-内存)
@@ -288,8 +280,6 @@ mesy提供了数个$64$位只读用户态计数器。
 
 |伪指令|基础指令|语义|
 |:--|:--|:--|
-|`la rd, symbol`|`auipc rd, delta[31:12] + delta[11]`<br/>`lw rd, rd, delta[11:0]`|载入绝对地址|
-|`lla rd, symbol`|`auipc rd, delta[31:12] + delta[11]`<br/>`addi rd, rd, delta[11:0]`|载入相对地址|
 |`l{b,h,w} rd, symbol`|`auipc rd, delta[31:12] + delta[11]`<br/>`l{b,h,w} rd, delta[11:0]`|全局加载|
 |`s{b,h,w} rd, symbol, rt`|`auipc rt, delta[31:12] + delta[11]`<br/>`s{b,h,w} rd, delta[11:0](rt)`|全局储存|
 |`nop`|`addi $0, $0, 0`|空指令|

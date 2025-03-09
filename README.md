@@ -12,6 +12,7 @@
   - [4.3. Create databse](#43-create-databse)
   - [4.4. Config Nginx](#44-config-nginx)
   - [4.5. Run](#45-run)
+- [5. License](#5-license)
 
 # 2. Prerequisites
 
@@ -92,3 +93,7 @@ nohup spawn-fcgi -n /var/lib/yangvillage/bin/bookmark.wt -a 0.0.0.0 -p 9002 >/de
 nohup spawn-fcgi -n /var/lib/yangvillage/bin/toolkits.wt -a 0.0.0.0 -p 9003 >/dev/null &
 nohup spawn-fcgi -n /var/lib/yangvillage/bin/portfolio.wt -a 0.0.0.0 -p 9004 >/dev/null &
 ```
+
+# 5. License
+
+The content in path `grav-pages/` of this project is licensed under the [CC-BY-AS-4.0](./grav-pages/LICENSE) license, and the source code of this project is licensed under the [GNU AGPLv4.0](./LICENSE) license.

@@ -1,6 +1,7 @@
 ---
-title: 羊村档案馆
-menu: 档案馆
+title: 羊村统计局
+menu: 统计局
+redirect: 'https://status.yangvillage.top'
 ---
 <!--
     YangVillage Website
@@ -11,6 +12,3 @@ menu: 档案馆
 
     See <https://creativecommons.org/licenses/by-sa/4.0/>.
 -->
-# 档案馆
-
-这里是存放所有羊村村长是发布的官方文件的地方。

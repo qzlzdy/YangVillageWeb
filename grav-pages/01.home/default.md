@@ -6,18 +6,10 @@ menu: 主页
     YangVillage Website
     Copyright (C) 2024  Qzlzdy
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as published
-    by the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+    This content is licensed under the Creative Commons Attribution Share Alike
+    4.0 International (CC-BY-SA-4.0).
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Affero General Public License for more details.
-
-    You should have received a copy of the GNU Affero General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    See <https://creativecommons.org/licenses/by-sa/4.0/>.
 -->
 # 欢迎来到羊村
 
@@ -58,6 +50,12 @@ menu: 主页
 网址：<https://api.yangvillage.top>
 
 准确的说，这个不是网站，是API接口。如果你想了解这里可以办理什么业务，可以去[羊村档案馆](../archives/api)看一看。
+
+### 羊村项目管理部
+
+网址：<https://git.yangvillage.top>
+
+羊村科技开发部和村长个人正在和已经开发的项目仓库。~~可以看到村长又摸了几天鱼。~~
 
 ### 羊村统计局
 

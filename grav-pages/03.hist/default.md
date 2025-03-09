@@ -6,18 +6,10 @@ menu: 村史馆
     YangVillage Website
     Copyright (C) 2024  Qzlzdy
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU Affero General Public License as published
-    by the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+    This content is licensed under the Creative Commons Attribution Share Alike
+    4.0 International (CC-BY-SA-4.0).
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU Affero General Public License for more details.
-
-    You should have received a copy of the GNU Affero General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+    See <https://creativecommons.org/licenses/by-sa/4.0/>.
 -->
 # 1. 羊村村史馆
 
@@ -31,7 +23,7 @@ menu: 村史馆
 
 ## 1.1. 服务器
 
-羊村运行在树莓派4B之上。这块单片机自2020年起投入运行，但它从一开始并不是用来建村的，而是做为复读机[猫猫ちゃん][1]独享服务器。~~没错，就是复读机在各大群聊盛行的那段时期。~~2022年9月，村长决定在这里建立自己的村子。而复读姬猫猫ちゃん此时已经是二代目了。~~没错，初代目被腾讯干掉了。~~
+羊村运行在树莓派4B之上。这块单片机自2020年起投入运行，但它从一开始并不是用来建村的，而是做为复读机[猫猫ちゃん][1]独享服务器。~~没错，就是复读机在各大群聊盛行的那段时期。~~2022年9月，村长决定在这里建立自己的村子。而复读姬猫猫ちゃん此时已经是二代目了。~~没错，初代目被马化腾干掉了。~~
 
 [1]: https://github.com/qzlzdy/Neko-Chan2.git
 
@@ -63,9 +55,10 @@ menu: 村史馆
 
 羊村本土的网站服务端通过不同的端口号实现不同部门的访问。
 
-位于云上的反向代理服务器同样使用Nginx实现，且仅对外开放三个端口：
+位于云上的反向代理服务器同样使用Nginx实现，且仅对外开放四个端口：
 
 - 443端口。用于对外提供所有羊村服务，反向代理至位于内网的羊村本土，再由本土服务器根据请求的子域名分流至相应部门。要听从游客中心的指挥哦（指域名解析）。
+- 猫猫酱签名服务端口。本来是不需要的，但是后来马化腾说必须要。
 - 另有两个SSH端口分别是村长远程连接两台Nginx服务器所用端口。属于员工通道哦，游客朋友请绕行～
 
 羊村统计局用来监控羊村本土服务器的状态。
@@ -73,12 +66,15 @@ menu: 村史馆
 羊村武装部当然是用来保障安全的啦。~~不过羊村也没什么需要保护的。~~
 
 > ~~其实有的，有数万张色图在树莓派上。~~
+>
+> > ~~现在没有了，但是在处于同一局域网的NAS上有近十万张色图。~~
 
 ## 1.4. 网站框架
 
-目前羊村有四套独立的网站框架。
+目前羊村有五套独立的网站框架。
 
 - 羊村广播站使用的Navidrome平台
 - 羊村客运中心、羊村村长室、羊村便民中心使用的Wt框架
 - 羊村门户网站、羊村村史馆等使用的Grav CMS
 - 羊村武装部、羊村统计局使用的Cloudflare服务
+- 羊村项目管理部使用的Gitea内置服务器
