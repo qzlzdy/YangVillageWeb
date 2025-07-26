@@ -1,0 +1,28 @@
+{{{#!comment
+    YangVillage Website
+    Copyright (C) 2024  Qzlzdy
+
+    This content is licensed under the Creative Commons Attribution Share Alike
+    4.0 International (CC-BY-SA-4.0).
+
+    See <https://creativecommons.org/licenses/by-sa/4.0/>.
+}}}
+[[PageOutline]]
+
+= erga编译工具链
+
+ 原型:: [https://llvm.org/ LLVM]
+
+erga编译工具链包含了将[../GlossaLang glossa语言]翻译成[../YlikouArch ylikou架构]机器代码的所有组件。
+
+== metag编译器
+
+[./MetagCompiler metag]将glossa语言翻译成[../MesyIsa mesy]汇编指令，作为symvo汇编器的输入。
+
+== symvo汇编器
+
+[./SymvoAssembler symvo]将mesy汇编指令翻译成ylikou机器代码，产生[./EsmFormat ESM格式]的对象文件。
+
+== synde链接器
+
+[./SyndeLinker synde]将多个对象文件链接为一个可执行文件。

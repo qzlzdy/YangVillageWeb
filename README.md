@@ -96,4 +96,4 @@ nohup spawn-fcgi -n /var/lib/yangvillage/bin/portfolio.wt -a 0.0.0.0 -p 9004 >/d
 
 # 5. License
 
-The content in path `grav-pages/` of this project is licensed under the [CC-BY-AS-4.0](./grav-pages/LICENSE) license, and the source code of this project is licensed under the [GNU AGPLv4.0](./LICENSE) license.
+The content in path `trac-wiki/wikis/` of this project is licensed under the [CC-BY-AS-4.0](./trac-wiki/wikis/LICENSE) license, and the source code of this project is licensed under the [GNU AGPLv4.0](./LICENSE) license.

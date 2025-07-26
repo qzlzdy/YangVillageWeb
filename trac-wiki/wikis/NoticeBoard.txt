@@ -1,0 +1,30 @@
+{{{#!comment
+    YangVillage Website
+    Copyright (C) 2024  Qzlzdy
+
+    This content is licensed under the Creative Commons Attribution Share Alike
+    4.0 International (CC-BY-SA-4.0).
+
+    See <https://creativecommons.org/licenses/by-sa/4.0/>.
+}}}
+= 羊村便民中心API文档
+
+[[PageOutline]]
+
+== 复读
+
+`GET /echo?echo={content}`
+
+原样复读传入的内容。
+
+=== 请求
+
+`content`: 任意内容
+
+ 示例:: https://api.yangvillage.top/echo?echo=hello
+
+=== 响应
+
+`200`：返回`{content}`
+
+`400`：错误

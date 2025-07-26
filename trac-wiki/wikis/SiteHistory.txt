@@ -1,0 +1,68 @@
+{{{#!comment
+    YangVillage Website
+    Copyright (C) 2024  Qzlzdy
+
+    This content is licensed under the Creative Commons Attribution Share Alike
+    4.0 International (CC-BY-SA-4.0).
+
+    See <https://creativecommons.org/licenses/by-sa/4.0/>.
+}}}
+= 羊村村史馆
+
+[[PageOutline]]
+
+欢迎来到羊村村史馆。在这里你可以详细了解到羊村建村使用的系统架构。
+
+== 1. 服务器
+
+羊村运行在[https://www.raspberrypi.com/products/raspberry-pi-4-model-b/ 树莓派4B]之上。这块单片机自2020年起投入运行，但它从一开始并不是用来建村的，而是做为复读机[https://github.com/qzlzdy/Neko-Chan2.git 猫猫ちゃん]独享服务器。~~没错，就是复读机在各大群聊盛行的那段时期。~~2022年9月，村长决定在这里建立自己的村子。而复读姬猫猫ちゃん此时已经是二代目了。~~没错，初代目被马化腾干掉了。~~
+
+这块树莓派只有$2G$内存，不过好在羊村规模不大~~常驻人口也许只有村长吧~~，足够为为数不多的村民提供服务了。
+
+> 所以村长为什么只买了$2G$内存啊啊啊
+
+其他的配件有外壳、风扇、电源线。
+
+== 2. 操作系统
+
+羊村运行的操作系统是[https://archlinuxarm.org/ Arch Linux ARM]。众所周知村长是一个激进主义者，村长想要尽可能早地使用最新的软件~~，即使村长从来不使用这些新特性~~，而不怎么在乎软件的稳定性。因此，作为滚动发行版的Arch Linux ARM被村长选中，负责管理树莓派的所有资源。
+
+> > 至于另一个著名的滚动发行版[https://www.gentoo.org/ Gentoo]
+> >
+> > 在树莓派上从源码编译所有软件包真是太慢了！
+> >
+> > 编译gcc甚至直接耗尽SD卡空间。
+> Gentoo推出二进制包了
+>
+> 不过对村长来说已经为时已晚
+
+[[box([https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-4 安装步骤],type=tips)]]
+
+== 3. 网站服务端
+
+羊村的所有部门网站目前均由[https://nginx.org/en/ Nginx]代理。但羊村所处网络环境为村长家的内网，因此除了羊村本土的网站服务器外，还有部署在云上的反向代理服务器，以及外包的羊村统计局和羊村武装部。
+
+羊村本土的网站服务端通过不同的端口号实现不同部门的访问。
+
+位于云上的反向代理服务器同样使用Nginx实现，且仅对外开放四个端口：
+
+- 443端口。用于对外提供所有羊村服务，反向代理至位于内网的羊村本土，再由本土服务器根据请求的子域名分流至相应部门。要听从游客中心的指挥哦（指域名解析）。
+- 猫猫酱签名服务端口。本来是不需要的，但是后来马化腾说必须要。
+- 另有两个SSH端口分别是村长远程连接两台Nginx服务器所用端口。属于员工通道哦，游客朋友请绕行～
+
+羊村统计局用来监控羊村本土服务器的状态。
+
+羊村武装部当然是用来保障安全的啦。~~不过羊村也没什么需要保护的。~~
+
+> > ~~其实有的，有几万张[[span(style=color: #FF0000, 色)]][[span(style=color: #00FF00, 图)]]在树莓派上。~~
+> ~~现在没有了，但是在处于同一局域网的NAS上有超过十万张[[span(style=color: #FF0000, 色)]][[span(style=color: #00FF00, 图)]]。~~
+
+== 4. 网站框架
+
+目前羊村有五套独立的网站框架。
+
+- 羊村广播站使用的[https://www.navidrome.org/ Navidrome]平台
+- 羊村客运中心、羊村村长室、羊村便民中心使用的[https://www.webtoolkit.eu/wt/ Wt框架]
+- 羊村门户网站、羊村村史馆等使用的[WikiStart Trac]
+- 羊村武装部、羊村统计局使用的[https://www.cloudflare.com/zh-cn/ Cloudflare]服务
+- 羊村项目管理部使用的[https://about.gitea.com/ Gitea]内置服务器
