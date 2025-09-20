@@ -9,9 +9,8 @@
 - [4. Deploy](#4-deploy)
   - [4.1. Create Directories](#41-create-directories)
   - [4.2. Copy Files](#42-copy-files)
-  - [4.3. Create databse](#43-create-databse)
-  - [4.4. Config Nginx](#44-config-nginx)
-  - [4.5. Run](#45-run)
+  - [4.3. Config Nginx](#43-config-nginx)
+  - [4.4. Run](#44-run)
 - [5. License](#5-license)
 
 # 2. Prerequisites
@@ -19,7 +18,7 @@
 ## 2.1. Install packages
 
 ```bash
-sudo pacman -S ccache cmake fcgi git nginx ninja sqlite spawn-fcgi wt
+sudo pacman -S ccache cmake fcgi git nginx ninja spawn-fcgi wt
 ```
 
 # 3. Build
@@ -68,13 +67,7 @@ cp build/bin/*.wt /usr/share/yangvillage/bin/
 cp wt_config.xml /etc/yangvillage/
 ```
 
-## 4.3. Create databse
-
-```bash
-sqlite3 /var/lib/yangvillage/yangvillage.db -init initdb.sql
-```
-
-## 4.4. Config Nginx
+## 4.3. Config Nginx
 
 ```bash
 cp nginx-config/wt_*.conf /etc/nginx/
@@ -85,11 +78,10 @@ nginx -s reload
 
 > add `include /etc/nginx/sites-enabled/*;` in http block in nginx.conf
 
-## 4.5. Run
+## 4.4. Run
 
 ```bash
 export WT_APP_ROOT=/var/lib/yangvillage
-nohup spawn-fcgi -n /var/lib/yangvillage/bin/bookmark.wt -a 0.0.0.0 -p 9002 >/dev/null &
 nohup spawn-fcgi -n /var/lib/yangvillage/bin/toolkits.wt -a 0.0.0.0 -p 9003 >/dev/null &
 nohup spawn-fcgi -n /var/lib/yangvillage/bin/portfolio.wt -a 0.0.0.0 -p 9004 >/dev/null &
 ```
