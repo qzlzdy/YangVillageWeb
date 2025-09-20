@@ -1,0 +1,64 @@
+@startuml
+
+box
+boundary "CPU IO interface" as cpu
+endbox
+
+box L1Cache
+control MainUnit
+database DataMem
+database MetaMem
+entity RefillUnit
+entity MissUnit
+entity ReleaseUnit
+entity ProbeUnit
+endbox
+
+box syndesmos
+boundary "Channel A" as a_ch
+boundary "Channel B" as b_ch
+boundary "Channel C" as c_ch
+boundary "Channel D" as d_ch
+boundary "Channel E" as e_ch
+endbox
+
+cpu -> MainUnit : 1. read/write
+MainUnit -> DataMem : 1. read data
+MainUnit -> MetaMem : 1. read meta
+MetaMem -> MainUnit : 2. tag
+
+alt hit
+DataMem -> MainUnit : 2.r. data
+MainUnit -> cpu : 2.r. data
+MainUnit -> DataMem : 2.w. write data
+else miss
+MainUnit -> MissUnit : 2.m. miss
+MissUnit -> a_ch : 3. AcquireBlock
+d_ch -> MissUnit : 4. Grant[Data]
+MissUnit -> e_ch : 5. GrantAck
+
+MissUnit -> cpu : 6. bypas
+MissUnit -> RefillUnit : 6. refill
+RefillUnit -> DataMem : 7. refill data
+RefillUnit -> MetaMem : 7. refill tag
+
+group dirty data
+MissUnit -> MainUnit : 3.d. replace
+MainUnit -> ReleaseUnit : 4.d. writeback
+MainUnit -> MissUnit : 5.d. acknownledge replace
+
+ReleaseUnit -> c_ch : 5.d. Release[Data]
+d_ch -> ReleaseUnit : 6.d. ReleaseAck
+end
+end
+group probe
+b_ch -> ProbeUnit : 8. ProbeBlock
+ProbeUnit -> MainUnit : 9. probe
+MainUnit -> MetaMem : 9. read meta
+
+MainUnit -> MetaMem : 10. write meta
+MainUnit -> ReleaseUnit : 11. writeback
+ReleaseUnit -> c_ch : 12. ProbeAck
+end
+
+@enduml

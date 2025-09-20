@@ -1,0 +1,32 @@
+@startuml
+
+[*] -> s_idle
+s_idle : 空闲状态，准备接受控制单元的请求
+
+state s_busy {
+    s_busy : 等待数据请求和替换完成
+    s_acquire -> s_grant
+    s_acquire : 向下级存储器请求数据/权限
+
+    s_grant -> s_grantAck
+    s_grant : 下级存储器授权
+
+    state "s_idle" as s_idle_1
+    s_grantAck -> s_idle_1
+    s_grantAck : 确认授权
+--
+    s_replace -> s_replaceAck
+    s_replace : 替换缓存中的数据
+
+    state "s_idle" as s_idle_2
+    s_replaceAck -> s_idle_2
+    s_replaceAck : 控制单元确认替换
+}
+
+s_idle -> s_busy
+s_busy -> s_refill
+
+s_refill -> s_idle
+s_refill : 向重填单元发送重填请求
+
+@enduml

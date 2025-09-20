@@ -1,0 +1,10 @@
+@startuml
+
+[*] -> s_idle
+s_idle -> s_probe
+s_idle : 空闲状态，准备接受下级存储器的Probe请求
+
+s_probe -> s_idle
+s_probe : 向控制单元发送请求
+
+@enduml

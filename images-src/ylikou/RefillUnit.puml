@@ -1,0 +1,10 @@
+@startuml
+
+[*] -> s_idle
+s_idle -> s_refill
+s_idle : 空闲状态，准备接受控制单元的请求
+
+s_refill -> s_idle
+s_refill : 进行重填
+
+@enduml

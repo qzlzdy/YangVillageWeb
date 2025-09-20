@@ -1,0 +1,28 @@
+@startuml
+class SourceManager
+class Lexer
+class Parser
+class CodeEmitter
+class EsmWriter
+class Assembler
+class EsmStreamer
+
+interface Expression
+class BinaryExpr
+class ConstantExpr
+class Unary
+class SymbolRef
+
+Expression <|.. BinaryExpr
+Expression <|.. ConstantExpr
+Expression <|.. Unary
+Expression <|.. SymbolRef
+
+Assembler o-- CodeEmitter
+Assembler o-- EsmWriter
+EsmStreamer *-- Assembler
+Parser o-- SourceManager
+Parser o-- EsmStreamer
+Parser *-- Lexer
+Parser --> Expression
+@enduml

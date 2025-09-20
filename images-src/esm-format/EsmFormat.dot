@@ -1,0 +1,13 @@
+digraph EsmFormat {
+    rankdir=LR
+    node [shape=record]
+    ehdr [label="e_ident|e_type|e_ehsize|e_entry|<phoff>e_phoff|<shoff>e_shoff|e_phentsize|e_phnum|e_shentsize|e_shnum|<shstrndx>e_shstrndx"]
+    phdr [label="<f0>p_type|<offset>p_offset|p_vaddr|p_paddr|p_filesz|p_memsz|p_flags|p_align"]
+    shdr [label="<f0>sh_name|sh_type|sh_flags|sh_addr|<offset>sh_offset|sh_size|sh_addralign|sh_entsize"]
+    sections [label="<f0>.text|.data|<strtab>.strtab"]
+    ehdr:phoff -> phdr:f0
+    ehdr:shoff -> shdr:f0
+    ehdr:shstrndx -> sections:strtab
+    phdr:offset -> sections:f0
+    shdr:offset -> sections:f0
+}

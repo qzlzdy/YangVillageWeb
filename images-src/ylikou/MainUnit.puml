@@ -1,0 +1,33 @@
+@startuml
+
+[*] -> s_idle
+s_idle -> s_probe
+s_idle -> s_replace
+s_idle -d-> s_write
+s_idle -d-> s_read
+s_idle : 空闲状态，准备接受控制单元的请求
+
+s_probe -d-> s_probeAck
+s_probe : 处理ProbeUniit的请求，修改元数据，优先级最高
+
+s_probeAck -> s_idle
+s_probeAck : 通知ReleaseUnit，释放缓存所有权
+
+s_read -> s_idle : hit
+s_read -d-> s_miss : miss
+s_read : 处理读请求
+
+s_write -> s_idle : hit
+s_write -d-> s_miss : miss
+s_write : 处理写请求
+
+s_miss -> s_idle
+s_miss : 通知MissUnit发生不命中
+
+s_replace -d-> s_replaceAck
+s_replace : 替换缓存中的脏数据
+
+s_replaceAck -> s_idle
+s_replaceAck : 确认MissUnit的替换请求
+
+@enduml
