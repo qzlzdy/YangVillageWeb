@@ -1,0 +1,24 @@
+@startjson
+
+{
+    "ESM header" : {},
+    "sections" : [
+        "0x00100093",
+        ".strtab \n.text "
+    ],
+    "section headers" : [
+        {
+            "sh_name" : 8,
+            "sh_type" : "SHT_PROGBITS",
+            "sh_flags" : "SHF_EXECINSTR|SHF_ALLOC"
+        },
+        {
+            "sh_name" : 0,
+            "sh_type" : "SHT_STRTAB",
+            "sh_flags" : null
+        }
+    ],
+    "program headers" : null
+}
+
+@endjson

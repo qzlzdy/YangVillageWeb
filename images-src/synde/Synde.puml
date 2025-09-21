@@ -1,0 +1,31 @@
+@startuml
+
+class Linker
+class LinkerScript
+class Writer
+
+interface SectionBase
+class InputSectionBase
+class InputSection
+class OutputSection
+
+interface SectionCommand
+class InputDesc
+class OutputDesc
+
+SectionBase <|.. InputSectionBase
+InputSectionBase <|.. InputSection
+SectionBase <|.. OutputSection
+
+SectionCommand <|.. InputDesc
+SectionCommand <|.. OutputDesc
+
+Linker --> LinkerScript
+Linker --> InputSection
+Linker --> OutputSection
+Linker --> Writer
+LinkerScript --> OutputDesc
+OutputDesc --> OutputSection
+OutputSection --> InputDesc
+
+@enduml

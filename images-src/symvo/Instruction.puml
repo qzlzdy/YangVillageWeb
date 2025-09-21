@@ -1,0 +1,21 @@
+@startjson
+
+{
+    "opcode": "ADDI",
+    "operands" : [
+        {
+            "kind" : "kRegister",
+            "regVal" : 1
+        },
+        {
+            "kind" : "kRegister",
+            "regVal" : 0
+        },
+        {
+            "kind" : "kImmediate",
+            "immVal" : 1
+        }
+    ]
+}
+
+@endjson

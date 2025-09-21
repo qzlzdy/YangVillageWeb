@@ -1,0 +1,26 @@
+@startjson
+
+[
+    {
+        "name" : ".text",
+        "sections" : [
+            "text1",
+            "text2"
+        ]
+    },
+    {
+        "name" : ".data",
+        "sections" : [
+            "data1"
+        ]
+    },
+    {
+        "name" : ".strtab",
+        "sections" : [
+            "strtab1",
+            "strtab2"
+        ]
+    }
+]
+
+@endjson

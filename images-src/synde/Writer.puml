@@ -1,0 +1,23 @@
+@startjson
+
+{
+    "ESM header" : {},
+    "sections" : [
+        "text1",
+        "text2",
+        "data1"
+    ],
+    "section headers" : null,
+    "program headers" : [
+        {
+            "p_type" : "PT_LOAD",
+            "p_flags" : "PF_R|PF_X"
+        },
+        {
+            "p_type" : "PT_LOAD",
+            "p_flags" : "PF_R|PF_W"
+        }
+    ]
+}
+
+@endjson

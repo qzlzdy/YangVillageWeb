@@ -1,0 +1,44 @@
+@startjson
+[
+{
+    "ESM header" : {},
+    "sections" : ["text1", "data1", "strtab1"],
+    "section headers" : [
+        {
+            "sh_name" : ".text",
+            "sh_type" : "SHT_PROGBITS",
+            "sh_flags" : "SHF_EXECINSTR|SHF_ALLOC"
+        },
+        {
+            "sh_name" : ".data",
+            "sh_type" : "SHT_PROGBITS",
+            "sh_flags" : "SHF_WRITE|SHF_ALLOC"
+        },
+        {
+            "sh_name" : ".strtab",
+            "sh_type" : "SHT_STRTAB",
+            "sh_flags" : null
+        }
+    ],
+    "program headers" : null
+},
+
+{
+    "ESM header" : {},
+    "sections" : ["text2", "strtab2"],
+    "section headers" : [
+        {
+            "sh_name" : ".text",
+            "sh_type" : "SHT_PROGBITS",
+            "sh_flags" : "SHF_EXECINSTR|SHF_ALLOC"
+        },
+        {
+            "sh_name" : ".strtab",
+            "sh_type" : "SHT_STRTAB",
+            "sh_flags" : null
+        }
+    ],
+    "program headers" : null
+}
+]
+@endjson

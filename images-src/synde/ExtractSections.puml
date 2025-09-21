@@ -1,0 +1,31 @@
+@startjson
+
+[
+    {
+        "name" : ".text",
+        "content" : "text1",
+        "file" : "file1"
+    },
+    {
+        "name" : ".data",
+        "content" : "data1",
+        "file" : "file1"
+    },
+    {
+        "name" : ".strtab",
+        "content" : "strtab1",
+        "file" : "file1"
+    },
+    {
+        "name" : ".text",
+        "content" : "text2",
+        "file" : "file2"
+    },
+    {
+        "name" : ".strtab",
+        "content" : "strtab2",
+        "file" : "file2"
+    }
+]
+
+@endjson
